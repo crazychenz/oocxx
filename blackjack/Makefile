@@ -1,18 +1,24 @@
+#REDIRECTION := 2>&1 /dev/null
+REDIRECTION := >/dev/null
 FLAGS := -Wall -Werror
 HEADERS = $(wildcard *.h)
 SOURCES = $(wildcard *.cc)
 OBJECTS = $(SOURCES:%.cc=%.o)
 
-all: main docs
+all: docs main
 
 main: $(OBJECTS)
-	g++ $(FLAGS) -std=c++11 -o main $^
+	@echo G++ $@
+	@g++ $(FLAGS) -std=c++11 -o main $^ $(REDIRECTION)
 
 %.o : %.cc $(HEADERS)
-	g++ $(FLAGS) -std=c++11 -c -o $@ $<
+	@echo G++ $@
+	@g++ $(FLAGS) -std=c++11 -c -o $@ $< $(REDIRECTION)
 
 clean:
-	rm -rf *.o main html latex
+	@echo [ CLEANING WORKSPACE ]
+	@rm -rf *.o main html latex $(REDIRECTION)
 
 docs:
-	doxygen
+	@echo [ BUILDING DOCS ]
+	@doxygen $(REDIRECTION)

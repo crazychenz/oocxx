@@ -1,31 +1,18 @@
 #ifndef DECK_H
 #define DECK_H
 
-#include <cstdlib>
-
 #include "Card.h"
 
 class Deck
 {
 public:
-	Deck()
-	{
-	}
+    Deck();
 
-	Deck(int seed)
-	{
-		shuffle(seed);
-	}
+    Deck(int seed);
 
-	void shuffle(int seed)
-	{
-		srand(seed);
-	}
+    void shuffle(int seed);
 
-	Card get_card()
-	{
-		return Card(rand() % 10 + 1);
-	}
+    Card get_card();
 
 };
 

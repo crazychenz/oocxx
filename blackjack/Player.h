@@ -4,33 +4,30 @@
 #include "Hand.h"
 #include "Card.h"
 
+/**
+* @class Player
+* @brief The Player object that holds a hand of cards.
+* 
+* Player class is responsible for managing the player's hand and
+* any other potential Player specific tracking statistics.
+*/
 class Player
 {
 public:
-	Player()
-	{
-		hand = Hand();
-	}
+    /** [docimport] Player::Player */
+    Player();
 
-	Hand get_hand()
-	{
-		return hand;
-	}
+    /** [docimport] Player::get_hand */
+    Hand get_hand();
 
-	int visible_points()
-	{
-		return hand.visible_points();
-	}
+    /** [docimport] Player::visible_points */
+    int visible_points();
 
-	void add_visible(Card card)
-	{
-		hand.add_faceup(card);
-	}
+    /** [docimport] Player::add_visible */
+    void add_visible(Card card);
 
-	void add_hidden(Card card)
-	{
-		hand.add_facedown(card);
-	}
+    /** [docimport] Player::add_hidden */
+    void add_hidden(Card card);
 
 private:
 

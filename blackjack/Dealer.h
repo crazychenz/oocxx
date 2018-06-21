@@ -1,71 +1,25 @@
 #ifndef DEALER_H
 #define DEALER_H
 
-#include <cstdlib>
-#include <vector>
-#include <ctime>
+#include <string>
+
 #include "Deck.h"
 #include "Player.h"
-#include "Card.h"
-
-using namespace std;
 
 class Dealer : public Player
 {
 public:
-	Dealer()
-	{
-		restart(time(NULL));
-	}
+    Dealer();
 
-	Dealer(int seed)
-	{
-		restart(seed);
-	}
+    Dealer(int seed);
 
-	void restart(int seed)
-	{
-		deck = Deck(seed);
-	}
+    void restart(int seed);
 
-	void initial_deal(Player &player)
-	{
-		player.add_visible(deck.get_card());
-		player.add_visible(deck.get_card());
+    void initial_deal(Player &player);
 
-		this->add_visible(deck.get_card());
-		add_hidden(deck.get_card());
-	}
+    void deal_card(Player &player);
 
-	void deal_card(Player &player)
-	{
-		player.add_visible(deck.get_card());
-	}
-
-	string get_winner(Player &player)
-	{
-		if (get_hand().all_points() > 21)
-		{
-			// House went bust.
-			return "Player";
-		}
-
-		if (player.visible_points() == get_hand().all_points())
-		{
-			// Tie
-			return "Neither";
-		}
-
-		if (player.visible_points() > get_hand().all_points())
-		{
-			// Player had more points
-			return "Player";
-		}
-		else {
-			// House had more points
-			return "House";
-		}
-	}
+    std::string get_winner(Player &player);
 
 private:
 

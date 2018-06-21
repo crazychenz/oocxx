@@ -6,30 +6,15 @@
 class Hand
 {
 public:
-	Hand()
-	{
+    Hand();
 
-	}
+    void add_faceup(Card card);
 
-	void add_faceup(Card card)
-	{
-		faceup += card.get_value();
-	}
+    void add_facedown(Card card);
 
-	void add_facedown(Card card)
-	{
-		facedown += card.get_value();
-	}
+    int visible_points();
 
-	int visible_points()
-	{
-		return faceup;
-	}
-
-	int all_points()
-	{
-		return faceup + facedown;
-	}
+    int all_points();
 
 private:
 
