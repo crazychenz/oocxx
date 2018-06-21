@@ -1,0 +1,64 @@
+Character Max: 127
+Character Min: -128
+Character Len: 1
+
+Unsigned Character Max: 255
+Unsigned Character Min: 0
+Unsigned Character Len: 1
+
+Short Max: 32767
+Short Min: -32768
+Short Len: 2
+
+Unsigned Short Max: 65535
+Unsigned Short Min: 0
+Unsigned Short Len: 2
+
+Integer Max: 2147483647
+Integer Min: -2147483648
+Integer Len: 4
+
+Unsigned Integer Max: 4294967295
+Unsigned Integer Min: 0
+Unsigned Integer Len: 4
+
+Long Max: 9223372036854775807
+Long Min: -9223372036854775808
+Long Len: 8
+
+Unsigned Long Max: 18446744073709551615
+Unsigned Long Min: 0
+Unsigned Long Len: 8
+
+Long Long Max: 9223372036854775807
+Long Long Min: -9223372036854775808
+Long Long Len: 8
+
+Unsigned Long Long Max: 18446744073709551615
+Unsigned Long Long Min: 0
+Unsigned Long Long Len: 8
+
+Test: Swap by address.
+X (before): 12
+Y (before): 6
+X (after): 6
+Y (after): 12
+
+Test: No swap by address.
+X (before): 100
+Y (before): 300
+X (after): 100
+Y (after): 300
+
+Test: Swap by reference.
+A (before): 15
+B (before): 3
+A (after): 3
+B (after): 15
+
+Test: No swap by reference.
+A (before): 50
+B (before): 400
+A (after): 50
+B (after): 400
+

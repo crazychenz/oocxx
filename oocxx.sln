@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assn1", "assn1", "{B1508562-CC98-427F-AD4F-E372F813135C}"
+	ProjectSection(SolutionItems) = preProject
+		assn1\main.cc = assn1\main.cc
+		assn1\Makefile = assn1\Makefile
+		assn1\output = assn1\output
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assn2", "assn2", "{5E07C5E7-D52F-4752-9FC5-22740DCD4FD4}"
+	ProjectSection(SolutionItems) = preProject
+		assn2\Dog.cc = assn2\Dog.cc
+		assn2\Dog.h = assn2\Dog.h
+		assn2\Doxyfile = assn2\Doxyfile
+		assn2\main.cc = assn2\main.cc
+		assn2\Makefile = assn2\Makefile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assn3", "assn3", "{F1F5BDF5-6B92-4438-880D-C1E37263B1A6}"
+	ProjectSection(SolutionItems) = preProject
+		assn3\Doxyfile = assn3\Doxyfile
+		assn3\main.cc = assn3\main.cc
+		assn3\Makefile = assn3\Makefile
+		assn3\MyArray.cc = assn3\MyArray.cc
+		assn3\MyArray.h = assn3\MyArray.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "blackjack", "blackjack", "{E7AE347C-A9B3-4751-878D-5A05F108600F}"
+	ProjectSection(SolutionItems) = preProject
+		blackjack\Card.cc = blackjack\Card.cc
+		blackjack\Card.h = blackjack\Card.h
+		blackjack\Dealer.cc = blackjack\Dealer.cc
+		blackjack\Dealer.h = blackjack\Dealer.h
+		blackjack\Deck.cc = blackjack\Deck.cc
+		blackjack\Deck.h = blackjack\Deck.h
+		blackjack\docsync.py = blackjack\docsync.py
+		blackjack\Doxyfile = blackjack\Doxyfile
+		blackjack\Hand.cc = blackjack\Hand.cc
+		blackjack\Hand.h = blackjack\Hand.h
+		blackjack\main.cc = blackjack\main.cc
+		blackjack\Makefile = blackjack\Makefile
+		blackjack\Player.cc = blackjack\Player.cc
+		blackjack\Player.h = blackjack\Player.h
+		blackjack\test.c = blackjack\test.c
+		blackjack\test.h = blackjack\test.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "poker", "poker", "{F10409CD-3A10-42D9-A958-F881917616AB}"
+	ProjectSection(SolutionItems) = preProject
+		poker\BankRoll.h = poker\BankRoll.h
+		poker\Card.h = poker\Card.h
+		poker\Deck.h = poker\Deck.h
+		poker\Doxyfile = poker\Doxyfile
+		poker\Hand.h = poker\Hand.h
+		poker\main.cc = poker\main.cc
+		poker\Makefile = poker\Makefile
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72B1B9D6-BFE1-4089-A1DB-9EE10BC025E7}
+	EndGlobalSection
+EndGlobal

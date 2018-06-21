@@ -1,0 +1,35 @@
+Card
+  Card(int value);
+  int get_value();
+  - int value;
+  
+Deck
+  Deck();
+  Deck(int seed);
+  shuffle(int seed);
+  Card get_card();
+  
+Hand
+  Hand();
+  add_faceup(Card card);
+  add_facedown(Card card);
+  int visible_points();
+  int all_points();
+  - int faceup;
+  - int facedown;
+  
+Player
+  Player();
+  Hand get_hand()
+  int visible_points();
+  void add_visible(Card card);
+  void add_hidden(Card card);
+  - Hand hand;
+
+Dealer : Player
+  Dealer();
+  void restart();
+  void initial_deal(Player player);
+  void deal_card(Player player);
+  string get_winner(Player player);
+  - Deck deck;s
