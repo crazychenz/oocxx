@@ -14,19 +14,15 @@
 class Player
 {
 public:
-    /** [docimport] Player::Player */
+
     Player();
 
-    /** [docimport] Player::get_hand */
     Hand get_hand();
 
-    /** [docimport] Player::visible_points */
     int visible_points();
 
-    /** [docimport] Player::add_visible */
     void add_visible(Card card);
 
-    /** [docimport] Player::add_hidden */
     void add_hidden(Card card);
 
 private:

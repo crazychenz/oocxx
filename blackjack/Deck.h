@@ -3,6 +3,10 @@
 
 #include "Card.h"
 
+/**
+* @class Deck
+* @brief The Deck that the Dealer draws cards from.
+*/
 class Deck
 {
 public:

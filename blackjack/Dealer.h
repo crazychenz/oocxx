@@ -6,6 +6,10 @@
 #include "Deck.h"
 #include "Player.h"
 
+/**
+* @class Dealer
+* @brief The Dealer object that plays and handles the dealing of cards.
+*/
 class Dealer : public Player
 {
 public:
@@ -23,8 +27,8 @@ public:
 
 private:
 
+    /** The card deck for all players. */
 	Deck deck;
-
 };
 
 #endif

@@ -1,6 +1,10 @@
 #ifndef CARD_H
 #define CARD_H
 
+/**
+* @class Card
+* @brief The card object that knows its value.
+*/
 class Card
 {
 public:
@@ -11,6 +15,7 @@ public:
 	int get_value();
 
 private:
+    /** The point value of this Card object. */
 	int value = 0;
 };
 
