@@ -31,6 +31,7 @@ public:
 
 private:
 
+    /** The player's hand. */
 	Hand hand;
 };
 
