@@ -3,13 +3,19 @@ REDIRECTION := >/dev/null
 FLAGS := -Wall -Werror
 HEADERS = $(wildcard *.h)
 SOURCES = $(wildcard *.cc)
-OBJECTS = $(SOURCES:%.cc=%.o)
+# Filter out ConsoleUI since it needs to be included in all
+# compilation units for its class member templates.
+OBJECTS = $(filter-out ConsoleUI.o main.o ui-main.o,$(SOURCES:%.cc=%.o))
 
 all: docs main
 
 main: $(OBJECTS)
 	@echo G++ $@
-	@g++ $(FLAGS) -std=c++11 -o main $^ $(REDIRECTION)
+	@g++ $(FLAGS) -std=c++11 -o main main.cc $^ $(REDIRECTION)
+
+ui-main: $(OBJECTS)
+	@echo G++ $@
+	@g++ $(FLAGS) -std=c++11 -o ui-main ui-main.cc $^ $(REDIRECTION)
 
 %.o : %.cc $(HEADERS)
 	@echo G++ $@
@@ -22,3 +28,4 @@ clean:
 docs:
 	@echo [ BUILDING DOCS ]
 	@doxygen $(REDIRECTION)
+

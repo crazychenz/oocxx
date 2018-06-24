@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "blackjack", "blackjack", "{
 	ProjectSection(SolutionItems) = preProject
 		blackjack\Card.cc = blackjack\Card.cc
 		blackjack\Card.h = blackjack\Card.h
+		blackjack\ConsoleUI.cc = blackjack\ConsoleUI.cc
+		blackjack\ConsoleUI.h = blackjack\ConsoleUI.h
 		blackjack\Dealer.cc = blackjack\Dealer.cc
 		blackjack\Dealer.h = blackjack\Dealer.h
 		blackjack\Deck.cc = blackjack\Deck.cc
@@ -46,6 +48,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "blackjack", "blackjack", "{
 		blackjack\Player.h = blackjack\Player.h
 		blackjack\test.c = blackjack\test.c
 		blackjack\test.h = blackjack\test.h
+		blackjack\ui-main.cc = blackjack\ui-main.cc
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "poker", "poker", "{F10409CD-3A10-42D9-A958-F881917616AB}"
@@ -59,9 +62,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "poker", "poker", "{F10409CD
 		poker\Makefile = poker\Makefile
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "graded", "graded", "{1E3B8363-21A7-4073-8405-7E3E628D855D}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B1508562-CC98-427F-AD4F-E372F813135C} = {1E3B8363-21A7-4073-8405-7E3E628D855D}
+		{5E07C5E7-D52F-4752-9FC5-22740DCD4FD4} = {1E3B8363-21A7-4073-8405-7E3E628D855D}
+		{F1F5BDF5-6B92-4438-880D-C1E37263B1A6} = {1E3B8363-21A7-4073-8405-7E3E628D855D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72B1B9D6-BFE1-4089-A1DB-9EE10BC025E7}

@@ -1,16 +1,19 @@
 #include <iostream>
+#include <limits>
 
 #include "Player.h"
 #include "Dealer.h"
+#include "ConsoleUI.h"
 
 using namespace std;
 
 int main()
 {
-	int seed;
+    ConsoleUI ui = ConsoleUI();
 
-	cout << "Seed? ";
-	cin >> seed;
+    unsigned int seed = 0;
+    
+    (void)ui.get_numeric_input<unsigned int>("Seed", seed);
 
 	Dealer dealer = Dealer(seed);
 	Player player = Player();
@@ -19,17 +22,17 @@ int main()
 
 	if (player.visible_points() == 21)
 	{
-		cout << "Player wins." << endl;
+		ui.out() << "Player wins." << endl;
 		return 0;
 	}
 
 	// player.play()
 	string action;
-	cout << "Dealer points: " << dealer.visible_points() << endl;
+    ui.out() << "Dealer points: " << dealer.visible_points() << endl;
 	do {
-		cout << "Your points: " << player.visible_points() << endl;
-		cout << "hit or stay? ";
-		cin >> action;
+        ui.out() << "Your points: " << player.visible_points() << endl;
+        (void)ui.get_single_word_input("hit or stay", action);
+
 		if (action == "hit") {
 			dealer.deal_card(player);
 		}
@@ -37,7 +40,7 @@ int main()
 
 	if (player.visible_points() > 21)
 	{
-		cout << "House wins." << endl;
+		ui.out() << "House wins." << endl;
 		return 0;
 	}
 	
@@ -46,9 +49,9 @@ int main()
 		dealer.deal_card(dealer);
 	}
 
-	cout << "Dealer points: " << dealer.get_hand().all_points() << endl;
+    ui.out() << "Dealer points: " << dealer.get_hand().all_points() << endl;
 
-	cout << "Winner: " << dealer.get_winner(player) << endl;
+    ui.out() << "Winner: " << dealer.get_winner(player) << endl;
 
 	return 0;
 }
