@@ -8,14 +8,10 @@
 #include "Player.h"
 #include "Card.h"
 
-/* 
-* Note: No default constructor because Dealer must have a 
-* user interface controller.
-*/
-
 /**
 * Constructor.
 * Initializes PRNG with current system time.
+* @param ui The user interface controller reference.
 */
 Dealer::Dealer(ConsoleUI &ui)
 {
@@ -26,6 +22,7 @@ Dealer::Dealer(ConsoleUI &ui)
 /**
 * Explicit constructor.
 * Initializes PRNG with provided seed value.
+* @param ui The user interface controller reference.
 * @param seed The seed to initialize PRNG with.
 */
 Dealer::Dealer(ConsoleUI &ui, unsigned int seed)

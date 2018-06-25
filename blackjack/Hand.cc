@@ -9,6 +9,9 @@ Hand::Hand()
 
 }
 
+/**
+* Clears out the faceup and facedown points.
+*/
 void Hand::clear_points()
 {
     faceup = 0;

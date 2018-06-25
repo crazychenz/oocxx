@@ -19,6 +19,9 @@ Hand Player::get_hand()
     return hand;
 }
 
+/**
+* Clears out the hand's card/points.
+*/
 void Player::clear_points()
 {
     hand.clear_points();

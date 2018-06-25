@@ -10,6 +10,10 @@
 /**
 * @class Dealer
 * @brief The Dealer object that plays and handles the dealing of cards.
+*
+* Note: No default constructor because Dealer must have a
+* user interface controller.
+*
 */
 class Dealer : public Player
 {

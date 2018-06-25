@@ -166,53 +166,6 @@ void ConsoleUI::get_numeric_input(
 
 }
 
-/*
-template <typename NumType>
-void ConsoleUI::get_numeric_input(
-const std::string &prompt,
-NumType &output,
-const NumType min,
-const NumType max)
-{
-using namespace std;
-string input;
-
-do
-{
-prompted_getline(prompt, input);
-
-if (input.find_first_not_of("-0123456789") == string::npos)
-{
-try
-{
-if (is_unsigned<NumType>::value)
-{
-output = static_cast<NumType>(
-ConsoleUI::get_ull_value(input, min, max));
-}
-else
-{
-output = static_cast<NumType>(
-ConsoleUI::get_ll_value(input, min, max));
-}
-break;
-}
-catch (out_of_range &oor)
-{
-err() << "Given value out of range. Must be between " <<
-min << " and " << max << "." << endl;
-}
-catch (invalid_argument &ia)
-{
-err() << "Input must be a decimal number." << endl;
-}
-}
-
-} while (true);
-
-}
-*/
-
 /** get_numeric_input fetches numeric input from a stream.
 *
 * This function is intended as a way to ensure clear and clean

@@ -23,7 +23,7 @@ ConsoleUI::ConsoleUI()
 * @param out The output stream.
 * @param err The error stream.
 */
-ConsoleUI::ConsoleUI(istream *in, ostream *out, ostream *err)
+ConsoleUI::ConsoleUI(std::istream *in, std::ostream *out, std::ostream *err)
 {
     if (in != nullptr)
         this->in_stream = in;
