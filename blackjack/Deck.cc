@@ -1,3 +1,6 @@
+#include <iostream>
+using namespace std;
+
 #include <cstdlib>
 
 #include "Deck.h"
@@ -35,5 +38,6 @@ void Deck::shuffle(int seed)
 */
 Card Deck::get_card()
 {
-    return Card(rand() % 10 + 1);
+    Card card = Card(rand() % 10 + 1);
+    return card;
 }

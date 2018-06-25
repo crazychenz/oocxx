@@ -1,0 +1,27 @@
+Seed: 1529934377
+Dealer points: 6
+Your points: 13
+hit or stay? hit
+Player Dealt: 4
+Your points: 17
+hit or stay? stay
+Dealer uncovers: 9
+Dealer Dealt: 3
+Dealer points: 18
+Winner: House (Player: 17 Dealer: 18)
+Play again? (yes or no)? yes
+Dealer points: 8
+Your points: 11
+hit or stay? hit
+Player Dealt: 5
+Your points: 16
+hit or stay? hit
+Player Dealt: 5
+Your points: 21
+hit or stay? stay
+Dealer uncovers: 5
+Dealer Dealt: 6
+Dealer points: 19
+Winner: Player (Player: 21 Dealer: 19)
+Play again? (yes or no)? no
+

@@ -9,6 +9,12 @@ Hand::Hand()
 
 }
 
+void Hand::clear_points()
+{
+    faceup = 0;
+    facedown = 0;
+}
+
 /**
 * Adds a face up card value to the face up Hand value.
 * @param card Card object used to get face up card value.
@@ -34,6 +40,15 @@ void Hand::add_facedown(Card card)
 int Hand::visible_points()
 {
     return faceup;
+}
+
+/**
+* Returns the total points of hand hidden from all players.
+* @return Hidden points as integer.
+*/
+int Hand::hidden_points()
+{
+    return facedown;
 }
 
 /**

@@ -11,12 +11,17 @@ Player::Player()
 }
 
 /**
-* Returns a copy of hand object.
+* Returns a *copy* of hand object.
 * @return Copy of Hand object.
 */
 Hand Player::get_hand()
 {
     return hand;
+}
+
+void Player::clear_points()
+{
+    hand.clear_points();
 }
 
 /**

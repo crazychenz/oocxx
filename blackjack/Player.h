@@ -17,6 +17,8 @@ public:
 
     Player();
 
+    void clear_points();
+
     Hand get_hand();
 
     int visible_points();

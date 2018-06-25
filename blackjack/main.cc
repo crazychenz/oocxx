@@ -1,5 +1,5 @@
-#include <iostream>
-#include <limits>
+#include <cstdlib>
+#include <ctime>
 
 #include "Player.h"
 #include "Dealer.h"
@@ -7,51 +7,102 @@
 
 using namespace std;
 
-int main()
+void argparser(
+    ConsoleUI &ui,
+    const int argc, 
+    char **argv, 
+    unsigned int &seed)
 {
+    if (argc > 1)
+    {
+        if (string(argv[1]) == "--help" || string(argv[1]) == "-h")
+        {
+            ui.out() << "Usage: " << argv[0] << " [SEED]\n" << endl <<
+                "Play a game of blackjack." << endl << endl <<
+                "With no SEED, current time is used." << endl << endl <<
+                "  -h, --help - show this help message" << endl << endl <<
+                "Examples:" << endl <<
+                "  " << argv[0] << " 23443" << endl <<
+                "  " << argv[0] << endl << endl;
+            exit(0);
+        }
+
+        try
+        {
+            ui.parse_numeric_input<unsigned int>(
+                string(argv[1]),
+                seed,
+                numeric_limits<unsigned int>::min(),
+                numeric_limits<unsigned int>::max());
+        }
+        catch (out_of_range &oor)
+        {
+            ui.err() << "Given seed value out of range. Must be between " <<
+                numeric_limits<unsigned int>::min() << " and " <<
+                numeric_limits<unsigned int>::max() << "." << endl;
+            exit(0);
+        }
+        catch (invalid_argument &ia)
+        {
+            ui.err() << "Unrecognized argument: " << argv[1] << endl;
+            exit(0);
+        }
+    }
+}
+
+int main(int argc, char **argv)
+{
+    // Initialize the user interface controller.
     ConsoleUI ui = ConsoleUI();
 
-    unsigned int seed = 0;
+    // Initialize PRNG with time as default.
+    unsigned int seed = static_cast<unsigned int>(time(NULL));
     
-    (void)ui.get_numeric_input<unsigned int>("Seed", seed);
+    // Parse and process any CLI arguments.
+    argparser(ui, argc, argv, seed);
 
-	Dealer dealer = Dealer(seed);
-	Player player = Player();
+    cout << "Seed: " << seed << endl;
 
-	dealer.initial_deal(player);
+    // Setup the dealer object
+    Dealer dealer = Dealer(ui, seed);
 
-	if (player.visible_points() == 21)
-	{
-		ui.out() << "Player wins." << endl;
-		return 0;
-	}
+    // Start main game loop.
+    string action;
+    do {
 
-	// player.play()
-	string action;
-    ui.out() << "Dealer points: " << dealer.visible_points() << endl;
-	do {
-        ui.out() << "Your points: " << player.visible_points() << endl;
-        (void)ui.get_single_word_input("hit or stay", action);
+        // Reset dealer cards.
+        dealer.clear_points();
 
-		if (action == "hit") {
-			dealer.deal_card(player);
-		}
-	} while (player.visible_points() <= 21 && action != "stay");
+        // Initialize a player object.
+        Player player = Player();
 
-	if (player.visible_points() > 21)
-	{
-		ui.out() << "House wins." << endl;
-		return 0;
-	}
-	
-	//dealer.play();
-	while (dealer.get_hand().all_points() < 17) {
-		dealer.deal_card(dealer);
-	}
+        // Dealer performs initial deal.
+        if (dealer.initial_deal(player))
+        {
+            ui.out() << "Winner: Player (with 21 points on initial deal)" << endl;
+        }
+        // Allow the player to hit or stay.
+        else if (dealer.play_player(player))
+        {
+            ui.out() << "Winner: House (because player went bust with " << 
+                player.visible_points() << " points)" << endl;
+        }
+        else
+        {
+            // Dealer finishes up the game.
+            dealer.play_dealer();
 
-    ui.out() << "Dealer points: " << dealer.get_hand().all_points() << endl;
+            ui.out() << "Winner: ";
+            dealer.display_winner(player);
+            ui.out() << endl;
+        }
 
-    ui.out() << "Winner: " << dealer.get_winner(player) << endl;
+        // Check if player wants to continue or quit.
+        do {
+            (void)ui.get_single_word_input("Play again? (yes or no)", action);
+        } while (action != "yes" && action != "no");
+
+    } while (action == "yes");
 
 	return 0;
 }

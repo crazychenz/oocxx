@@ -12,11 +12,15 @@ class Hand
 public:
     Hand();
 
+    void clear_points();
+
     void add_faceup(Card card);
 
     void add_facedown(Card card);
 
     int visible_points();
+
+    int hidden_points();
 
     int all_points();
 

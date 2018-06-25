@@ -5,7 +5,7 @@ HEADERS = $(wildcard *.h)
 SOURCES = $(wildcard *.cc)
 # Filter out ConsoleUI since it needs to be included in all
 # compilation units for its class member templates.
-OBJECTS = $(filter-out ConsoleUI.o main.o ui-main.o,$(SOURCES:%.cc=%.o))
+OBJECTS = $(filter-out main.o ui-main.o,$(SOURCES:%.cc=%.o))
 
 all: docs main
 

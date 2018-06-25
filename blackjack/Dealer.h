@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include "ConsoleUI.h"
 #include "Deck.h"
 #include "Player.h"
 
@@ -13,22 +14,29 @@
 class Dealer : public Player
 {
 public:
-    Dealer();
+    Dealer(ConsoleUI &ui);
 
-    Dealer(int seed);
+    Dealer(ConsoleUI &ui, unsigned int seed);
 
     void restart(int seed);
 
-    void initial_deal(Player &player);
+    bool initial_deal(Player &player);
 
-    void deal_card(Player &player);
+    Card deal_card(Player &player);
 
-    std::string get_winner(Player &player);
+    bool play_player(Player &player);
+
+    void play_dealer();
+
+    void display_winner(Player &player);
 
 private:
 
     /** The card deck for all players. */
 	Deck deck;
+
+    /** User interface controller. */
+    ConsoleUI ui;
 };
 
 #endif
