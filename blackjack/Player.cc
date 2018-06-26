@@ -56,3 +56,23 @@ void Player::add_hidden(Card card)
 {
     hand.add_facedown(card);
 }
+
+void Player::add_money(unsigned int money)
+{
+    wallet += money;
+}
+
+void Player::sub_money(unsigned int money)
+{
+    if (wallet - money > 0)
+    {
+        wallet -= money;
+        return;
+    }
+    wallet = 0;
+}
+
+unsigned int Player::get_wallet() const
+{
+    return wallet;
+}

@@ -151,6 +151,7 @@ void ConsoleUI::get_numeric_input(
         try
         {
             parse_numeric_input<NumType>(input, output, min, max);
+            break;
         }
         catch (out_of_range &oor)
         {

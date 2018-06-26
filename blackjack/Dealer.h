@@ -24,18 +24,21 @@ public:
 
     void restart(int seed);
 
-    bool initial_deal(Player &player);
-
     Card deal_card(Player &player);
+
+    bool initial_deal(Player &player);
 
     bool play_player(Player &player);
 
     void play_dealer();
 
-    void display_winner(Player &player);
+    void add_money(unsigned int money);
+
+    void sub_money(unsigned int money);
+
+    void handle_winnings(Player &player, const unsigned int bet);
 
 private:
-
     /** The card deck for all players. */
 	Deck deck;
 

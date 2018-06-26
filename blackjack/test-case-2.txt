@@ -1,0 +1,58 @@
+Seed: 1529978056
+You have $100 in your wallet.
+How much to bet? 5
+Dealer points: 10
+Your points: 5
+hit or stay? hit
+Player Dealt: 2
+Your points: 7
+hit or stay? hit
+Player Dealt: 3
+Your points: 10
+hit or stay? hit
+Player Dealt: 3
+Your points: 13
+hit or stay? hit
+Player Dealt: 3
+Your points: 16
+hit or stay? hit
+Player Dealt: 10
+Winner: House (because player went bust with 26 points)
+Play again? (yes or no)? yes
+You have $95 in your wallet.
+How much to bet? 5
+Dealer points: 5
+Your points: 10
+hit or stay? hit
+Player Dealt: 9
+Your points: 19
+hit or stay? stay
+Dealer uncovers: 5
+Dealer Dealt: 10
+Dealer points: 20
+Winner: House (Player: 19 Dealer: 20)
+Play again? (yes or no)? yes
+You have $90 in your wallet.
+How much to bet? 5
+Dealer points: 10
+Your points: 9
+hit or stay? hit
+Player Dealt: 9
+Your points: 18
+hit or stay? stay
+Dealer uncovers: 6
+Dealer Dealt: 1
+Dealer points: 17
+Winner: Player (Player: 18 Dealer: 17)
+Play again? (yes or no)? yes
+You have $95 in your wallet.
+How much to bet? 5
+Dealer points: 6
+Your points: 13
+hit or stay? stay
+Dealer uncovers: 10
+Dealer Dealt: 3
+Dealer points: 19
+Winner: House (Player: 13 Dealer: 19)
+Play again? (yes or no)? no
+

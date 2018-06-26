@@ -1,4 +1,6 @@
 Seed: 1529934377
+You have $100 in your wallet.
+How much to bet? 95
 Dealer points: 6
 Your points: 13
 hit or stay? hit
@@ -10,6 +12,8 @@ Dealer Dealt: 3
 Dealer points: 18
 Winner: House (Player: 17 Dealer: 18)
 Play again? (yes or no)? yes
+You have $5 in your wallet.
+How much to bet? 5
 Dealer points: 8
 Your points: 11
 hit or stay? hit

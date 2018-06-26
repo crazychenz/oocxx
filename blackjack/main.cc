@@ -3,21 +3,23 @@
 
  Description
 =============
-A simple blackjack card game consists of a player and a dealer. A player is dealt cards, called
-a hand. Each card in the hand has a point value. The objective of the game is to get as close
-to 21 points as possible without exceeding 21 points. A player that goes over is out of the
-game. The dealer deals cards to itself and a player. The dealer must play by slightly different
-rules than a player. A game proceeds as follows: A player is dealt two cards face up. If the
-point total is exactly 21 the player wins immediately. If the total is not 21, the dealer is dealt
-two cards, one face up and one face down. A player then determines whether to ask the
-dealer for another card (called a "hit") or to "stay" with his/her current hand. A player may
-ask for several "hits." When a player decides to "stay" the dealer begins to play. If the
-dealer has 21 it immediately wins the game. Otherwise, the dealer must take "hits" until the
-total points in its hand is 17 or over, at which point the dealer must "stay." If the dealer goes
-over 21 while taking "hits" the game is over and the player wins. If the dealer's points total
-exactly 21, the dealer wins immediately. When the dealer and player have finished playing
-their hands, the one with the highest point total is the winner. If the dealer and player tie,
-nobody wins. Play is repeated until the player decides to quit.
+A simple blackjack card game consists of a player and a dealer. A player is provided with a
+sum of money with which to play. A player can place a bet between $0 and the amount of
+money the player has. A player is dealt cards, called a hand. Each card in the hand has a point
+value. The objective of the game is to get as close to 21 points as possible without exceeding
+21 points. A player that goes over is out of the game. The dealer deals cards to itself and a
+player. The dealer must play by slightly different rules than a player, and the dealer does not
+place bets. A game proceeds as follows: A player is dealt two cards face up. If the point total
+is exactly 21 the player wins immediately. If the total is not 21, the dealer is dealt two cards,
+one face up and one face down. A player then determines whether to ask the dealer for another
+card (called a "hit") or to "stay" with his/her current hand. A player may ask for several "hits."
+When a player decides to "stay" the dealer begins to play. If the dealer has 21 it immediately
+wins the game. Otherwise, the dealer must take "hits" until the total points in its hand is 17 or
+over, at which point the dealer must "stay." If the dealer goes over 21 while taking "hits" the
+game is over and the player wins. If the dealer's points total exactly 21, the dealer wins
+immediately. When the dealer and player have finished playing their hands, the one with the
+highest point total is the winner. Play is repeated until the player decides to quit or runs out of
+money to bet.
 
  Synopsis
 ==========
@@ -68,8 +70,12 @@ includes the user and the autonomous Dealer.
 --------
 The Dealer object represents the Dealer of the table. Since the Dealer drives
 the flow of the game, most of the control logic has been placed into the
-Dealer object. The Dealer, as an entity with a hand and player rules is derived 
+Dealer object. The Dealer, as an entity with a hand and rules is derived 
 from the class Player. 
+
+ Game
+------
+The Game object simply encapsulates the main game loop.
 
  'Other' Code Overview
 =======================
@@ -175,6 +181,7 @@ not have been desired. In otherwords, it aims to improve the user experience.
 
 #include "Player.h"
 #include "Dealer.h"
+#include "Game.h"
 #include "ConsoleUI.h"
 
 using namespace std;
@@ -233,48 +240,18 @@ int main(int argc, char **argv)
     // Parse and process any CLI arguments.
     argparser(ui, argc, argv, seed);
 
-    cout << "Seed: " << seed << endl;
+    ui.out() << "Seed: " << seed << endl;
 
     // Setup the dealer object
     Dealer dealer = Dealer(ui, seed);
 
-    // Start main game loop.
-    string action;
-    do {
+    // Initialize a player object.
+    Player player = Player();
+    player.add_money(100);
 
-        // Reset dealer cards.
-        dealer.clear_points();
-
-        // Initialize a player object.
-        Player player = Player();
-
-        // Dealer performs initial deal.
-        if (dealer.initial_deal(player))
-        {
-            ui.out() << "Winner: Player (with 21 points on initial deal)" << endl;
-        }
-        // Allow the player to hit or stay.
-        else if (dealer.play_player(player))
-        {
-            ui.out() << "Winner: House (because player went bust with " << 
-                player.visible_points() << " points)" << endl;
-        }
-        else
-        {
-            // Dealer finishes up the game.
-            dealer.play_dealer();
-
-            ui.out() << "Winner: ";
-            dealer.display_winner(player);
-            ui.out() << endl;
-        }
-
-        // Check if player wants to continue or quit.
-        do {
-            (void)ui.get_single_word_input("Play again? (yes or no)", action);
-        } while (action != "yes" && action != "no");
-
-    } while (action == "yes");
+    //Game game = Game(ui, Player(100), Dealer(seed));
+    Game(ui).game_loop(player, dealer);
+    //game.game_loop();
 
 	return 0;
 }

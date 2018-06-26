@@ -27,10 +27,18 @@ public:
 
     void add_hidden(Card card);
 
+    void add_money(unsigned int money);
+
+    void sub_money(unsigned int money);
+
+    unsigned int get_wallet() const;
+
 private:
 
     /** The player's hand. */
 	Hand hand;
+
+    unsigned int wallet = 0;
 };
 
 #endif

@@ -42,6 +42,18 @@ void Dealer::restart(int seed)
 }
 
 /**
+* Deal a card to the given Player ref.
+* @param player Reference of Player to deal card to.
+* @return Returns *copy* of card dealt.
+*/
+Card Dealer::deal_card(Player &player)
+{
+    Card card = deck.get_card();
+    player.add_visible(card);
+    return card;
+}
+
+/**
 * Perform the initial deal of the cards.
 * @param player Reference to the other player in the game.
 * @return Returns true if player wins, false if winner unknown.
@@ -60,18 +72,6 @@ bool Dealer::initial_deal(Player &player)
     }
 
     return false;
-}
-
-/**
-* Deal a card to the given Player ref.
-* @param player Reference of Player to deal card to.
-* @return Returns *copy* of card dealt.
-*/
-Card Dealer::deal_card(Player &player)
-{
-    Card card = deck.get_card();
-    player.add_visible(card);
-    return card;
 }
 
 /**
@@ -130,20 +130,22 @@ void Dealer::play_dealer()
 * @param player Reference of other Player to compare this->Player too.
 * @return Returns the winner as a string.
 */
-void Dealer::display_winner(Player &player)
+void Dealer::handle_winnings(Player &player, const unsigned int bet)
 {
     if (get_hand().all_points() == 21)
     {
         // House wins
         ui.out() << "House (House started with 21 points)";
+        player.sub_money(bet);
         return;
     }
-    
+
     if (get_hand().all_points() > 21)
     {
         // House went bust.
-        ui.out() << "Player (House went bust with " << 
+        ui.out() << "Player (House went bust with " <<
             get_hand().all_points() << " points)";
+        player.add_money(bet);
         return;
     }
 
@@ -159,12 +161,24 @@ void Dealer::display_winner(Player &player)
         // Player had more points
         ui.out() << "Player (Player: " << player.visible_points() <<
             " Dealer: " << get_hand().all_points() << ")";
+        player.add_money(bet);
         return;
     }
     else {
         // House had more points
         ui.out() << "House (Player: " << player.visible_points() <<
             " Dealer: " << get_hand().all_points() << ")";
+        player.sub_money(bet);
         return;
     }
+}
+
+void Dealer::add_money(unsigned int money)
+{
+    // House has infinite money.
+}
+
+void Dealer::sub_money(unsigned int money)
+{
+    // House has infinite money.
 }
