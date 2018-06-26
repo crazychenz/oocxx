@@ -7,11 +7,19 @@
 
 using namespace std;
 
+/**
+* Constructor. Sets the ConsoleUI.
+*/
 Game::Game(ConsoleUI &ui)
 {
     this->ui = ui;
 }
 
+/**
+* The main game loop.
+* @param player The reference to the active player object.
+* @param dealer The reference to the autonomous dealer object.
+*/
 void Game::game_loop(Player &player, Dealer &dealer)
 {
     // Start main game loop.

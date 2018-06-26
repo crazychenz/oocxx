@@ -5,6 +5,10 @@
 #include "Player.h"
 #include "Dealer.h"
 
+/**
+* @class Game
+* @brief A game object for encapsulating the main game loop.
+*/
 class Game
 {
 public:

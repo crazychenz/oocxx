@@ -57,11 +57,19 @@ void Player::add_hidden(Card card)
     hand.add_facedown(card);
 }
 
+/**
+* Add money to wallet.
+* @param money Amount of money to add.
+*/
 void Player::add_money(unsigned int money)
 {
     wallet += money;
 }
 
+/**
+* Remove money to wallet.
+* @param money Amount of money to remove.
+*/
 void Player::sub_money(unsigned int money)
 {
     if (wallet - money > 0)
@@ -72,6 +80,10 @@ void Player::sub_money(unsigned int money)
     wallet = 0;
 }
 
+/**
+* Get money in wallet.
+* @return Returns money in wallet.
+*/
 unsigned int Player::get_wallet() const
 {
     return wallet;

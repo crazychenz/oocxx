@@ -107,6 +107,8 @@ of time(NULL).
 
     $ ./blackjack 5432
     Seed: 5432
+    You have $100 in your wallet.
+    How much to bet? 10
     Dealer points: 7
     Your points: 11
     hit or stay? hit
@@ -121,30 +123,22 @@ of time(NULL).
 
 ### Example Random Seed
 
-    $ ./blackjack 
-    Seed: 1529971428
+    $ ./blackjack
+    Seed: 1529979857
+    You have $100 in your wallet.
+    How much to bet? 50
     Dealer points: 5
-    Your points: 9
+    Your points: 6
     hit or stay? hit
-    Player Dealt: 7
-    Your points: 16
+    Player Dealt: 5
+    Your points: 11
     hit or stay? hit
-    Player Dealt: 6
-    Winner: House (because player went bust with 22 points)
+    Player Dealt: 3
+    Your points: 14
+    hit or stay? hit
+    Player Dealt: 10
+    Winner: House (because player went bust with 24 points)
     Play again? (yes or no)? no
-
-
-
- Entry Point
--------------
-The main() entry point is designed to house the main game loop. In this game loop there
-are 4 major parts.
-
-1. The initial deal is where the initial cards are laid out and the system checks 
-   whether the Player has 21 for a quick win.
-2. The second part is where the system goes into a loop that allows the Player to 'play'.
-3. The third part is where the system performs the duty of the Dealer.
-4. Finally, the question is asked of the user whether they'd like to try again or quit.
 
  ConsoleUI
 -----------
@@ -183,64 +177,18 @@ not have been desired. In otherwords, it aims to improve the user experience.
 #include "Dealer.h"
 #include "Game.h"
 #include "ConsoleUI.h"
-
-using namespace std;
-
-void argparser(
-    ConsoleUI &ui,
-    const int argc, 
-    char **argv, 
-    unsigned int &seed)
-{
-    if (argc > 1)
-    {
-        if (string(argv[1]) == "--help" || string(argv[1]) == "-h")
-        {
-            ui.out() << "Usage: " << argv[0] << " [SEED]\n" << endl <<
-                "Play a game of blackjack." << endl << endl <<
-                "With no SEED, current time is used." << endl << endl <<
-                "  -h, --help - show this help message" << endl << endl <<
-                "Examples:" << endl <<
-                "  " << argv[0] << " 23443" << endl <<
-                "  " << argv[0] << endl << endl;
-            exit(0);
-        }
-
-        try
-        {
-            ui.parse_numeric_input<unsigned int>(
-                string(argv[1]),
-                seed,
-                numeric_limits<unsigned int>::min(),
-                numeric_limits<unsigned int>::max());
-        }
-        catch (out_of_range &oor)
-        {
-            ui.err() << "Given seed value out of range. Must be between " <<
-                numeric_limits<unsigned int>::min() << " and " <<
-                numeric_limits<unsigned int>::max() << "." << endl;
-            exit(0);
-        }
-        catch (invalid_argument &ia)
-        {
-            ui.err() << "Unrecognized argument: " << argv[1] << endl;
-            exit(0);
-        }
-    }
-}
+#include "ArgParser.h"
 
 int main(int argc, char **argv)
 {
     // Initialize the user interface controller.
     ConsoleUI ui = ConsoleUI();
-
-    // Initialize PRNG with time as default.
-    unsigned int seed = static_cast<unsigned int>(time(NULL));
     
     // Parse and process any CLI arguments.
-    argparser(ui, argc, argv, seed);
+    ArgParser args = ArgParser(ui, argc, argv);
 
-    ui.out() << "Seed: " << seed << endl;
+    unsigned int seed = args.get_seed();
+    ui.out() << "Seed: " << seed << std::endl;
 
     // Setup the dealer object
     Dealer dealer = Dealer(ui, seed);
@@ -249,9 +197,7 @@ int main(int argc, char **argv)
     Player player = Player();
     player.add_money(100);
 
-    //Game game = Game(ui, Player(100), Dealer(seed));
     Game(ui).game_loop(player, dealer);
-    //game.game_loop();
 
 	return 0;
 }

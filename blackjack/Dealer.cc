@@ -128,6 +128,7 @@ void Dealer::play_dealer()
 /**
 * Compares this Dealer object score to given Player to determine winner.
 * @param player Reference of other Player to compare this->Player too.
+* @param bet The amount of money being bet.
 * @return Returns the winner as a string.
 */
 void Dealer::handle_winnings(Player &player, const unsigned int bet)
@@ -173,11 +174,17 @@ void Dealer::handle_winnings(Player &player, const unsigned int bet)
     }
 }
 
+/**
+* Override the Player's add_money to do nothing.
+*/
 void Dealer::add_money(unsigned int money)
 {
     // House has infinite money.
 }
 
+/**
+* Override the Player's sub_money to do nothing.
+*/
 void Dealer::sub_money(unsigned int money)
 {
     // House has infinite money.
