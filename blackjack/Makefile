@@ -5,8 +5,6 @@ REDIRECTION := >/dev/null
 FLAGS := -Wall -Werror
 HEADERS = $(wildcard *.h)
 SOURCES = $(wildcard *.cc)
-# Filter out ConsoleUI since it needs to be included in all
-# compilation units for its class member templates.
 OBJECTS = $(filter-out main.o,$(SOURCES:%.cc=%.o))
 
 help:

@@ -3,6 +3,8 @@
 html/
 latex/
 main
+junk/
+clutter/
 
 # Autosave files
 *~

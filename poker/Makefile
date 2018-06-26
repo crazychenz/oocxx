@@ -1,15 +1,26 @@
 #REDIRECTION := 2>&1 /dev/null
+MAINBIN := poker
+PROJECTNAME := Poker Machine Project
 REDIRECTION := >/dev/null
 FLAGS := -Wall -Werror
 HEADERS = $(wildcard *.h)
 SOURCES = $(wildcard *.cc)
-OBJECTS = $(SOURCES:%.cc=%.o)
+OBJECTS = $(filter-out main.o,$(SOURCES:%.cc=%.o))
 
-all: docs main
+help:
+	@echo
+	@echo Targets:
+	@echo docs - Build doxygen documentation
+	@echo $(MAINBIN) - Build the primary binary target
+	@echo clean - Cleanup the workspace
+	@echo all - Build docs and $(MAINBIN)
+	@echo
 
-main: $(OBJECTS)
+all: docs $(MAINBIN)
+
+$(MAINBIN): $(OBJECTS)
 	@echo G++ $@
-	@g++ $(FLAGS) -std=c++11 -o main $^ $(REDIRECTION)
+	@g++ $(FLAGS) -std=c++11 -o $(MAINBIN) main.cc $^ $(REDIRECTION)
 
 %.o : %.cc $(HEADERS)
 	@echo G++ $@
@@ -17,8 +28,14 @@ main: $(OBJECTS)
 
 clean:
 	@echo [ CLEANING WORKSPACE ]
-	@rm -rf *.o main html latex $(REDIRECTION)
+	@rm -rf *.o $(MAINBIN) html latex $(REDIRECTION)
 
 docs:
 	@echo [ BUILDING DOCS ]
-	@doxygen $(REDIRECTION)
+	#@mkdir html ; cp blackjack-class-diagram.png ./html/
+	@( \
+	    cat Doxyfile | \
+	    echo PROJECT_NAME=\"$(PROJECTNAME)\" \
+	) | \
+	doxygen - $(REDIRECTION)
+
