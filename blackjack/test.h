@@ -1,8 +1,0 @@
-/**
-
-multiline documentation
-
-[docimport] Function
-
-*/
-
