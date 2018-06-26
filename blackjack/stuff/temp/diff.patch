@@ -1,0 +1,25 @@
+diff -Naur not-working/ConsoleUI.h working/ConsoleUI.h
+--- not-working/ConsoleUI.h	2018-06-23 00:55:42.000000000 -0400
++++ working/ConsoleUI.h	2018-06-23 00:58:10.000000000 -0400
+@@ -41,6 +41,6 @@
+    
+ };
+ 
+-//#include "ConsoleUI.cc"
++#include "ConsoleUI.cc"
+ 
+-#endif /* CONSOLEUI_H */
+\ No newline at end of file
++#endif /* CONSOLEUI_H */
+diff -Naur not-working/Makefile working/Makefile
+--- not-working/Makefile	2018-06-23 00:59:15.000000000 -0400
++++ working/Makefile	2018-06-23 00:58:58.000000000 -0400
+@@ -5,7 +5,7 @@
+ SOURCES = $(wildcard *.cc)
+ # Filter out ConsoleUI since it needs to be included in all
+ # compilation units for its class member templates.
+-OBJECTS = $(filter-out main.o ui-main.o,$(SOURCES:%.cc=%.o))
++OBJECTS = $(filter-out ConsoleUI.o main.o ui-main.o,$(SOURCES:%.cc=%.o))
+ 
+ all: ui-main
+ 
