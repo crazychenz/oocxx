@@ -39,3 +39,5 @@ docs:
 	) | \
 	doxygen - $(REDIRECTION)
 
+zip:
+	zip -r v_agriesti_blackjack.zip *.cc *.h html latex *.txt *.png Makefile Doxyfile
