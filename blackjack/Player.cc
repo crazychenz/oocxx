@@ -63,6 +63,7 @@ void Player::add_hidden(Card card)
 */
 void Player::add_money(unsigned int money)
 {
+    // Note: Risk of overrun here.
     wallet += money;
 }
 
@@ -72,12 +73,13 @@ void Player::add_money(unsigned int money)
 */
 void Player::sub_money(unsigned int money)
 {
-    if (wallet - money > 0)
+    // Protect from (unlikely) underrun
+    if (wallet - money > wallet)
     {
-        wallet -= money;
+        wallet = 0;
         return;
     }
-    wallet = 0;
+    wallet -= money;
 }
 
 /**
