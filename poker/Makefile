@@ -6,9 +6,9 @@ FLAGS := -Wall -Werror
 HEADERS := $(wildcard *.h)
 SOURCES := $(wildcard *.cc)
 OBJECTS := $(filter-out main.o,$(SOURCES:%.cc=%.o))
-STYLEFLAGS := -n -s4
-DRYSTYLECMD := astyle --dry-run $(STYLEFLAGS) $(HEADERS) $(SOURCES)
 
+# Style command stuff
+STYLEFLAGS := -n -s4
 STYLED = astyle $2 $(STYLEFLAGS) $1 | grep -v ^Unchanged
 
 help:
