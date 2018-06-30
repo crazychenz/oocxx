@@ -3,8 +3,6 @@
 
 #include <string>
 
-using namespace std;
-
 class Card
 {
 public:
@@ -33,91 +31,23 @@ public:
         DIAMOND=8
     };
 
-    Card(Rank rank, Suit suit)
-    {
-        this->rank = rank;
-        this->suit = suit;
-    }
+    Card(Rank rank, Suit suit);
 
-    int get_rank_value() const
-    {
-        return rank;
-    }
+    int rank() const;
 
-    string get_rank_string()
-    {
-        switch (rank)
-        {
-        case ACE:
-            return "Ace";
-        case KING:
-            return "King";
-        case QUEEN:
-            return "Queen";
-        case JACK:
-            return "Jack";
-        case CARD_10:
-            return "Ten";
-        case CARD_9:
-            return "Nine";
-        case CARD_8:
-            return "Eight";
-        case CARD_7:
-            return "Seven";
-        case CARD_6:
-            return "Six";
-        case CARD_5:
-            return "Five";
-        case CARD_4:
-            return "Four";
-        case CARD_3:
-            return "Three";
-        case CARD_2:
-            return "Two";
-        default:
-            break;
-        }
-        cout << "BAD: " << rank;
-        return "Unknown Rank";
-    }
+    const std::string get_rank_string() const;
 
-    int get_suit_value() const
-    {
-        return suit;
-    }
+    int suit() const;
 
-    string get_suit_string()
-    {
-        switch (suit)
-        {
-        case SPADE:
-            return "Spade";
-        case HEART:
-            return "Heart";
-        case CLUB:
-            return "Club";
-        case DIAMOND:
-            return "Diamond";
-        default:
-            break;
-        }
+    const std::string get_suit_string() const;
 
-        return "Unknown Suit";
-    }
+    std::string to_string();
 
-    string to_string()
-    {
-        return get_rank_string() + " of " + get_suit_string();
-    }
-
-    bool operator==(const Card &card) const
-    {
-        return (card.get_rank_value() == get_rank_value()) && (card.get_suit_value() == get_suit_value());
-    }
+    bool operator==(const Card &card) const;
 
 private:
-    Rank rank;
-    Suit suit;
+    Rank rank_enum;
+    Suit suit_enum;
 };
 
 #endif
