@@ -11,11 +11,17 @@
 
 using namespace std;
 
+/**
+* Default PokerMachine Constructor
+*/
 PokerMachine::PokerMachine()
 {
     bankroll = BankRoll();
 }
 
+/**
+* Cashes out the BankRoll of the machine for the player.
+*/
 void PokerMachine::cash_out()
 {
     cout << endl << "--------------------" << endl;
@@ -26,6 +32,9 @@ void PokerMachine::cash_out()
         " coins to spend." << endl;
 }
 
+/**
+* Adds coins to the bank roll for the Player.
+*/
 void PokerMachine::add_coins()
 {
     cout << endl << "--------------------" << endl;
@@ -42,6 +51,10 @@ void PokerMachine::add_coins()
     bankroll.deposit(coins);
 }
 
+/**
+* Allows player to play the current hand of the (Five Card Stud) Poker Game.
+* @return The payout of the final hand as an integer.
+*/
 int PokerMachine::play_game()
 {
     int cnt = 0;
@@ -120,6 +133,9 @@ int PokerMachine::play_game()
     return hand.get_payout();
 }
 
+/**
+* Asks the Player what bet they'd like to make on the next hand.
+*/
 void PokerMachine::place_bet()
 {
     cout << endl << "--------------------" << endl;
@@ -173,6 +189,9 @@ void PokerMachine::place_bet()
     }
 }
 
+/**
+* Main Menu for player action selection.
+*/
 void PokerMachine::main_menu()
 {
     int choice = 0;

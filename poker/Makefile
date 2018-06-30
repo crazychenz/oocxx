@@ -32,7 +32,6 @@ $(MAINBIN): $(OBJECTS)
 	@if [ ! -z "$$(which astyle)" ]; then \
 	  if [ ! -z "$$($(call STYLED,$(HEADERS) $(SOURCES),--dry-run))" ]; \
 	  then \
-	    $(call STYLED,$(HEADERS) $(SOURCES),--dry-run) ;\
 	    echo "WARNING: Detected style issues. Run 'make style' to fix."; \
 	  fi \
 	fi

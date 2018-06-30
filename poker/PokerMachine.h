@@ -1,5 +1,9 @@
 #include "BankRoll.h"
 
+/**
+* @class PokerMachine
+* @brief A poker machine user interface.
+*/
 class PokerMachine
 {
 public:
@@ -16,5 +20,7 @@ public:
     void main_menu();
 
 private:
+    
+    /** The current Player's bank roll in the machine. */
     BankRoll bankroll;
 };

@@ -7,17 +7,28 @@ using namespace std;
 
 #include "Card.h"
 
+/**
+* Default Card Constructor.
+*/
 Card::Card(Rank rank, Suit suit)
 {
     this->rank_enum = rank;
     this->suit_enum = suit;
 }
 
+/**
+* Get the rank value of Card.
+* @return the rank value of the Card as an integer.
+*/
 int Card::rank() const
 {
     return rank_enum;
 }
 
+/**
+* Get the string representation of the rank value of Card.
+* @return string representation of Card's rank value.
+*/
 const string Card::get_rank_string() const
 {
     switch (rank())
@@ -55,11 +66,19 @@ const string Card::get_rank_string() const
     return "Unknown Rank";
 }
 
+/**
+* Get the suit value of Card.
+* @return the suit value of the Card as an integer.
+*/
 int Card::suit() const
 {
     return suit_enum;
 }
 
+/**
+* Get the string representation of the suit value of Card.
+* @return string representation of Card's suit value.
+*/
 const string Card::get_suit_string() const
 {
     switch (suit())
@@ -79,11 +98,20 @@ const string Card::get_suit_string() const
     return "Unknown Suit";
 }
 
-string Card::to_string()
+/**
+* Get the string representation of the Card object.
+* @return string representation of Card object.
+*/
+const string Card::to_string() const
 {
     return get_rank_string() + " of " + get_suit_string();
 }
 
+/**
+* Boolean equality operator overloader between two Card objects.
+* @param card The right side argument Card object of the comparison.
+* @return true if both Card object ranks are equal and suits are equal.
+*/
 bool Card::operator==(const Card &card) const
 {
     return (card.rank() == rank()) && (card.suit() == suit());
