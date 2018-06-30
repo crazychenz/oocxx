@@ -4,40 +4,40 @@
 class BankRoll
 {
 public:
-	BankRoll()
-	{
-	}
+    BankRoll()
+    {
+    }
 
-	unsigned int get_balance()
-	{
-		return coins;
-	}
+    unsigned int get_balance()
+    {
+        return coins;
+    }
 
-	void deposit(const unsigned int coins)
-	{
-		this->coins += coins;
-	}
+    void deposit(const unsigned int coins)
+    {
+        this->coins += coins;
+    }
 
-	unsigned int withdraw(const unsigned int coins)
-	{
-		if (coins > get_balance())
-		{
-			return cash_out();
-		}
+    unsigned int withdraw(const unsigned int coins)
+    {
+        if (coins > get_balance())
+        {
+            return cash_out();
+        }
 
-		this->coins -= coins;
-		return coins;
-	}
+        this->coins -= coins;
+        return coins;
+    }
 
-	unsigned int cash_out()
-	{
-		unsigned int coins = this->coins;
-		this->coins = 0;
-		return coins;
-	}
+    unsigned int cash_out()
+    {
+        unsigned int coins = this->coins;
+        this->coins = 0;
+        return coins;
+    }
 
 private:
-	unsigned int coins = 0;
+    unsigned int coins = 0;
 };
 
 #endif
