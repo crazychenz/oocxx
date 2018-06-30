@@ -44,7 +44,7 @@ public:
     int get_payout();
 
     std::string type_as_string();
-    
+
     // TODO: Make class function
     void test_hands();
 
@@ -53,7 +53,7 @@ public:
 
 private:
 
-    
+
 
     // TODO: Make class function
     void test(std::string name, Card *cards);
@@ -67,7 +67,7 @@ private:
     bool is_royal_flush();
 
     bool is_four_ofa_kind();
-    
+
     // Assumed not four of a kind.
     bool is_full_house();
 

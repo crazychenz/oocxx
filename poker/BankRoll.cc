@@ -34,7 +34,7 @@ unsigned int BankRoll::withdraw(const unsigned int coins)
 {
     unsigned int to_withdraw = coins > get_balance() ? get_balance() : coins;
     this->coins -= to_withdraw;
-    
+
     return get_balance();
 }
 

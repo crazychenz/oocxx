@@ -20,7 +20,7 @@ public:
     void main_menu();
 
 private:
-    
+
     /** The current Player's bank roll in the machine. */
     BankRoll bankroll;
 };

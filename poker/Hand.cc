@@ -9,7 +9,7 @@ using namespace std;
 #include "Card.h"
 #include "Hand.h"
 
-/** 
+/**
 * Predicate to compare Card object ranks for sorting.
 * @param x First card object to compare.
 * @param y Second card object to compare.
@@ -20,7 +20,7 @@ static bool comp_rank(Card &x, Card &y)
     return x.rank() < y.rank();
 }
 
-/** 
+/**
 * Predicate to compare Card object suits for sorting.
 * @param x First card object to compare.
 * @param y Second card object to compare.
@@ -31,8 +31,8 @@ static bool comp_suit(Card &x, Card &y)
     return x.suit() < y.suit();
 }
 
-/** 
-* Default Hand Constructor 
+/**
+* Default Hand Constructor
 * @public
 */
 Hand::Hand()
@@ -41,7 +41,7 @@ Hand::Hand()
     //suit_vec = std::vector<Card &>();
 }
 
-/** 
+/**
 * Add a Card object to Hand
 * @public
 */
@@ -53,7 +53,7 @@ void Hand::add_card(Card card)
     return;
 }
 
-/** 
+/**
 * Get a copy of the Hand object.
 * @public
 * @return Copy of the Hand object as vector<Card>
@@ -73,7 +73,7 @@ const vector<Card> Hand::get_hand() const
 	return false;
 }*/
 
-/** 
+/**
 * Replace the Card at index @p idx with Card object @p new_card.
 * @public
 */
@@ -84,7 +84,7 @@ void Hand::redeal(int idx, Card new_card)
     //locked.push_back(new_card);
 }
 
-/** 
+/**
 * Sort the Cards objects in Hand based on their rank value.
 */
 void Hand::rank_sort()
@@ -92,7 +92,7 @@ void Hand::rank_sort()
     sort(rank_vec.begin(), rank_vec.end(), comp_rank);
 }
 
-/** 
+/**
 * Dump the state of Hand object to console.
 * @public
 */
@@ -130,7 +130,7 @@ void Hand::dump_hand()
 
 }
 
-/** 
+/**
 * Unit test various Hand states.
 * @public
 */
@@ -268,7 +268,7 @@ void Hand::test_hands()
     test("Pair (High)", high_pair);
 }
 
-/** 
+/**
 * Get a string representation of player's Hand.
 * @return current calculated HandType as a string object.
 * @public
@@ -302,7 +302,7 @@ string Hand::type_as_string()
     return "Unknown Hand";
 }
 
-/** 
+/**
 * Get an enumeration type for player's Hand.
 * @return current calculated HandType as a HandType enumeration.
 * @public
@@ -357,7 +357,7 @@ Hand::HandType Hand::get_hand_type()
     return NOTHING;
 }
 
-/** 
+/**
 * Get the payout for the current Hand.
 * @return current calculated HandType as a integer representation of payout.
 * @public
@@ -367,7 +367,7 @@ int Hand::get_payout()
     return get_hand_type();
 }
 
-/** 
+/**
 * Test a single hand state. (For use with test_hands().)
 */
 // TODO: Make class function
@@ -385,10 +385,10 @@ void Hand::test(string name, Card *cards)
     hand.dump_hand();
 }
 
-/** 
+/**
 * Check if hand is a flush.
 * (This function is control flow dependent.)
-* @return true if the hand is a flush. 
+* @return true if the hand is a flush.
 */
 bool Hand::is_flush()
 {
@@ -397,7 +397,7 @@ bool Hand::is_flush()
     return suit_vec.at(0).suit() == suit_vec.at(4).suit();
 }
 
-/** 
+/**
 * Check if the hand is a straight.
 * (This function is control flow dependent.)
 * @return true if the hand is a straight.
@@ -424,7 +424,7 @@ bool Hand::is_straight()
     return true;
 }
 
-/** 
+/**
 * Check if the hand is a straight flush.
 * (This function is control flow dependent.)
 * @return true if the hand is a straight flush.
@@ -434,10 +434,10 @@ bool Hand::is_straight_flush()
     return is_flush() && is_straight();
 }
 
-/** 
+/**
 * Check if hand is a royal flush.
 * (This function is control flow dependent.)
-* @return true if the hand is a royal flush. 
+* @return true if the hand is a royal flush.
 */
 bool Hand::is_royal_flush()
 {
@@ -446,10 +446,10 @@ bool Hand::is_royal_flush()
            rank_vec.at(4).rank() == Card::ACE;
 }
 
-/** 
+/**
 * Check if hand is a four of a kind.
 * (This function is control flow dependent.)
-* @return true if the hand is a four of a kind. 
+* @return true if the hand is a four of a kind.
 */
 bool Hand::is_four_ofa_kind()
 {
@@ -465,10 +465,10 @@ bool Hand::is_four_ofa_kind()
     return false;
 }
 
-/** 
+/**
 * Check if hand is a full house.
 * (This function is control flow dependent.)
-* @return true if the hand is a full house. 
+* @return true if the hand is a full house.
 */
 // Assumed not four of a kind.
 bool Hand::is_full_house()
@@ -485,7 +485,7 @@ bool Hand::is_full_house()
     return false;
 }
 
-/** 
+/**
 * Check if hand is a three of a kind.
 * (This function is control flow dependent.)
 * @return true if the hand is a three of a kind.
@@ -505,10 +505,10 @@ bool Hand::has_three_ofa_kind()
     return false;
 }
 
-/** 
+/**
 * Check if hand has two pair.
 * (This function is control flow dependent.)
-* @return true if the hand is a two pair. 
+* @return true if the hand is a two pair.
 */
 // Assumed not three ofa kind, not four ofa kind, AND not full house
 bool Hand::has_two_pair()
@@ -541,10 +541,10 @@ bool Hand::has_two_pair()
     return false;*/
 }
 
-/** 
+/**
 * Check if hand has a pair of jacks or better.
 * (This function is control flow dependent.)
-* @return true if the hand is pair of jacks or better. 
+* @return true if the hand is pair of jacks or better.
 */
 bool Hand::has_royal_pair()
 {

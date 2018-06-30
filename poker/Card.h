@@ -10,7 +10,7 @@
 class Card
 {
 public:
-    
+
     /// Card rank enumeration.
     enum Rank: int
     {
@@ -53,10 +53,10 @@ public:
     bool operator==(const Card &card) const;
 
 private:
-    
+
     /** Rank enumeration. */
     Rank rank_enum;
-    
+
     /** Suit enumeration. */
     Suit suit_enum;
 };

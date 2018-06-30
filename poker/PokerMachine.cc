@@ -28,8 +28,8 @@ void PokerMachine::cash_out()
     cout << " Cashed Out" << endl;
     cout << "--------------------" << endl;
 
-    cout << "You now have " << bankroll.cash_out() << 
-        " coins to spend." << endl;
+    cout << "You now have " << bankroll.cash_out() <<
+         " coins to spend." << endl;
 }
 
 /**
