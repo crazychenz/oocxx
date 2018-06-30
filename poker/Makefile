@@ -3,9 +3,13 @@ MAINBIN := poker
 PROJECTNAME := Poker Machine Project
 REDIRECTION := >/dev/null
 FLAGS := -Wall -Werror
-HEADERS = $(wildcard *.h)
-SOURCES = $(wildcard *.cc)
-OBJECTS = $(filter-out main.o,$(SOURCES:%.cc=%.o))
+HEADERS := $(wildcard *.h)
+SOURCES := $(wildcard *.cc)
+OBJECTS := $(filter-out main.o,$(SOURCES:%.cc=%.o))
+STYLEFLAGS := -n -s4
+DRYSTYLECMD := astyle --dry-run $(STYLEFLAGS) $(HEADERS) $(SOURCES)
+
+STYLED = astyle $2 $(STYLEFLAGS) $1 | grep -v ^Unchanged
 
 help:
 	@echo
@@ -13,22 +17,27 @@ help:
 	@echo docs - Build doxygen documentation
 	@echo $(MAINBIN) - Build the primary binary target
 	@echo clean - Cleanup the workspace
+	@echo style - Style the code with astyle
 	@echo all - Build docs and $(MAINBIN)
 	@echo
 
 all: docs $(MAINBIN)
-	@result=$$(astyle --dry-run -s4 $(HEADERS) $(SOURCES)) ; \
-	if [ ! -z "$$(echo $(result)) | grep -v ^Unchanged)" ]; then \
-	    echo "WARNING: Detected style issues. Run 'make style' to fix."; \
-	fi
 
-.PHONY = style
+.PHONY: style
 style: $(SOURCES) $(HEADERS)
-	@astyle -s4 $^
+	@echo [ STYLING CODE ]
+	@astyle $(STYLEFLAGS) $^
 
 $(MAINBIN): $(OBJECTS)
+	@if [ ! -z "$$(which astyle)" ]; then \
+	  if [ ! -z "$$($(call STYLED,$(HEADERS) $(SOURCES),--dry-run))" ]; \
+	  then \
+	    $(call STYLED,$(HEADERS) $(SOURCES),--dry-run) ;\
+	    echo "WARNING: Detected style issues. Run 'make style' to fix."; \
+	  fi \
+	fi
 	@echo G++ $@
-	@g++ $(FLAGS) -std=c++11 -o $(MAINBIN) main.cc $^ $(REDIRECTION)
+	@g++ $(FLAGS) -std=c++11 -o $(MAINBIN) main.cc $(OBJECTS) $(REDIRECTION)
 
 %.o : %.cc $(HEADERS)
 	@echo G++ $@
