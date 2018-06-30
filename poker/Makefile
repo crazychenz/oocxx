@@ -17,6 +17,10 @@ help:
 	@echo
 
 all: docs $(MAINBIN)
+	@result=$$(astyle --dry-run -s4 $(HEADERS) $(SOURCES)) ; \
+	if [ ! -z "$$(echo $(result)) | grep -v ^Unchanged)" ]; then \
+	    echo "WARNING: Detected style issues. Run 'make style' to fix."; \
+	fi
 
 .PHONY = style
 style: $(SOURCES) $(HEADERS)
