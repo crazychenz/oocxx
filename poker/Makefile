@@ -18,6 +18,10 @@ help:
 
 all: docs $(MAINBIN)
 
+.PHONY = style
+style: $(SOURCES) $(HEADERS)
+	@astyle -s4 $^
+
 $(MAINBIN): $(OBJECTS)
 	@echo G++ $@
 	@g++ $(FLAGS) -std=c++11 -o $(MAINBIN) main.cc $^ $(REDIRECTION)
@@ -32,7 +36,7 @@ clean:
 
 docs:
 	@echo [ BUILDING DOCS ]
-	#@mkdir html ; cp blackjack-class-diagram.png ./html/
+	@#mkdir html ; cp blackjack-class-diagram.png ./html/
 	@( \
 	    cat Doxyfile | \
 	    echo PROJECT_NAME=\"$(PROJECTNAME)\" \
