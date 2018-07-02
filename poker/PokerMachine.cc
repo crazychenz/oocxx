@@ -102,13 +102,10 @@ int PokerMachine::play_game()
 
         if (to_replace > 0 && to_replace < 6)
         {
-            if (find(replace_list.begin(), replace_list.end(), to_replace) == replace_list.end()) {
+            if (find(replace_list.begin(), replace_list.end(), to_replace) == replace_list.end())
+            {
                 replace_list.push_back(to_replace);
             }
-
-            //to_replace--;
-            //hand.redeal(to_replace - 1, deck.pop_card());
-            //hand.rank_sort();
         }
         else
         {

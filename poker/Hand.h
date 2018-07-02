@@ -37,7 +37,7 @@ public:
 
     void redeal(int idx, Card new_card);
 
-    void dump_hand();
+    //void dump_hand();
 
     HandType get_hand_type();
 
@@ -46,7 +46,7 @@ public:
     std::string type_as_string();
 
     // TODO: Make class function
-    void test_hands();
+    //void test_hands();
 
     // TODO: Make this private?
     void rank_sort();
@@ -56,7 +56,7 @@ private:
 
 
     // TODO: Make class function
-    void test(std::string name, Card *cards);
+    //void test(std::string name, Card *cards);
 
     bool is_flush();
 

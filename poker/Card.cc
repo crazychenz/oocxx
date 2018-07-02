@@ -1,8 +1,5 @@
 #include <string>
 
-// TODO: Get rid of this?
-#include <iostream>
-
 using namespace std;
 
 #include "Card.h"
@@ -62,7 +59,7 @@ const string Card::get_rank_string() const
     default:
         break;
     }
-    cout << "BAD: " << rank_enum;
+    // TODO: throw exception.
     return "Unknown Rank";
 }
 

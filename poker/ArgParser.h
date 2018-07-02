@@ -40,13 +40,13 @@ public:
     {
         parse(argc, argv);
     }
-    
+
     void parse(const int argc, char **argv)
     {
         // Setup defaults
         set_key("help", new ArgumentBool(false));
         set_key("seed", new ArgumentInt(1));
-        
+
         // Look for user defined values
         for (int i = 1; i < argc; i++) {
             if (std::string(argv[i]) == "--help") {
@@ -62,7 +62,7 @@ public:
             }
         }
     }
-    
+
     void set_key(std::string key, ArgumentBaseType *value)
     {
         std::map<std::string, ArgumentBaseType *>::iterator it = args.find(key);
@@ -85,7 +85,7 @@ public:
         std::map<std::string, ArgumentBaseType *>::iterator it = args.find(name);
         if(it != args.end())
         {
-           return true;
+            return true;
         }
         return false;
     }
@@ -94,12 +94,12 @@ public:
     {
         return ((ArgumentInt *)(args.find(name)->second))->value;
     }
-    
+
     std::string get_raw(const std::string &name) const
     {
         return ((ArgumentRaw *)(args.find(name)->second))->value;
     }
-    
+
     bool get_bool(const std::string &name) const
     {
         return ((ArgumentBool *)(args.find(name)->second))->value;

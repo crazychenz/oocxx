@@ -37,14 +37,14 @@ ConsoleUI::ConsoleUI(std::istream *in, std::ostream *out, std::ostream *err)
 * Parse numeric string into primitive unsigned datatype and check constraints.
 * When the parsed input doesn't meet constriants, std::out_of_range()
 * exception is thrown.
-* 
+*
 * @param input A string reference of the data to be parsed.
 * @param min The minumum allowable value of the parsed input string.
 * @param min The maximum allowable value of the parsed input string.
 * @return Returns the parsed input string as a unsigned long long.
 * @throws out_of_range when @p min or @p max constraints are not met.
 */
-unsigned long long 
+unsigned long long
 ConsoleUI::get_ull_value(
     const string &input,
     const unsigned long long min,
@@ -54,7 +54,7 @@ ConsoleUI::get_ull_value(
     string::size_type off;
     parsed = stoull(input, &off);
     if (parsed > static_cast<unsigned long long>(max) ||
-        parsed < static_cast<unsigned long long>(min))
+            parsed < static_cast<unsigned long long>(min))
     {
         const string msg =
             "Parseable, but doesn't fall within constraints.";
@@ -74,9 +74,9 @@ ConsoleUI::get_ull_value(
 * @return Returns the parsed input string as a long long.
 * @throws out_of_range when @p min or @p max constraints are not met.
 */
-long long 
+long long
 ConsoleUI::get_ll_value(
-    const string &input, 
+    const string &input,
     const long long min,
     const long long max)
 {
@@ -84,7 +84,7 @@ ConsoleUI::get_ll_value(
     string::size_type off;
     parsed = stoll(input, &off);
     if (parsed > static_cast<long long>(max) ||
-        parsed < static_cast<long long>(min))
+            parsed < static_cast<long long>(min))
     {
         const string msg =
             "Parseable, but doesn't fall within constraints.";

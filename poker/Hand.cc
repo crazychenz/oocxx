@@ -2,7 +2,7 @@
 #include <algorithm>
 
 // TODO: Get rid of this?
-#include <iostream>
+//#include <iostream>
 
 using namespace std;
 
@@ -92,42 +92,32 @@ void Hand::rank_sort()
     sort(rank_vec.begin(), rank_vec.end(), comp_rank);
 }
 
+#if 0
 /**
 * Dump the state of Hand object to console.
 * @public
 */
-void Hand::dump_hand()
+void Hand::dump_hand(ostream &out)
 {
-
     /* Dump attributes. */
-    cout << "payout: " << get_payout() << endl;
-    cout << "royal flush: " << is_royal_flush() << endl;
-    cout << "is flush: " << is_flush() << endl;
-    cout << "is straight: " << is_straight() << endl;
-    cout << "is straight flush: " << is_straight_flush() << endl;
-    cout << "is four ofa kind: " << is_four_ofa_kind() << endl;
-    cout << "is full house: " << is_full_house() << endl;
-    cout << "has three ofa kind: " << has_three_ofa_kind() << endl;
-    cout << "has two pair: " << has_two_pair() << endl;
-    cout << "has_pair: " << has_royal_pair() << endl;
+    out << "payout: " << get_payout() << endl;
+    out << "royal flush: " << is_royal_flush() << endl;
+    out << "is flush: " << is_flush() << endl;
+    out << "is straight: " << is_straight() << endl;
+    out << "is straight flush: " << is_straight_flush() << endl;
+    out << "is four ofa kind: " << is_four_ofa_kind() << endl;
+    out << "is full house: " << is_full_house() << endl;
+    out << "has three ofa kind: " << has_three_ofa_kind() << endl;
+    out << "has two pair: " << has_two_pair() << endl;
+    out << "has_pair: " << has_royal_pair() << endl;
 
     /* Dump rank sorted. */
-    cout << "--- Rank sorted: ---" << endl;
+    out << "--- Rank sorted: ---" << endl;
     for (vector<Card>::iterator it = rank_vec.begin(); it < rank_vec.end(); it++)
     {
-        cout << it->to_string() << endl;
+        out << it->to_string() << endl;
     }
-    cout << endl;
-
-    /* Dump suit sorted. */
-    /*cout << "--- Suit sorted: ---" << endl;
-    for (vector<Card>::iterator it = suit_vec.begin(); it < suit_vec.end(); it++)
-    {
-    	cout << it->to_string() << endl;
-    }
-    cout << endl;*/
-
-
+    out << endl;
 }
 
 /**
@@ -269,6 +259,26 @@ void Hand::test_hands()
 }
 
 /**
+* Test a single hand state. (For use with test_hands().)
+*/
+// TODO: Make class function
+void Hand::test(string name, Card *cards)
+{
+    Hand hand = Hand();
+    Card *card;
+    card = cards;
+    hand.add_card(card[0]);
+    hand.add_card(card[1]);
+    hand.add_card(card[2]);
+    hand.add_card(card[3]);
+    hand.add_card(card[4]);
+    cout << endl << "=== Name: " << name << " ===" << endl;
+    hand.dump_hand();
+}
+
+#endif /* #if 0 */
+
+/**
 * Get a string representation of player's Hand.
 * @return current calculated HandType as a string object.
 * @public
@@ -365,24 +375,6 @@ Hand::HandType Hand::get_hand_type()
 int Hand::get_payout()
 {
     return get_hand_type();
-}
-
-/**
-* Test a single hand state. (For use with test_hands().)
-*/
-// TODO: Make class function
-void Hand::test(string name, Card *cards)
-{
-    Hand hand = Hand();
-    Card *card;
-    card = cards;
-    hand.add_card(card[0]);
-    hand.add_card(card[1]);
-    hand.add_card(card[2]);
-    hand.add_card(card[3]);
-    hand.add_card(card[4]);
-    cout << endl << "=== Name: " << name << " ===" << endl;
-    hand.dump_hand();
 }
 
 /**

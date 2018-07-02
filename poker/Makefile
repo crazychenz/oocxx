@@ -8,7 +8,7 @@ SOURCES := $(wildcard *.cc)
 OBJECTS := $(filter-out main.o,$(SOURCES:%.cc=%.o))
 
 # Style command stuff
-STYLEFLAGS := -n -s4
+STYLEFLAGS := -z2 -n -s4
 STYLED = astyle $2 $(STYLEFLAGS) $1 | grep -v ^Unchanged
 
 help:

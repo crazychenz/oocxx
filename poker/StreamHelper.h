@@ -72,8 +72,8 @@ private:
     std::ostream *out_stream = &std::cout;
     /** Error stream, defaulted to standard error stream. */
     std::ostream *err_stream = &std::cerr;
-    
-   
+
+
 };
 
 /**
@@ -100,12 +100,12 @@ void ConsoleUI::parse_numeric_input(
         if (is_unsigned<NumType>::value)
         {
             output = static_cast<NumType>(
-                ConsoleUI::get_ull_value(input, min, max));
+                         ConsoleUI::get_ull_value(input, min, max));
             return;
         }
 
         output = static_cast<NumType>(
-            ConsoleUI::get_ll_value(input, min, max));
+                     ConsoleUI::get_ll_value(input, min, max));
         return;
     }
     throw std::invalid_argument("Input must be numeric in decimal notation.");
@@ -156,7 +156,7 @@ void ConsoleUI::get_numeric_input(
         catch (out_of_range &oor)
         {
             err() << "Given value out of range. Must be between " <<
-                min << " and " << max << "." << endl;
+                  min << " and " << max << "." << endl;
         }
         catch (invalid_argument &ia)
         {
