@@ -17,23 +17,23 @@ used.
 Our game will simulate a single hand of five-card stud poker. The basic
 rules and mechanics of the game are as follows:
 
-* A player deposits an arbitrary number of coins into the machine. Each
+- A player deposits an arbitrary number of coins into the machine. Each
   coin has equal value. The number of coins deposited is the player’s
   bankroll.
-* The player makes a bet of one to five coins (but not more than the
+- The player makes a bet of one to five coins (but not more than the
   bankroll).
-* A hand of five cards is dealt from a deck of 52 cards. The deck is
+- A hand of five cards is dealt from a deck of 52 cards. The deck is
   reshuffled before each game.
-* After viewing his/her hand, the player decides which cards he/she
+- After viewing his/her hand, the player decides which cards he/she
   would like to keep and which cards he/she would like to replace.
-* New cards are dealt for those the player has discarded.
-* The hand is evaluated and scored.
-* If the hand is a winner, a payout amount is added to the bankroll.
+- New cards are dealt for those the player has discarded.
+- The hand is evaluated and scored.
+- If the hand is a winner, a payout amount is added to the bankroll.
   Otherwise, the bet amount is deducted from the bankroll.
-* The player can quit and cash out at any time.
-* The player can continue to play as long as the bankroll is not
+- The player can quit and cash out at any time.
+- The player can continue to play as long as the bankroll is not
   depleted.
-* The player can add coins to the bankroll before each game.
+- The player can add coins to the bankroll before each game.
 
  Scoring the Game
 ------------------
@@ -46,38 +46,38 @@ ranks are as follows:
 
 The winning hands, listed in highest to lowest precedence, are as follows:
 
-* Royal Flush: 10, Jack, King, Queen, Ace, all of the same suit. Pays 250
+- Royal Flush: 10, Jack, King, Queen, Ace, all of the same suit. Pays 250
   to 1. For example, if a player bets one coin and is dealt a royal flush,
   then the player wins 250 coints.
-* Straight Flush: Five cards in rank sequence, all of the same suit, but
+- Straight Flush: Five cards in rank sequence, all of the same suit, but
   not a royal flush. For example, Ace, 2, 3, 4, 5 all hearts. Pays 50 to 1.
-* Four of a Kind: For cards of the same rank. For example, 3 of hearts, 3
+- Four of a Kind: For cards of the same rank. For example, 3 of hearts, 3
   of diamonds, 3 of spades, and 10 of clubs. Pays 25 to 1.
-* Full House: Three cards of one rank and two of another. For example, 4
+- Full House: Three cards of one rank and two of another. For example, 4
   of hearts, 4 of spades, 4 of clubs, 7 of clubs, 7 of diamonds. Pays 9
   to 1.
-* Flush: All five cards of the same suit, but not a straight flush. For
+- Flush: All five cards of the same suit, but not a straight flush. For
   example, 3 of hearts, 6 of hearts, 7 of harts, 10 of hearts, Jack of
   hearts. Pays 6 to 1.
-* Straight: Five cards in rank sequence, but not a flush. For example,
+- Straight: Five cards in rank sequence, but not a flush. For example,
   Ace of hearts, 2 of spades, 3 of hearts, 4 of clubs, 5 of diamonds.
   Pays 4 to 1.
-* Three of a Kind: Three cards of the same rank and two cards of two other
+- Three of a Kind: Three cards of the same rank and two cards of two other
   ranks that is not a full house or four of a kind. For example, 5 of
   hearts, 5 of clubs, 5 of spades, 7 of clubs, 9 of diamonds. Pays 3 to 1.
-* Two Pair: Two cards of one rank, two of another, and one card of a
+- Two Pair: Two cards of one rank, two of another, and one card of a
   third. For example, 6 of hearts, 6 of clubs, 9 of clubs, 9 of spades,
   Ace of hearts. Pays 2 to 1.
-* Jacks or Better: Exactly one pair of Jacks, Queens, Kings, or Aces,
+- Jacks or Better: Exactly one pair of Jacks, Queens, Kings, or Aces,
   and nothing else of interest. For example, Jack of hearts, Jack of
   clubs, 2 of spades, 3 of clubs, 3 of hearts. Pays 1 to 1.
 
  Project Deliverables
 ----------------------
 
-* A class diagram
-* All source code
-* A screen capture illustrating the results of a single hand.
+- A class diagram
+- All source code
+- A screen capture illustrating the results of a single hand.
 
  Implementation Synopsis
 =========================
@@ -100,13 +100,13 @@ This class assists with managing input, output, and error streams. By
 default, these streams are set to the standard associated streams. This
 accomplishes two things:
 
-* Provides a mechanism for automation of testing and logging by
+- Provides a mechanism for automation of testing and logging by
   controlling the input and output outside of the standard streams.
   For example, the application could configure the ConsoleUI to
   read all input from a file and produce the output results to
   another file unattended.
 
-* Provides a mechanism for using non-console output. By implementing
+- Provides a mechanism for using non-console output. By implementing
   the input and output through this ConsoleUI, this application has
   the beginnings of an abstracted interface that would allow other
   UI classes to more simply replace the ConsoleUI.
