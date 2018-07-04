@@ -11,7 +11,7 @@
 class ArgParser
 {
 public:
-    
+
     /**
     * @class ArgumentBaseType
     * @brief The base class for Argument values.

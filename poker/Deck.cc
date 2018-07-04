@@ -91,7 +91,7 @@ void Deck::shuffle(int seed)
 
     // Setup the PRNG
     srand(seed);
-    
+
     // Shuffle cards by randomly removing a card from the baseline
     // until the baseline is empty. Each card removed from the baseline
     // is appended to the Deck.

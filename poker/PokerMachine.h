@@ -33,7 +33,7 @@ public:
     const unsigned int get_winnings() const;
 
     unsigned int cash_out();
-    
+
     const unsigned int get_payout() const;
 
 private:

@@ -61,7 +61,7 @@ const string Card::get_rank_string() const
     default:
         break;
     }
-    
+
     // This should technically be impossible.
     throw out_of_range("Invalid rank value for Card.");
 }

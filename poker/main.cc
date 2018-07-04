@@ -146,7 +146,7 @@ deck of cards being dealt, and the rules of the game.
  Card
 ------
 The Card object is a wrapper around a 2 enumerations, a suit enum and a
-rank enum. 
+rank enum.
 
  Hand
 ------
@@ -173,7 +173,7 @@ implicitly set the PRNG based on the result of time(NULL).
 ### Example Given Seed
 
     $ ./poker 5432
-    
+
 
 ### Example Random Seed
 

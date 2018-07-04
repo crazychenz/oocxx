@@ -8,9 +8,9 @@ using namespace std;
 
 /**
  * Default Constructor.
- * Initialize a game by dealing a hand to the player. 
+ * Initialize a game by dealing a hand to the player.
  */
-FiveCardStudGame::FiveCardStudGame() : 
+FiveCardStudGame::FiveCardStudGame() :
     deck(), hand()
 {
     for (int i = 0; i < 5; ++i)
@@ -23,7 +23,7 @@ FiveCardStudGame::FiveCardStudGame() :
  * Fetch an immutable Hand object for inspection by the user interface.
  * @return Immutable Hand reference.
  */
-const Hand& 
+const Hand&
 FiveCardStudGame::get_hand() const
 {
     return hand;
@@ -34,7 +34,7 @@ FiveCardStudGame::get_hand() const
  * @param replace_list A reference to a vector of card indicies to replace.
  * @return Hand payout as an unsigned integer.
  */
-unsigned int 
+unsigned int
 FiveCardStudGame::replace_cards(
     const std::vector<int> &replace_list)
 {
