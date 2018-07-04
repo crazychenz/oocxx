@@ -1,4 +1,5 @@
 #include <string>
+#include <stdexcept>
 
 using namespace std;
 
@@ -24,6 +25,7 @@ int Card::rank() const
 
 /**
 * Get the string representation of the rank value of Card.
+* @throws out_of_range thrown when an invalid rank detected.
 * @return string representation of Card's rank value.
 */
 const string Card::get_rank_string() const
@@ -59,8 +61,9 @@ const string Card::get_rank_string() const
     default:
         break;
     }
-    // TODO: throw exception.
-    return "Unknown Rank";
+    
+    // This should technically be impossible.
+    throw out_of_range("Invalid rank value for Card.");
 }
 
 /**
@@ -74,6 +77,7 @@ int Card::suit() const
 
 /**
 * Get the string representation of the suit value of Card.
+* @throws out_of_range thrown when an invalid suit detected.
 * @return string representation of Card's suit value.
 */
 const string Card::get_suit_string() const
@@ -92,7 +96,8 @@ const string Card::get_suit_string() const
         break;
     }
 
-    return "Unknown Suit";
+    // This should technically be impossible.
+    throw out_of_range("Invalid suit value for Card.");
 }
 
 /**

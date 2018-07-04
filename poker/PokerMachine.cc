@@ -6,7 +6,7 @@
 #include "Hand.h"
 #include "Card.h"
 #include "BankRoll.h"
-
+#include "FiveCardStudGame.h"
 #include "PokerMachine.h"
 
 using namespace std;
@@ -19,6 +19,10 @@ PokerMachine::PokerMachine()
     bankroll = BankRoll();
 }
 
+/**
+ * Fetch the Hand in the current Game.
+ * @return reference to Hand object.
+ */
 const Hand& PokerMachine::get_hand() const
 {
     return game.get_hand();
@@ -26,6 +30,7 @@ const Hand& PokerMachine::get_hand() const
 
 /**
 * Adds coins to the bank roll for the Player.
+* @param coins Number of coins to add to bankroll.
 */
 void PokerMachine::add_coins(const unsigned int coins)
 {
@@ -33,30 +38,38 @@ void PokerMachine::add_coins(const unsigned int coins)
     bankroll.deposit(coins);
 }
 
+/**
+* Withdraw all coins from the bankroll.
+* @return Returns the amount withdrawn.
+*/
 unsigned int PokerMachine::cash_out()
 {
     return bankroll.cash_out();
 }
 
 /**
-* Allows player to play the current hand of the (Five Card Stud) Poker Game.
-* @return The payout of the final hand as an integer.
+* Initializes a new Five Card Stud poker game.
 */
 void PokerMachine::start_game()
 {
-    game = Game();
+    game = FiveCardStudGame();
 }
 
+/**
+* Replaces the requested cards and deposits the winnings into bankroll.
+* @param replace_list Reference to vector<int> indicies for replacing cards.
+*/
 void PokerMachine::finish_game(const vector<int> &replace_list)
 {
     game.replace_cards(replace_list);
-        
+
     // Payout the winnings plus the original stake
     bankroll.deposit(get_winnings() + bet);
 }
 
 /**
-* Asks the Player what bet they'd like to make on the next hand.
+* Move the player's bet from bankroll.
+* @param bet Number of coins being bet.
 */
 void PokerMachine::place_bet(const unsigned int bet)
 {
@@ -67,11 +80,41 @@ void PokerMachine::place_bet(const unsigned int bet)
     bankroll.withdraw(bet);
 }
 
+/**
+* Get the bankroll balance.
+* @return The balance of the bankroll.
+*/
 const unsigned int PokerMachine::get_balance() const
 {
     return bankroll.get_balance();
 }
 
+/**
+* Get the payout for the current Hand.
+* @return current calculated HandType as a integer representation of payout.
+*/
+const unsigned int PokerMachine::get_payout() const
+{
+    return game.get_hand().get_hand_type();
+}
+
+/**
+* Get the current bet value made by the player.
+* @return The bet value.
+*/
+const unsigned int PokerMachine::get_bet() const
+{
+    return bet;
+}
+
+/**
+* Calculate the player winnings.
+* @return The player winnings based on current Game hand.
+*/
+const unsigned int PokerMachine::get_winnings() const
+{
+    return game.get_hand().get_payout() * get_bet();
+}
 
 
 

@@ -1,20 +1,20 @@
-#ifndef CONSOLEUI_H
-#define CONSOLEUI_H
+#ifndef STREAMHELPER_H
+#define STREAMHELPER_H
 
 #include <iostream>
 #include <limits>
 
 /**
-* @class ConsoleUI
+* @class StreamHelper
 * @brief Console support class for managing input and output streams.
 */
-class ConsoleUI
+class StreamHelper
 {
 public:
 
-    ConsoleUI();
+    StreamHelper();
 
-    ConsoleUI(std::istream *in, std::ostream *out, std::ostream *err);
+    StreamHelper(std::istream *in, std::ostream *out, std::ostream *err);
 
     std::istream& in() const;
     std::ostream& out() const;
@@ -87,7 +87,7 @@ private:
 * @throws out_of_range if input not within constraints.
 */
 template <typename NumType>
-void ConsoleUI::parse_numeric_input(
+void StreamHelper::parse_numeric_input(
     const std::string &input,
     NumType &output,
     const NumType min,
@@ -100,12 +100,12 @@ void ConsoleUI::parse_numeric_input(
         if (is_unsigned<NumType>::value)
         {
             output = static_cast<NumType>(
-                         ConsoleUI::get_ull_value(input, min, max));
+                         StreamHelper::get_ull_value(input, min, max));
             return;
         }
 
         output = static_cast<NumType>(
-                     ConsoleUI::get_ll_value(input, min, max));
+                     StreamHelper::get_ll_value(input, min, max));
         return;
     }
     throw std::invalid_argument("Input must be numeric in decimal notation.");
@@ -135,7 +135,7 @@ void ConsoleUI::parse_numeric_input(
 *
 */
 template <typename NumType>
-void ConsoleUI::get_numeric_input(
+void StreamHelper::get_numeric_input(
     const std::string &prompt,
     NumType &output,
     const NumType min,
@@ -178,7 +178,7 @@ void ConsoleUI::get_numeric_input(
 * @param output The reference that returns the retrieved value.
 */
 template <typename NumType>
-void ConsoleUI::get_numeric_input(
+void StreamHelper::get_numeric_input(
     const std::string &prompt,
     NumType &output)
 {
@@ -189,4 +189,4 @@ void ConsoleUI::get_numeric_input(
     get_numeric_input<NumType>(prompt, output, min, max);
 }
 
-#endif /* CONSOLEUI_H */
+#endif /* STREAMHELPER_H */

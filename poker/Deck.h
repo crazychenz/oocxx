@@ -1,13 +1,7 @@
 #ifndef DECK_H
 #define DECK_H
 
-#include <vector>
-#include <list>
-#include <cstdlib>
-
 #include "Card.h"
-
-using namespace std;
 
 /**
 * @class Deck
@@ -29,7 +23,7 @@ public:
 private:
 
     /** Vector that holds all remaining Card objects in the Deck. */
-    vector<Card> deck;
+    std::vector<Card> deck;
 
 };
 

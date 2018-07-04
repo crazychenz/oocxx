@@ -11,102 +11,71 @@
 class ArgParser
 {
 public:
+    
+    /**
+    * @class ArgumentBaseType
+    * @brief The base class for Argument values.
+    */
     class ArgumentBaseType
     {
     };
 
+    /**
+    * @class ArgumentBool
+    * @brief For storing boolean arguments
+    */
     class ArgumentBool : public ArgumentBaseType
     {
     public:
+        /** Boolean Constructor */
         ArgumentBool(bool v) : value(v) {}
+        /** Boolean value represented by this class. */
         bool value;
     };
 
+    /**
+    * @class ArgumentInt
+    * @brief For storing numeric arguments.
+    */
     class ArgumentInt : public ArgumentBaseType
     {
     public:
+        /** Integer Constructor */
         ArgumentInt(long long v) : value(v) {}
+        /** Integer value represented by this class. */
         long long value;
     };
 
+    /**
+    * @class ArgumentRaw
+    * @brief For storing string arguments.
+    */
     class ArgumentRaw : public ArgumentBaseType
     {
     public:
+        /** String Constructor */
         ArgumentRaw(std::string v) : value(v) {}
+        /** String value represented by this class. */
         std::string value;
     };
 
-    ArgParser(const int argc, char **argv)
-    {
-        parse(argc, argv);
-    }
+    ArgParser(const int argc, char **argv);
 
-    void parse(const int argc, char **argv)
-    {
-        // Setup defaults
-        set_key("help", new ArgumentBool(false));
-        set_key("seed", new ArgumentInt(1));
+    void parse(const int argc, char **argv);
 
-        // Look for user defined values
-        for (int i = 1; i < argc; i++) {
-            if (std::string(argv[i]) == "--help") {
-                set_key("help", new ArgumentBool(true));
-            } else if (std::string(argv[i]) == "--seed") {
-                if (argc - 1 == i)
-                {
-                    // We're out of arguments and we still need one more.
-                    // TODO: Throw exception.
-                }
-                // TODO: Use ConsoleUI stoll helper code.
-                set_key("seed", new ArgumentInt(atoi(argv[i + 1])));
-            }
-        }
-    }
+    void set_key(std::string key, ArgumentBaseType *value);
 
-    void set_key(std::string key, ArgumentBaseType *value)
-    {
-        std::map<std::string, ArgumentBaseType *>::iterator it = args.find(key);
-        if(it != args.end())
-        {
-            // First delete the value object memory.
-            delete args[key];
-            // Finally remove map entry.
-            args.erase(it);
-        }
-        if (value)
-        {
-            // Only create new key if value is not NULL.
-            args[key] = value;
-        }
-    }
+    bool has_key(const std::string &name);
 
-    bool has_key(const std::string &name)
-    {
-        std::map<std::string, ArgumentBaseType *>::iterator it = args.find(name);
-        if(it != args.end())
-        {
-            return true;
-        }
-        return false;
-    }
+    long long get_int(const std::string &name) const;
 
-    long long get_int(const std::string &name) const
-    {
-        return ((ArgumentInt *)(args.find(name)->second))->value;
-    }
+    std::string get_raw(const std::string &name) const;
 
-    std::string get_raw(const std::string &name) const
-    {
-        return ((ArgumentRaw *)(args.find(name)->second))->value;
-    }
-
-    bool get_bool(const std::string &name) const
-    {
-        return ((ArgumentBool *)(args.find(name)->second))->value;
-    }
+    bool get_bool(const std::string &name) const;
 
 private:
 
+    /** Parsed arguments. */
     std::map<std::string, ArgumentBaseType *> args;
 
 };

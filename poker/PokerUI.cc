@@ -10,7 +10,15 @@
 using namespace std;
 
 /**
-* Adds coins to the bank roll for the Player.
+* Primary Constructor
+* @param machine The machine this PokerUI interacts with.
+*/
+PokerUI::PokerUI(PokerMachine *machine) {
+    this->machine = machine;
+}
+
+/**
+* Requests from user the number of coins they have and sets amount in machine.
 */
 void PokerUI::add_coins()
 {
@@ -24,7 +32,7 @@ void PokerUI::add_coins()
     cin >> coins;
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    
+
     machine->add_coins(coins);
 }
 
@@ -59,7 +67,7 @@ void PokerUI::place_bet()
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
-    
+
     machine->place_bet(bet);
 }
 
@@ -120,12 +128,15 @@ vector<int> PokerUI::player_selections()
     return replace_list;
 }
 
+/**
+* Shows player the results of their hand after the card replacements.
+*/
 void PokerUI::show_results()
 {
     int cnt = 0;
     const Hand &hand = machine->get_hand();
     unsigned int payout = hand.get_payout();
-    
+
     cout << endl << "=== Final Hand ===" << endl;
     for (Card card : hand.get_cards())
     {
@@ -133,10 +144,10 @@ void PokerUI::show_results()
     }
     cout << "Final Hand: " << hand.type_as_string() << endl;
     cout << "Final Payout: " << payout << endl;
-    
+
     if (payout > 0)
     {
-        
+
 
         cout << endl << "You won " << machine->get_winnings() << " coins! ";
         cout << "(Press Enter to return to Main Menu)";
@@ -154,6 +165,7 @@ void PokerUI::show_results()
 
 /**
 * Cashes out the BankRoll of the machine for the player.
+* Presents the user with the number of coins they've cashed out.
 */
 void PokerUI::cash_out()
 {

@@ -1,19 +1,16 @@
-#ifndef CONSOLEUI_CC
-#define CONSOLEUI_CC
-
 #include <iostream>
 #include <limits>
 #include <cctype>
 #include <algorithm>
 
-#include "ConsoleUI.h"
+#include "StreamHelper.h"
 
 using namespace std;
 
 /**
 * Default Constructor
 */
-ConsoleUI::ConsoleUI()
+StreamHelper::StreamHelper()
 {
 }
 
@@ -23,7 +20,7 @@ ConsoleUI::ConsoleUI()
 * @param out The output stream.
 * @param err The error stream.
 */
-ConsoleUI::ConsoleUI(std::istream *in, std::ostream *out, std::ostream *err)
+StreamHelper::StreamHelper(std::istream *in, std::ostream *out, std::ostream *err)
 {
     if (in != nullptr)
         this->in_stream = in;
@@ -45,7 +42,7 @@ ConsoleUI::ConsoleUI(std::istream *in, std::ostream *out, std::ostream *err)
 * @throws out_of_range when @p min or @p max constraints are not met.
 */
 unsigned long long
-ConsoleUI::get_ull_value(
+StreamHelper::get_ull_value(
     const string &input,
     const unsigned long long min,
     const unsigned long long max)
@@ -75,7 +72,7 @@ ConsoleUI::get_ull_value(
 * @throws out_of_range when @p min or @p max constraints are not met.
 */
 long long
-ConsoleUI::get_ll_value(
+StreamHelper::get_ll_value(
     const string &input,
     const long long min,
     const long long max)
@@ -102,7 +99,7 @@ ConsoleUI::get_ll_value(
 * @param input A reference to a string to return the user input with.
 */
 string&
-ConsoleUI::prompted_getline(
+StreamHelper::prompted_getline(
     const std::string &prompt,
     string &input)
 {
@@ -122,7 +119,7 @@ ConsoleUI::prompted_getline(
 * @param c The character value to check.
 * @return Returns true if character is not a whitespace. False otherwise.
 */
-bool ConsoleUI::isnotspace(const int c)
+bool StreamHelper::isnotspace(const int c)
 {
     return !(::isspace(c));
 }
@@ -132,7 +129,7 @@ bool ConsoleUI::isnotspace(const int c)
 * @param prompt The string prompt to present to the user.
 * @param output The single word reference string returned to user.
 */
-void ConsoleUI::get_single_word_input(
+void StreamHelper::get_single_word_input(
     const std::string &prompt,
     string &output)
 {
@@ -143,14 +140,14 @@ void ConsoleUI::get_single_word_input(
     {
         prompted_getline(prompt, input);
 
-    } while (!all_of(input.begin(), input.end(), &ConsoleUI::isnotspace));
+    } while (!all_of(input.begin(), input.end(), &StreamHelper::isnotspace));
 
     output = input;
 }
 /**
 * Fetches the internally stored input stream.
 */
-istream& ConsoleUI::in() const
+istream& StreamHelper::in() const
 {
     return *in_stream;
 }
@@ -158,7 +155,7 @@ istream& ConsoleUI::in() const
 /**
 * Fetches the internally stored output stream.
 */
-ostream& ConsoleUI::out() const
+ostream& StreamHelper::out() const
 {
     return *out_stream;
 }
@@ -166,9 +163,8 @@ ostream& ConsoleUI::out() const
 /**
 * Fetches the internally stored error output stream.
 */
-ostream& ConsoleUI::err() const
+ostream& StreamHelper::err() const
 {
     return *err_stream;
 }
 
-#endif /* CONSOLEUI_CC */
