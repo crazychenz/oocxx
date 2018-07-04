@@ -58,7 +58,7 @@ void Hand::add_card(Card card)
 * @public
 * @return Copy of the Hand object as vector<Card>
 */
-const vector<Card> Hand::get_hand() const
+const vector<Card>& Hand::get_cards() const
 {
     return rank_vec;
 }
@@ -283,7 +283,7 @@ void Hand::test(string name, Card *cards)
 * @return current calculated HandType as a string object.
 * @public
 */
-string Hand::type_as_string()
+const string Hand::type_as_string() const
 {
     switch (get_hand_type())
     {
@@ -317,7 +317,7 @@ string Hand::type_as_string()
 * @return current calculated HandType as a HandType enumeration.
 * @public
 */
-Hand::HandType Hand::get_hand_type()
+const Hand::HandType Hand::get_hand_type() const
 {
     if (is_royal_flush())
     {
@@ -372,7 +372,7 @@ Hand::HandType Hand::get_hand_type()
 * @return current calculated HandType as a integer representation of payout.
 * @public
 */
-int Hand::get_payout()
+const unsigned int Hand::get_payout() const
 {
     return get_hand_type();
 }
@@ -382,7 +382,7 @@ int Hand::get_payout()
 * (This function is control flow dependent.)
 * @return true if the hand is a flush.
 */
-bool Hand::is_flush()
+bool Hand::is_flush() const
 {
     vector<Card> suit_vec = rank_vec;
     sort(suit_vec.begin(), suit_vec.end(), comp_suit);
@@ -394,7 +394,7 @@ bool Hand::is_flush()
 * (This function is control flow dependent.)
 * @return true if the hand is a straight.
 */
-bool Hand::is_straight()
+bool Hand::is_straight() const
 {
     if (rank_vec.at(0).rank() == Card::CARD_2 &&
             rank_vec.at(1).rank() == Card::CARD_3 &&
@@ -406,7 +406,7 @@ bool Hand::is_straight()
     }
 
     int start = rank_vec.begin()->rank();
-    for (vector<Card>::iterator it = rank_vec.begin(); it < rank_vec.end(); ++it, ++start)
+    for (vector<Card>::const_iterator it = rank_vec.begin(); it < rank_vec.end(); ++it, ++start)
     {
         if (it->rank() != start)
         {
@@ -421,7 +421,7 @@ bool Hand::is_straight()
 * (This function is control flow dependent.)
 * @return true if the hand is a straight flush.
 */
-bool Hand::is_straight_flush()
+bool Hand::is_straight_flush() const
 {
     return is_flush() && is_straight();
 }
@@ -431,7 +431,7 @@ bool Hand::is_straight_flush()
 * (This function is control flow dependent.)
 * @return true if the hand is a royal flush.
 */
-bool Hand::is_royal_flush()
+bool Hand::is_royal_flush() const
 {
     return is_straight_flush() &&
            rank_vec.at(0).rank() == Card::CARD_10 &&
@@ -443,7 +443,7 @@ bool Hand::is_royal_flush()
 * (This function is control flow dependent.)
 * @return true if the hand is a four of a kind.
 */
-bool Hand::is_four_ofa_kind()
+bool Hand::is_four_ofa_kind() const
 {
     if ((rank_vec.at(0).rank() == rank_vec.at(1).rank() &&
             rank_vec.at(1).rank() == rank_vec.at(2).rank() &&
@@ -463,7 +463,7 @@ bool Hand::is_four_ofa_kind()
 * @return true if the hand is a full house.
 */
 // Assumed not four of a kind.
-bool Hand::is_full_house()
+bool Hand::is_full_house() const
 {
     if ((rank_vec.at(0).rank() == rank_vec.at(1).rank() &&
             rank_vec.at(1).rank() == rank_vec.at(2).rank() &&
@@ -483,7 +483,7 @@ bool Hand::is_full_house()
 * @return true if the hand is a three of a kind.
 */
 // Assumed not four of a kind OR full house
-bool Hand::has_three_ofa_kind()
+bool Hand::has_three_ofa_kind() const
 {
     if ((rank_vec.at(0).rank() == rank_vec.at(1).rank() &&
             rank_vec.at(1).rank() == rank_vec.at(2).rank()) ||
@@ -503,7 +503,7 @@ bool Hand::has_three_ofa_kind()
 * @return true if the hand is a two pair.
 */
 // Assumed not three ofa kind, not four ofa kind, AND not full house
-bool Hand::has_two_pair()
+bool Hand::has_two_pair() const
 {
     int t[3][4] = {
         { 0, 1, 2, 3 },
@@ -538,7 +538,7 @@ bool Hand::has_two_pair()
 * (This function is control flow dependent.)
 * @return true if the hand is pair of jacks or better.
 */
-bool Hand::has_royal_pair()
+bool Hand::has_royal_pair() const
 {
     for (int i = 0; i < 4; ++i)
     {

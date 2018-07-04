@@ -33,17 +33,17 @@ public:
 
     void add_card(Card card);
 
-    const std::vector<Card> get_hand() const;
+    const std::vector<Card>& get_cards() const;
 
     void redeal(int idx, Card new_card);
 
     //void dump_hand();
 
-    HandType get_hand_type();
+    const HandType get_hand_type() const;
 
-    int get_payout();
+    const unsigned int get_payout() const;
 
-    std::string type_as_string();
+    const std::string type_as_string() const;
 
     // TODO: Make class function
     //void test_hands();
@@ -58,26 +58,26 @@ private:
     // TODO: Make class function
     //void test(std::string name, Card *cards);
 
-    bool is_flush();
+    bool is_flush() const;
 
-    bool is_straight();
+    bool is_straight() const;
 
-    bool is_straight_flush();
+    bool is_straight_flush() const;
 
-    bool is_royal_flush();
+    bool is_royal_flush() const;
 
-    bool is_four_ofa_kind();
+    bool is_four_ofa_kind() const;
 
     // Assumed not four of a kind.
-    bool is_full_house();
+    bool is_full_house() const;
 
     // Assumed not four of a kind OR full house
-    bool has_three_ofa_kind();
+    bool has_three_ofa_kind() const;
 
     // Assumed not three ofa kind, not four ofa kind, AND not full house
-    bool has_two_pair();
+    bool has_two_pair() const;
 
-    bool has_royal_pair();
+    bool has_royal_pair() const;
 
     /** Rank order vector of cards in hand. */
     std::vector<Card> rank_vec;
