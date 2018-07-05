@@ -8,8 +8,8 @@ class PokerArgParser : public ArgParser
 {
 public:
     PokerArgParser(int argc, char **argv);
-    
+
     void parse();
-    
+
     void usage();
 };

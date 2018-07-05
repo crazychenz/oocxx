@@ -195,7 +195,7 @@ int main(int argc, char **argv)
 
     // Start up a PokerMachine.
     PokerMachine machine = PokerMachine(args);
-    
+
     // Attach PokerMachine to user interface (PokerUI).
     PokerUI(machine, args).main_menu();
     return 0;

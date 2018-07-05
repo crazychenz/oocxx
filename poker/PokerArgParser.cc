@@ -5,6 +5,11 @@ using namespace std;
 #include "PokerArgParser.h"
 #include "ArgParser.h"
 
+/**
+* Primary constructor.
+* @param argc Number of arguments passed to the main() entry point.
+* @param argv The argument 'vector' passed to the main() entry point.
+*/
 PokerArgParser::PokerArgParser(int argc, char **argv) :
     ArgParser(argc, argv)
 {
@@ -13,14 +18,12 @@ PokerArgParser::PokerArgParser(int argc, char **argv) :
 
 /**
 * Interprets the argc/argv parameters into a argument key/value table.
-* @param argc Number of arguments passed to the main() entry point.
-* @param argv The argument 'vector' passed to the main() entry point.
 */
 void PokerArgParser::parse()
 {
     const int argc = get_argc();
     const char **argv = get_argv();
-    
+
     // Setup defaults
     set_key("help", new ArgumentBool(false));
     set_key("seed", new ArgumentInt(1));
@@ -35,7 +38,7 @@ void PokerArgParser::parse()
         }
         else if (std::string(argv[i]) == "--debug") {
             set_key("debug", new ArgumentBool(true));
-        } 
+        }
         else if (std::string(argv[i]) == "--seed") {
             if (argc - 1 == i)
             {

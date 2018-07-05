@@ -29,7 +29,7 @@ public:
     const char** get_argv() const;
 
 protected:
-    
+
     /**
     * @class ArgumentBaseType
     * @brief The base class for Argument values.
@@ -76,7 +76,7 @@ protected:
         /** String value represented by this class. */
         std::string value;
     };
-    
+
     void set_key(std::string key, ArgumentBaseType *value);
 
 private:

@@ -18,12 +18,9 @@ ArgParser::ArgParser(int argc, char **argv) :
 
 /**
 * Interprets the argc/argv parameters into a argument key/value table.
-* @param argc Number of arguments passed to the main() entry point.
-* @param argv The argument 'vector' passed to the main() entry point.
 */
 void ArgParser::parse()
 {
-    cout << "parse(NOTHING)" << endl;
     // This is just an abstract method to be implemented by a subclass.
 }
 

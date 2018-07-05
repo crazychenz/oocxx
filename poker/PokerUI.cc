@@ -17,7 +17,7 @@ using namespace std;
 * @param args Parsed execution environment arguments.
 */
 PokerUI::PokerUI(PokerMachine &machine, ArgParser &args) :
-     machine(machine), args(args)
+    machine(machine), args(args)
 {
 }
 
