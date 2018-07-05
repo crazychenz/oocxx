@@ -13,13 +13,13 @@
 */
 class PokerUI
 {
-public:    
+public:
     PokerUI(PokerMachine *machine, ArgParser *args);
 
     void main_menu();
 
 private:
-    
+
     void add_coins();
 
     void place_bet();
@@ -29,12 +29,12 @@ private:
     void show_results();
 
     void cash_out();
-    
+
     void usage(const char *argv0);
-    
+
     /** The PokerMachine PokerUI is communicating with. */
     PokerMachine *machine;
-    
+
     ArgParser *args;
 
 };

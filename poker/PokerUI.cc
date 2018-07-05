@@ -21,6 +21,9 @@ PokerUI::PokerUI(PokerMachine *machine, ArgParser *args) {
     this->args = args;
 }
 
+/**
+* Show the CLI usage of the application.
+*/
 void PokerUI::usage(const char *argv0)
 {
     cout << "Usage: " << argv0 << " [--seed SEED]\n" << endl;
@@ -210,7 +213,7 @@ void PokerUI::main_menu()
         usage(args->get_argv()[0]);
         exit(0);
     }
-    
+
     int choice = 0;
 
     while (choice != 3)

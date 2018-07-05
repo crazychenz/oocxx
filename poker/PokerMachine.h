@@ -47,7 +47,7 @@ private:
 
     /** The current Game being played. */
     FiveCardStudGame game;
-    
+
     /** Execution environment arguments. */
     ArgParser *args;
 };
