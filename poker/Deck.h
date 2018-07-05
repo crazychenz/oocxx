@@ -6,15 +6,14 @@
 /**
 * @class Deck
 * @brief A finite deck of Card objects that may be dealt.
+* Note: The user of this class is responsible for seeding the PRNG.
 */
 class Deck
 {
 public:
     Deck();
 
-    Deck(int seed);
-
-    void shuffle(int seed);
+    void shuffle();
 
     bool has_card() const;
 

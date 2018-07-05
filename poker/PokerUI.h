@@ -5,6 +5,7 @@
 
 #include "BankRoll.h"
 #include "PokerMachine.h"
+#include "ArgParser.h"
 
 /**
 * @class PokerUI
@@ -12,9 +13,13 @@
 */
 class PokerUI
 {
-public:
-    PokerUI(PokerMachine *machine);
+public:    
+    PokerUI(PokerMachine *machine, ArgParser *args);
 
+    void main_menu();
+
+private:
+    
     void add_coins();
 
     void place_bet();
@@ -24,12 +29,13 @@ public:
     void show_results();
 
     void cash_out();
-
-    void main_menu();
-
-private:
+    
+    void usage(const char *argv0);
+    
     /** The PokerMachine PokerUI is communicating with. */
     PokerMachine *machine;
+    
+    ArgParser *args;
 
 };
 

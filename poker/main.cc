@@ -185,10 +185,11 @@ implicitly set the PRNG based on the result of time(NULL).
 
 #include "PokerMachine.h"
 #include "PokerUI.h"
-int main()
+int main(int argc, char **argv)
 {
-    PokerMachine machine = PokerMachine();
-    PokerUI(&machine).main_menu();
+    ArgParser args(argc, argv);
+    PokerMachine machine = PokerMachine(&args);
+    PokerUI(&machine, &args).main_menu();
     return 0;
 }
 

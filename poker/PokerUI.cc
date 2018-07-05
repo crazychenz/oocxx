@@ -1,20 +1,40 @@
 #include <iostream>
 #include <limits>
 #include <algorithm>
+#include <cstdlib>
 
 #include "PokerUI.h"
 #include "PokerMachine.h"
 #include "Hand.h"
 #include "Card.h"
+#include "ArgParser.h"
 
 using namespace std;
 
 /**
 * Primary Constructor
 * @param machine The machine this PokerUI interacts with.
+* @param args Parsed execution environment arguments.
 */
-PokerUI::PokerUI(PokerMachine *machine) {
+PokerUI::PokerUI(PokerMachine *machine, ArgParser *args) {
     this->machine = machine;
+    this->args = args;
+}
+
+void PokerUI::usage(const char *argv0)
+{
+    cout << "Usage: " << argv0 << " [--seed SEED]\n" << endl;
+    cout << "Play a game of poker (five card stud)." << endl;
+    cout << endl;
+    cout << "With no SEED, current time is used." << endl;
+    cout << endl;
+    cout << "  --help - show this help message" << endl;
+    cout << "  --seed - seed the PRNG for deterministic shuffles" << endl;
+    cout << endl;
+    cout << "Examples:" << endl;
+    cout << "  " << argv0 << " --seed 23443" << endl;
+    cout << "  " << argv0 << endl;
+    cout << endl;
 }
 
 /**
@@ -95,7 +115,7 @@ vector<int> PokerUI::player_selections()
             cout << ++cnt << ". " << card.to_string() << endl;
         }
         cout << "Current Hand: " << hand.type_as_string() << endl;
-        cout << "Current Payout: " << hand.get_payout() << endl;
+        cout << "Current Payout: " << machine->get_payout() << endl;
         cout << "Current Balance: " << machine->get_balance() << endl;
         cout << "Press Enter When Select Complete" << endl;
 
@@ -135,7 +155,7 @@ void PokerUI::show_results()
 {
     int cnt = 0;
     const Hand &hand = machine->get_hand();
-    unsigned int payout = hand.get_payout();
+    unsigned int payout = machine->get_payout();
 
     cout << endl << "=== Final Hand ===" << endl;
     for (Card card : hand.get_cards())
@@ -185,6 +205,12 @@ void PokerUI::cash_out()
 */
 void PokerUI::main_menu()
 {
+    if (args->get_bool("help") == true)
+    {
+        usage(args->get_argv()[0]);
+        exit(0);
+    }
+    
     int choice = 0;
 
     while (choice != 3)

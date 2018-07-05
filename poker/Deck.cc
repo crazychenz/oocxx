@@ -12,23 +12,13 @@ using namespace std;
 */
 Deck::Deck()
 {
-    shuffle(1);
-}
-
-/**
-* Deck Constructor.
-* @param seed The seed valud for the PRNG for shuffling.
-*/
-Deck::Deck(int seed)
-{
-    shuffle(seed);
+    shuffle();
 }
 
 /**
 * Shuffles the Cards in the deck vector.
-* @param seed Seed value to give to the PRNG.
 */
-void Deck::shuffle(int seed)
+void Deck::shuffle()
 {
     list<Card> baseline = {
         Card(Card::ACE, Card::SPADE),
@@ -89,13 +79,11 @@ void Deck::shuffle(int seed)
 
     };
 
-    // Setup the PRNG
-    srand(seed);
-
     // Shuffle cards by randomly removing a card from the baseline
     // until the baseline is empty. Each card removed from the baseline
     // is appended to the Deck.
     while (baseline.size() > 0) {
+        // Note: Caller responsible for seeding rand() with srand()
         int idx = rand() % baseline.size();
         std::list<Card>::iterator it = baseline.begin();
         std::advance(it, idx);

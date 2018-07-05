@@ -41,8 +41,6 @@ public:
 
     const HandType get_hand_type() const;
 
-    const unsigned int get_payout() const;
-
     const std::string type_as_string() const;
 
     // TODO: Make class function

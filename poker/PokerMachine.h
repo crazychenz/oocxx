@@ -6,6 +6,7 @@
 #include "BankRoll.h"
 #include "FiveCardStudGame.h"
 #include "Hand.h"
+#include "ArgParser.h"
 
 /**
 * @class PokerMachine
@@ -14,7 +15,7 @@
 class PokerMachine
 {
 public:
-    PokerMachine();
+    PokerMachine(ArgParser *args);
 
     void add_coins(const unsigned int coins);
 
@@ -46,6 +47,9 @@ private:
 
     /** The current Game being played. */
     FiveCardStudGame game;
+    
+    /** Execution environment arguments. */
+    ArgParser *args;
 };
 
 #endif /* POKERMACHINE_H */

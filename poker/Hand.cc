@@ -1,9 +1,6 @@
 #include <vector>
 #include <algorithm>
 
-// TODO: Get rid of this?
-//#include <iostream>
-
 using namespace std;
 
 #include "Card.h"
@@ -37,8 +34,6 @@ static bool comp_suit(Card &x, Card &y)
 */
 Hand::Hand()
 {
-    //rank_vec = std::vector<Card &>();
-    //suit_vec = std::vector<Card &>();
 }
 
 /**
@@ -63,16 +58,6 @@ const vector<Card>& Hand::get_cards() const
     return rank_vec;
 }
 
-/*bool is_locked(int idx) const
-{
-	Card card = locked.at(idx);
-	if (find(locked.begin(), locked.end(), card) != locked.end())
-	{
-		return true;
-	}
-	return false;
-}*/
-
 /**
 * Replace the Card at index @p idx with Card object @p new_card.
 * @public
@@ -81,7 +66,6 @@ void Hand::redeal(int idx, Card new_card)
 {
     Card old_card = rank_vec.at(idx);
     replace(rank_vec.begin(), rank_vec.end(), old_card, new_card);
-    //locked.push_back(new_card);
 }
 
 /**
@@ -365,16 +349,6 @@ const Hand::HandType Hand::get_hand_type() const
     }
 
     return NOTHING;
-}
-
-/**
-* Get the payout for the current Hand.
-* @return current calculated HandType as a integer representation of payout.
-* @public
-*/
-const unsigned int Hand::get_payout() const
-{
-    return get_hand_type();
 }
 
 /**

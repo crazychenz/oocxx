@@ -8,22 +8,34 @@
 #include "BankRoll.h"
 #include "FiveCardStudGame.h"
 #include "PokerMachine.h"
+#include "ArgParser.h"
 
 using namespace std;
 
 /**
 * Default PokerMachine Constructor
+* @param args The ArgParser object for fetching exec arguments.
 */
-PokerMachine::PokerMachine()
+PokerMachine::PokerMachine(
+    ArgParser *args) : bankroll()
 {
-    bankroll = BankRoll();
+    this->args = args;
+    if (args && args->has_key("seed"))
+    {
+        game = FiveCardStudGame(args->get_int("seed"));
+    }
+    else
+    {
+        game = FiveCardStudGame();
+    }
 }
 
 /**
  * Fetch the Hand in the current Game.
  * @return reference to Hand object.
  */
-const Hand& PokerMachine::get_hand() const
+const Hand&
+PokerMachine::get_hand() const
 {
     return game.get_hand();
 }
@@ -32,7 +44,8 @@ const Hand& PokerMachine::get_hand() const
 * Adds coins to the bank roll for the Player.
 * @param coins Number of coins to add to bankroll.
 */
-void PokerMachine::add_coins(const unsigned int coins)
+void
+PokerMachine::add_coins(const unsigned int coins)
 {
     // TODO: Check input?
     bankroll.deposit(coins);
@@ -42,7 +55,8 @@ void PokerMachine::add_coins(const unsigned int coins)
 * Withdraw all coins from the bankroll.
 * @return Returns the amount withdrawn.
 */
-unsigned int PokerMachine::cash_out()
+unsigned int
+PokerMachine::cash_out()
 {
     return bankroll.cash_out();
 }
@@ -50,16 +64,19 @@ unsigned int PokerMachine::cash_out()
 /**
 * Initializes a new Five Card Stud poker game.
 */
-void PokerMachine::start_game()
+void
+PokerMachine::start_game()
 {
-    game = FiveCardStudGame();
+    game.redeal_cards();
 }
 
 /**
 * Replaces the requested cards and deposits the winnings into bankroll.
 * @param replace_list Reference to vector<int> indicies for replacing cards.
 */
-void PokerMachine::finish_game(const vector<int> &replace_list)
+void
+PokerMachine::finish_game(
+    const vector<int> &replace_list)
 {
     game.replace_cards(replace_list);
 
@@ -71,7 +88,9 @@ void PokerMachine::finish_game(const vector<int> &replace_list)
 * Move the player's bet from bankroll.
 * @param bet Number of coins being bet.
 */
-void PokerMachine::place_bet(const unsigned int bet)
+void
+PokerMachine::place_bet(
+    const unsigned int bet)
 {
     // TODO: Trigger Event?
     this->bet = bet;
@@ -84,7 +103,8 @@ void PokerMachine::place_bet(const unsigned int bet)
 * Get the bankroll balance.
 * @return The balance of the bankroll.
 */
-const unsigned int PokerMachine::get_balance() const
+const unsigned int
+PokerMachine::get_balance() const
 {
     return bankroll.get_balance();
 }
@@ -93,7 +113,8 @@ const unsigned int PokerMachine::get_balance() const
 * Get the payout for the current Hand.
 * @return current calculated HandType as a integer representation of payout.
 */
-const unsigned int PokerMachine::get_payout() const
+const unsigned int
+PokerMachine::get_payout() const
 {
     return game.get_hand().get_hand_type();
 }
@@ -102,7 +123,8 @@ const unsigned int PokerMachine::get_payout() const
 * Get the current bet value made by the player.
 * @return The bet value.
 */
-const unsigned int PokerMachine::get_bet() const
+const unsigned int
+PokerMachine::get_bet() const
 {
     return bet;
 }
@@ -111,9 +133,10 @@ const unsigned int PokerMachine::get_bet() const
 * Calculate the player winnings.
 * @return The player winnings based on current Game hand.
 */
-const unsigned int PokerMachine::get_winnings() const
+const unsigned int
+PokerMachine::get_winnings() const
 {
-    return game.get_hand().get_payout() * get_bet();
+    return get_payout() * get_bet();
 }
 
 

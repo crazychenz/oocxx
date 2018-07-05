@@ -1,5 +1,6 @@
 #include <string>
 #include <map>
+#include <stdexcept>
 
 using namespace std;
 
@@ -10,7 +11,8 @@ using namespace std;
 * @param argc Number of arguments passed to the main() entry point.
 * @param argv The argument 'vector' passed to the main() entry point.
 */
-ArgParser::ArgParser(const int argc, char **argv)
+ArgParser::ArgParser(const int argc, char **argv) :
+    argc(argc), argv(argv)
 {
     parse(argc, argv);
 }
@@ -34,7 +36,7 @@ void ArgParser::parse(const int argc, char **argv)
             if (argc - 1 == i)
             {
                 // We're out of arguments and we still need one more.
-                // TODO: Throw exception.
+                throw invalid_argument("Missing argument for --seed.");
             }
             // TODO: Use ConsoleUI stoll helper code.
             set_key("seed", new ArgumentInt(atoi(argv[i + 1])));
@@ -107,4 +109,20 @@ std::string ArgParser::get_raw(const std::string &key) const
 bool ArgParser::get_bool(const std::string &key) const
 {
     return ((ArgumentBool *)(args.find(key)->second))->value;
+}
+
+/**
+* Fetch the number of arguments passed for parsing.
+*/
+const int ArgParser::get_argc() const
+{
+    return argc;
+}
+
+/**
+* Fetch the arguments passed for parsing.
+*/
+const char** ArgParser::get_argv() const
+{
+    return (const char **)argv;
 }

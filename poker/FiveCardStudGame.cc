@@ -1,4 +1,6 @@
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -13,6 +15,28 @@ using namespace std;
 FiveCardStudGame::FiveCardStudGame() :
     deck(), hand()
 {
+    srand(time(NULL));
+    redeal_cards();
+}
+
+/**
+ * Seeded Constructor.
+ * Initialize a game by shuffling and dealing a hand to the player.
+ */
+FiveCardStudGame::FiveCardStudGame(unsigned int seed) :
+    deck(), hand()
+{
+    srand(seed);
+    redeal_cards();
+}
+
+/**
+* Reshuffle and redeal cards for a new game.
+*/
+void FiveCardStudGame::redeal_cards()
+{
+    deck = Deck();
+    hand = Hand();
     for (int i = 0; i < 5; ++i)
     {
         hand.add_card(deck.pop_card());
@@ -43,5 +67,5 @@ FiveCardStudGame::replace_cards(
     }
     hand.rank_sort();
 
-    return hand.get_payout();
+    return hand.get_hand_type();
 }

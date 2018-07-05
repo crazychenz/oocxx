@@ -73,10 +73,20 @@ public:
 
     bool get_bool(const std::string &name) const;
 
+    const int get_argc() const;
+    
+    const char** get_argv() const;
+
 private:
 
     /** Parsed arguments. */
     std::map<std::string, ArgumentBaseType *> args;
+    
+    /** The number of arguments passed for parsing. */
+    int argc;
+    
+    /** An array of char* that each point to an argument. */
+    char **argv;
 
 };
 

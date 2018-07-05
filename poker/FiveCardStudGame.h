@@ -14,13 +14,20 @@ class FiveCardStudGame
 {
 public:
     FiveCardStudGame();
+    
+    FiveCardStudGame(unsigned int seed);
+    
+    void redeal_cards();
 
     const Hand& get_hand() const;
 
     unsigned int replace_cards(const std::vector<int> &replace_list);
 
 private:
+    /** The deck of cards game is dealt from. */
     Deck deck;
+    
+    /** The player's hand being dealt from deck. */
     Hand hand;
 
 };
