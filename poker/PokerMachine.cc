@@ -17,12 +17,11 @@ using namespace std;
 * @param args The ArgParser object for fetching exec arguments.
 */
 PokerMachine::PokerMachine(
-    ArgParser *args) : bankroll()
+    ArgParser &args) : bankroll(), args(args)
 {
-    this->args = args;
-    if (args && args->has_key("seed"))
+    if (args.has_key("seed"))
     {
-        game = FiveCardStudGame(args->get_int("seed"));
+        game = FiveCardStudGame(args.get_int("seed"));
     }
     else
     {

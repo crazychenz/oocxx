@@ -14,7 +14,7 @@
 class PokerUI
 {
 public:
-    PokerUI(PokerMachine *machine, ArgParser *args);
+    PokerUI(PokerMachine &machine, ArgParser &args);
 
     void main_menu();
 
@@ -33,9 +33,9 @@ private:
     void usage(const char *argv0);
 
     /** The PokerMachine PokerUI is communicating with. */
-    PokerMachine *machine;
+    PokerMachine &machine;
 
-    ArgParser *args;
+    ArgParser &args;
 
 };
 

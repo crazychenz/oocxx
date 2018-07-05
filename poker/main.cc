@@ -188,8 +188,8 @@ implicitly set the PRNG based on the result of time(NULL).
 int main(int argc, char **argv)
 {
     ArgParser args(argc, argv);
-    PokerMachine machine = PokerMachine(&args);
-    PokerUI(&machine, &args).main_menu();
+    PokerMachine machine = PokerMachine(args);
+    PokerUI(machine, args).main_menu();
     return 0;
 }
 

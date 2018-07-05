@@ -15,7 +15,7 @@
 class PokerMachine
 {
 public:
-    PokerMachine(ArgParser *args);
+    PokerMachine(ArgParser &args);
 
     void add_coins(const unsigned int coins);
 
@@ -49,7 +49,7 @@ private:
     FiveCardStudGame game;
 
     /** Execution environment arguments. */
-    ArgParser *args;
+    ArgParser &args;
 };
 
 #endif /* POKERMACHINE_H */

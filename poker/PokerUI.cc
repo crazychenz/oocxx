@@ -16,9 +16,9 @@ using namespace std;
 * @param machine The machine this PokerUI interacts with.
 * @param args Parsed execution environment arguments.
 */
-PokerUI::PokerUI(PokerMachine *machine, ArgParser *args) {
-    this->machine = machine;
-    this->args = args;
+PokerUI::PokerUI(PokerMachine &machine, ArgParser &args) :
+     machine(machine), args(args)
+{
 }
 
 /**
@@ -50,13 +50,13 @@ void PokerUI::add_coins()
     cout << "--------------------" << endl;
 
     unsigned int coins;
-    cout << "You have " << machine->get_balance() << " coins." << endl;
+    cout << "You have " << machine.get_balance() << " coins." << endl;
     cout << "How many coins would you like to add? ";
     cin >> coins;
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    machine->add_coins(coins);
+    machine.add_coins(coins);
 }
 
 /**
@@ -69,7 +69,7 @@ void PokerUI::place_bet()
     cout << "--------------------" << endl;
 
     unsigned int bet;
-    unsigned int balance = machine->get_balance();
+    unsigned int balance = machine.get_balance();
     cout << "You have " << balance << " coins." << endl;
 
     if (balance == 0)
@@ -91,7 +91,7 @@ void PokerUI::place_bet()
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    machine->place_bet(bet);
+    machine.place_bet(bet);
 }
 
 /**
@@ -110,7 +110,7 @@ vector<int> PokerUI::player_selections()
     int cnt = 0;
     while (to_replace > 0 && to_replace < 6)
     {
-        const Hand &hand = machine->get_hand();
+        const Hand &hand = machine.get_hand();
         cnt = 0;
         cout << endl << "=== Current Hand ===" << endl;
         for (Card card : hand.get_cards())
@@ -118,8 +118,8 @@ vector<int> PokerUI::player_selections()
             cout << ++cnt << ". " << card.to_string() << endl;
         }
         cout << "Current Hand: " << hand.type_as_string() << endl;
-        cout << "Current Payout: " << machine->get_payout() << endl;
-        cout << "Current Balance: " << machine->get_balance() << endl;
+        cout << "Current Payout: " << machine.get_payout() << endl;
+        cout << "Current Balance: " << machine.get_balance() << endl;
         cout << "Press Enter When Select Complete" << endl;
 
         cout << "Replace List: ";
@@ -157,8 +157,8 @@ vector<int> PokerUI::player_selections()
 void PokerUI::show_results()
 {
     int cnt = 0;
-    const Hand &hand = machine->get_hand();
-    unsigned int payout = machine->get_payout();
+    const Hand &hand = machine.get_hand();
+    unsigned int payout = machine.get_payout();
 
     cout << endl << "=== Final Hand ===" << endl;
     for (Card card : hand.get_cards())
@@ -172,13 +172,13 @@ void PokerUI::show_results()
     {
 
 
-        cout << endl << "You won " << machine->get_winnings() << " coins! ";
+        cout << endl << "You won " << machine.get_winnings() << " coins! ";
         cout << "(Press Enter to return to Main Menu)";
         getchar();
     }
     else
     {
-        cout << endl << "You lost " << machine->get_bet() << " coins. ";
+        cout << endl << "You lost " << machine.get_bet() << " coins. ";
         cout << "(Press Enter to return to Main Menu)";
         getchar();
     }
@@ -196,8 +196,8 @@ void PokerUI::cash_out()
     cout << " Cashed Out" << endl;
     cout << "--------------------" << endl;
 
-    unsigned int balance = machine->get_balance();
-    machine->cash_out();
+    unsigned int balance = machine.get_balance();
+    machine.cash_out();
     cout << "You now have " << balance << " coins to spend." << endl;
 }
 
@@ -208,9 +208,9 @@ void PokerUI::cash_out()
 */
 void PokerUI::main_menu()
 {
-    if (args->get_bool("help") == true)
+    if (args.get_bool("help") == true)
     {
-        usage(args->get_argv()[0]);
+        usage(args.get_argv()[0]);
         exit(0);
     }
 
@@ -223,7 +223,7 @@ void PokerUI::main_menu()
         cout << "--------------------" << endl;
         cout << " Main Menu" << endl;
         cout << "--------------------" << endl;
-        cout << "Current Balance: " << machine->get_balance() << endl;
+        cout << "Current Balance: " << machine.get_balance() << endl;
         cout << "1. Add Coins" << endl;
         cout << "2. Play Game" << endl;
         cout << "3. Cash Out & Quit" << endl;
@@ -240,8 +240,8 @@ void PokerUI::main_menu()
             break;
         case 2:
             place_bet();
-            machine->start_game();
-            machine->finish_game(player_selections());
+            machine.start_game();
+            machine.finish_game(player_selections());
             show_results();
             break;
         case 3:
