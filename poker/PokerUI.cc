@@ -22,30 +22,12 @@ PokerUI::PokerUI(PokerMachine &machine, ArgParser &args) :
 }
 
 /**
-* Show the CLI usage of the application.
-*/
-void PokerUI::usage(const char *argv0)
-{
-    cout << "Usage: " << argv0 << " [--seed SEED]\n" << endl;
-    cout << "Play a game of poker (five card stud)." << endl;
-    cout << endl;
-    cout << "With no SEED, current time is used." << endl;
-    cout << endl;
-    cout << "  --help - show this help message" << endl;
-    cout << "  --seed - seed the PRNG for deterministic shuffles" << endl;
-    cout << endl;
-    cout << "Examples:" << endl;
-    cout << "  " << argv0 << " --seed 23443" << endl;
-    cout << "  " << argv0 << endl;
-    cout << endl;
-}
-
-/**
 * Requests from user the number of coins they have and sets amount in machine.
 */
 void PokerUI::add_coins()
 {
-    cout << endl << "--------------------" << endl;
+    cout << endl;
+    cout << "--------------------" << endl;
     cout << " Add Coins" << endl;
     cout << "--------------------" << endl;
 
@@ -64,7 +46,8 @@ void PokerUI::add_coins()
 */
 void PokerUI::place_bet()
 {
-    cout << endl << "--------------------" << endl;
+    cout << endl;
+    cout << "--------------------" << endl;
     cout << " Place Bet" << endl;
     cout << "--------------------" << endl;
 
@@ -160,7 +143,8 @@ void PokerUI::show_results()
     const Hand &hand = machine.get_hand();
     unsigned int payout = machine.get_payout();
 
-    cout << endl << "=== Final Hand ===" << endl;
+    cout << endl;
+    cout << "=== Final Hand ===" << endl;
     for (Card card : hand.get_cards())
     {
         cout << ++cnt << ". " << card.to_string() << endl;
@@ -168,10 +152,9 @@ void PokerUI::show_results()
     cout << "Final Hand: " << hand.type_as_string() << endl;
     cout << "Final Payout: " << payout << endl;
 
-    if (payout > 0)
+    if (payout > 1)
     {
-
-
+        // TODO: If payout is 1, you win zero coins?
         cout << endl << "You won " << machine.get_winnings() << " coins! ";
         cout << "(Press Enter to return to Main Menu)";
         getchar();
@@ -192,12 +175,12 @@ void PokerUI::show_results()
 */
 void PokerUI::cash_out()
 {
-    cout << endl << "--------------------" << endl;
+    cout << endl;
+    cout << "--------------------" << endl;
     cout << " Cashed Out" << endl;
     cout << "--------------------" << endl;
 
-    unsigned int balance = machine.get_balance();
-    machine.cash_out();
+    unsigned int balance = machine.cash_out();
     cout << "You now have " << balance << " coins to spend." << endl;
 }
 
@@ -208,11 +191,6 @@ void PokerUI::cash_out()
 */
 void PokerUI::main_menu()
 {
-    if (args.get_bool("help") == true)
-    {
-        usage(args.get_argv()[0]);
-        exit(0);
-    }
 
     int choice = 0;
 

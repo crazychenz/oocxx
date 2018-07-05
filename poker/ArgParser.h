@@ -12,6 +12,24 @@ class ArgParser
 {
 public:
 
+    ArgParser(int argc, char **argv);
+
+    void parse();
+
+    bool has_key(const std::string &name);
+
+    long long get_int(const std::string &name) const;
+
+    std::string get_raw(const std::string &name) const;
+
+    bool get_bool(const std::string &name) const;
+
+    const int get_argc() const;
+
+    const char** get_argv() const;
+
+protected:
+    
     /**
     * @class ArgumentBaseType
     * @brief The base class for Argument values.
@@ -58,24 +76,8 @@ public:
         /** String value represented by this class. */
         std::string value;
     };
-
-    ArgParser(const int argc, char **argv);
-
-    void parse(const int argc, char **argv);
-
+    
     void set_key(std::string key, ArgumentBaseType *value);
-
-    bool has_key(const std::string &name);
-
-    long long get_int(const std::string &name) const;
-
-    std::string get_raw(const std::string &name) const;
-
-    bool get_bool(const std::string &name) const;
-
-    const int get_argc() const;
-
-    const char** get_argv() const;
 
 private:
 

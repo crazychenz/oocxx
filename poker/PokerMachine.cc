@@ -79,8 +79,11 @@ PokerMachine::finish_game(
 {
     game.replace_cards(replace_list);
 
-    // Payout the winnings plus the original stake
-    bankroll.deposit(get_winnings() + bet);
+    if (get_payout() > 0)
+    {
+        // Payout the winnings plus the original stake
+        bankroll.deposit(get_winnings() + bet);
+    }
 }
 
 /**

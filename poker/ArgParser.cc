@@ -1,7 +1,7 @@
 #include <string>
 #include <map>
 #include <stdexcept>
-
+#include <iostream>
 using namespace std;
 
 #include "ArgParser.h"
@@ -11,10 +11,9 @@ using namespace std;
 * @param argc Number of arguments passed to the main() entry point.
 * @param argv The argument 'vector' passed to the main() entry point.
 */
-ArgParser::ArgParser(const int argc, char **argv) :
+ArgParser::ArgParser(int argc, char **argv) :
     argc(argc), argv(argv)
 {
-    parse(argc, argv);
 }
 
 /**
@@ -22,26 +21,10 @@ ArgParser::ArgParser(const int argc, char **argv) :
 * @param argc Number of arguments passed to the main() entry point.
 * @param argv The argument 'vector' passed to the main() entry point.
 */
-void ArgParser::parse(const int argc, char **argv)
+void ArgParser::parse()
 {
-    // Setup defaults
-    set_key("help", new ArgumentBool(false));
-    set_key("seed", new ArgumentInt(1));
-
-    // Look for user defined values
-    for (int i = 1; i < argc; i++) {
-        if (std::string(argv[i]) == "--help") {
-            set_key("help", new ArgumentBool(true));
-        } else if (std::string(argv[i]) == "--seed") {
-            if (argc - 1 == i)
-            {
-                // We're out of arguments and we still need one more.
-                throw invalid_argument("Missing argument for --seed.");
-            }
-            // TODO: Use ConsoleUI stoll helper code.
-            set_key("seed", new ArgumentInt(atoi(argv[i + 1])));
-        }
-    }
+    cout << "parse(NOTHING)" << endl;
+    // This is just an abstract method to be implemented by a subclass.
 }
 
 /**

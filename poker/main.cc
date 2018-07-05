@@ -183,12 +183,20 @@ implicitly set the PRNG based on the result of time(NULL).
 
 */
 
+#include "PokerArgParser.h"
 #include "PokerMachine.h"
 #include "PokerUI.h"
+
 int main(int argc, char **argv)
 {
-    ArgParser args(argc, argv);
+    // Grab and parse the exec env args.
+    PokerArgParser args(argc, argv);
+    args.parse();
+
+    // Start up a PokerMachine.
     PokerMachine machine = PokerMachine(args);
+    
+    // Attach PokerMachine to user interface (PokerUI).
     PokerUI(machine, args).main_menu();
     return 0;
 }

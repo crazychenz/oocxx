@@ -30,8 +30,6 @@ private:
 
     void cash_out();
 
-    void usage(const char *argv0);
-
     /** The PokerMachine PokerUI is communicating with. */
     PokerMachine &machine;
 
