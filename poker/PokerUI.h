@@ -18,11 +18,15 @@ public:
 
     void main_menu();
 
+protected:
+
+    void display_current_hand(const Hand &hand) const;
+
 private:
 
     void add_coins();
 
-    void place_bet();
+    unsigned int place_bet();
 
     std::vector<int> player_selections();
 

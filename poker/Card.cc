@@ -18,7 +18,7 @@ Card::Card(Rank rank, Suit suit)
 * Get the rank value of Card.
 * @return the rank value of the Card as an integer.
 */
-int Card::rank() const
+char Card::rank() const
 {
     return rank_enum;
 }

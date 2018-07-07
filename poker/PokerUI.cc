@@ -44,14 +44,14 @@ void PokerUI::add_coins()
 /**
 * Asks the Player what bet they'd like to make on the next hand.
 */
-void PokerUI::place_bet()
+unsigned int PokerUI::place_bet()
 {
     cout << endl;
     cout << "--------------------" << endl;
     cout << " Place Bet" << endl;
     cout << "--------------------" << endl;
 
-    unsigned int bet;
+    unsigned int bet = 0;
     unsigned int balance = machine.get_balance();
     cout << "You have " << balance << " coins." << endl;
 
@@ -61,7 +61,7 @@ void PokerUI::place_bet()
         cout << "Come back when you have a bank roll!" << endl;
         cout << "(Press Enter to return to Main Menu)";
         getchar();
-        return;
+        return bet;
     }
 
     bet = 0;
@@ -75,6 +75,74 @@ void PokerUI::place_bet()
     }
 
     machine.place_bet(bet);
+    return bet;
+}
+
+/*
+void PokerUI::display_current_hand_old(const Hand &hand) const
+{
+    for (Card card : hand.get_cards())
+    {
+        cout << ++cnt << ". " << card.to_string() << endl;
+    }
+}
+*/
+
+void PokerUI::display_current_hand(const Hand &hand) const
+{
+    string ul = "\u250C";
+    string ur = "\u2510";
+    string hz = "\u2500";
+    string vt = "\u2502";
+    string lr = "\u2518";
+    string ll = "\u2514";
+
+    const string suit[4] = { "\u2660", "\u2665", "\u2663", "\u2666" };
+
+    for (int i = 0; i < 5; ++i)
+    {
+        cout << ul << hz << hz << hz << hz << hz << ur << " ";
+    }
+    cout << endl;
+
+    for (Card card : hand.get_cards())
+    {
+        cout << vt << suit[card.suit()] << "   " << card.rank() << vt << " ";
+    }
+    cout << endl;
+
+    for (int j = 0; j < 2; ++j)
+    {
+        for (int i = 0; i < 5; ++i)
+        {
+            cout << vt << "     " << vt << " ";
+        }
+        cout << endl;
+    }
+
+    for (Card card : hand.get_cards())
+    {
+        cout << vt << card.rank() << "   " << suit[card.suit()] << vt << " ";
+    }
+    cout << endl;
+
+    for (int i = 0; i < 5; ++i)
+    {
+        cout << ll << hz << hz << hz << hz << hz << lr << " ";
+    }
+    cout << endl;
+
+    for (int i = 1; i < 6; ++i)
+    {
+        cout << "   " << i << ".   ";
+    }
+    cout << endl << endl;
+
+    //int cnt = 0;
+    //for (Card card : hand.get_cards())
+    //{
+    //    cout << ++cnt << ". " << card.to_string() << endl;
+    //}
 }
 
 /**
@@ -90,16 +158,11 @@ vector<int> PokerUI::player_selections()
 
     vector<int> replace_list;
     int to_replace = 1;
-    int cnt = 0;
     while (to_replace > 0 && to_replace < 6)
     {
         const Hand &hand = machine.get_hand();
-        cnt = 0;
         cout << endl << "=== Current Hand ===" << endl;
-        for (Card card : hand.get_cards())
-        {
-            cout << ++cnt << ". " << card.to_string() << endl;
-        }
+        display_current_hand(hand);
         cout << "Current Hand: " << hand.type_as_string() << endl;
         cout << "Current Payout: " << machine.get_payout() << endl;
         cout << "Current Balance: " << machine.get_balance() << endl;
@@ -139,16 +202,17 @@ vector<int> PokerUI::player_selections()
 */
 void PokerUI::show_results()
 {
-    int cnt = 0;
+    //int cnt = 0;
     const Hand &hand = machine.get_hand();
     unsigned int payout = machine.get_payout();
 
     cout << endl;
     cout << "=== Final Hand ===" << endl;
-    for (Card card : hand.get_cards())
-    {
-        cout << ++cnt << ". " << card.to_string() << endl;
-    }
+    display_current_hand(hand);
+    //for (Card card : hand.get_cards())
+    //{
+    //    cout << ++cnt << ". " << card.to_string() << endl;
+    //}
     cout << "Final Hand: " << hand.type_as_string() << endl;
     cout << "Final Payout: " << payout << endl;
 
@@ -217,7 +281,10 @@ void PokerUI::main_menu()
             add_coins();
             break;
         case 2:
-            place_bet();
+            if (place_bet() == 0)
+            {
+                break;
+            }
             machine.start_game();
             machine.finish_game(player_selections());
             show_results();
