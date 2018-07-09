@@ -30,6 +30,16 @@ PokerMachine::PokerMachine(
 }
 
 /**
+* Fetch the seed used to shuffle the deck.
+* @return unsigned int of PRNG seed.
+*/
+unsigned int
+PokerMachine::get_seed() const
+{
+    return game.get_seed();
+}
+
+/**
  * Fetch the Hand in the current Game.
  * @return reference to Hand object.
  */

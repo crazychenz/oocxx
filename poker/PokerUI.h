@@ -6,6 +6,7 @@
 #include "BankRoll.h"
 #include "PokerMachine.h"
 #include "ArgParser.h"
+#include "StreamHelper.h"
 
 /**
 * @class PokerUI
@@ -42,6 +43,8 @@ private:
     PokerMachine &machine;
 
     ArgParser &args;
+
+    StreamHelper io = StreamHelper();
 
 };
 

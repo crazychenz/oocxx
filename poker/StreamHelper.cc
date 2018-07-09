@@ -13,6 +13,7 @@ using namespace std;
 */
 StreamHelper::StreamHelper()
 {
+    // Data members initialized with C++11 initializers.
 }
 
 /**
@@ -104,7 +105,7 @@ StreamHelper::prompted_getline(
     const std::string &prompt,
     string &input)
 {
-    out() << prompt << "? ";
+    out() << prompt << " ";
     getline(in(), input);
     in().clear();
 

@@ -155,11 +155,17 @@ void StreamHelper::get_numeric_input(
         }
         catch (out_of_range &oor)
         {
+            // Squelch 'unreferenced' warning
+            (void)oor;
+
             err() << "Given value out of range. Must be between " <<
                   min << " and " << max << "." << endl;
         }
         catch (invalid_argument &ia)
         {
+            // Squelch 'unreferenced' warning
+            (void)ia;
+
             err() << "Input must be a decimal number." << endl;
         }
 

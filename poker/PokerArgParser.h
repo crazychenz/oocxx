@@ -1,4 +1,5 @@
 #include "ArgParser.h"
+#include "StreamHelper.h"
 
 /**
 * @class PokerArgParser
@@ -12,4 +13,6 @@ public:
     void parse();
 
     void usage();
+private:
+    StreamHelper io = StreamHelper();
 };

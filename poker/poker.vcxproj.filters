@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{2f1cfaaf-9e2d-49ca-bb09-7eaf1d354e53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArgParser.cc">
@@ -80,5 +83,16 @@
     <ClInclude Include="StreamHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore">
+      <Filter>Misc</Filter>
+    </None>
+    <None Include="Doxyfile">
+      <Filter>Misc</Filter>
+    </None>
+    <None Include="Makefile">
+      <Filter>Misc</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -15,7 +15,8 @@ using namespace std;
 FiveCardStudGame::FiveCardStudGame() :
     deck(), hand()
 {
-    srand(static_cast<unsigned int>(time(NULL)));
+    seed = static_cast<unsigned int>(time(NULL));
+    srand(seed);
     redeal_cards();
 }
 
@@ -26,6 +27,7 @@ FiveCardStudGame::FiveCardStudGame() :
 FiveCardStudGame::FiveCardStudGame(unsigned int seed) :
     deck(), hand()
 {
+    this->seed = seed;
     srand(seed);
     redeal_cards();
 }
@@ -51,6 +53,16 @@ const Hand&
 FiveCardStudGame::get_hand() const
 {
     return hand;
+}
+
+/**
+* Fetch the seed used to shuffle the deck.
+* @return unsigned int of PRNG seed.
+*/
+unsigned int
+FiveCardStudGame::get_seed() const
+{
+    return seed;
 }
 
 /**

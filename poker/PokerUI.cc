@@ -2,12 +2,14 @@
 #include <limits>
 #include <algorithm>
 #include <cstdlib>
+#include <sstream>
 
 #include "PokerUI.h"
 #include "PokerMachine.h"
 #include "Hand.h"
 #include "Card.h"
 #include "ArgParser.h"
+#include "StreamHelper.h"
 
 using namespace std;
 
@@ -19,6 +21,10 @@ using namespace std;
 PokerUI::PokerUI(PokerMachine &machine, ArgParser &args) :
     machine(machine), args(args)
 {
+    if (args.get_bool("verbose"))
+    {
+        cout << "Seed: " << machine.get_seed() << endl;
+    }
 }
 
 /**
@@ -26,18 +32,24 @@ PokerUI::PokerUI(PokerMachine &machine, ArgParser &args) :
 */
 void PokerUI::add_coins()
 {
+    // Give the user some context.
     cout << endl;
     cout << "--------------------" << endl;
     cout << " Add Coins" << endl;
     cout << "--------------------" << endl;
+    cout << "You have " << machine.get_balance() << " coins." << endl; 
+    
+    // Only allow adding coins if they fit within primitive type.
+    unsigned int max;
+    max = numeric_limits<unsigned int>::max();
+    max -= machine.get_balance();
 
+    // Get safe user input.
     unsigned int coins;
-    cout << "You have " << machine.get_balance() << " coins." << endl;
-    cout << "How many coins would you like to add? ";
-    cin >> coins;
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    string prompt = "How many coins would you like to add?";
+    io.get_numeric_input<unsigned int>(prompt, coins, 0, max);
 
+    // Make it so.
     machine.add_coins(coins);
 }
 
@@ -46,15 +58,18 @@ void PokerUI::add_coins()
 */
 unsigned int PokerUI::place_bet()
 {
+    unsigned int bet = 0;
+
+    // Give the user some context.
     cout << endl;
     cout << "--------------------" << endl;
     cout << " Place Bet" << endl;
     cout << "--------------------" << endl;
-
-    unsigned int bet = 0;
+    
     unsigned int balance = machine.get_balance();
     cout << "You have " << balance << " coins." << endl;
 
+    // Only ask for bet if there is something to bet.
     if (balance == 0)
     {
         cout << "You have no money to bet with." << endl;
@@ -64,21 +79,25 @@ unsigned int PokerUI::place_bet()
         return bet;
     }
 
+    // Allow a bet between 1 and 5 coins or between 1 and the BankRoll coins.
     bet = 0;
     while (!(bet > 0 && bet < 6))
     {
         int max = balance < 5 ? balance : 5;
-        cout << "How many coins will you bet (1 - " << max << " coins)? ";
-        cin >> bet;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        stringstream prompt;
+        prompt << "How many coins will you bet (1 - " << max << " coins)? ";
+        io.get_numeric_input<unsigned int>(prompt.str(), bet, 0, max);
     }
 
+    // Make it so.
     machine.place_bet(bet);
     return bet;
 }
 
-
+/**
+* Present the a Hand to the user with plain text.
+* @param hand A reference to the hand to display.
+*/
 void PokerUI::display_current_hand_text(const Hand &hand) const
 {
     int cnt = 0;
@@ -88,30 +107,23 @@ void PokerUI::display_current_hand_text(const Hand &hand) const
     }
 }
 
+/**
+* Present the a Hand to the user with ASCII art.
+* @param hand A reference to the hand to display.
+*/
 void PokerUI::display_current_hand_ascii(const Hand &hand) const
 {
-    /* Suit art found at: http://www.asciiartfarts.com/poker.html
-      _
-    ( V )
-     \ /
-      V
+    /* Suit ascii art found at: 
+       http://www.asciiartfarts.com/poker.html
 
-     / \
-    /   \
-    \   /
-     \ /
-
-      .
-     / \
-    (_,_)
-      I
-      _
-     ( )
-    (_x_)
-      Y
-
+         .    _ _    _    / \ 
+        / \  ( V )  ( )  /   \
+       (_,_)  \ /  (_x_) \   /
+         I     V     Y    \ / 
+    
     */
 
+    // An easy index for remapping the sides of the cards.
     string ul = " ";
     string ur = " ";
     string hz = "-";
@@ -119,6 +131,7 @@ void PokerUI::display_current_hand_ascii(const Hand &hand) const
     string lr = " ";
     string ll = " ";
 
+    // Broke each suit into their lines for horizontal presentation.
     const string suit[4][4] = {
         { "  .  ",  " _ _ ", "  _  ", " / \\ "},
         { " / \\ ",  "( V )", " ( ) ", "/   \\" },
@@ -126,18 +139,21 @@ void PokerUI::display_current_hand_ascii(const Hand &hand) const
         { "  I  ",  "  V  ", "  Y  ", " \\ / " },
     };
 
+    // First line
     for (int i = 0; i < 5; ++i)
     {
         cout << ul << hz << hz << hz << hz << hz << hz << hz << ur << " ";
     }
     cout << endl;
 
+    // First Rank line
     for (Card card : hand.get_cards())
     {
         cout << vt << card.rank() << "      " << vt << " ";
     }
     cout << endl;
 
+    // Draw the suits.
     for (int j = 0; j < 4; ++j)
     {
         for (Card card : hand.get_cards())
@@ -147,18 +163,21 @@ void PokerUI::display_current_hand_ascii(const Hand &hand) const
         cout << endl;
     }
 
+    // Second rank line
     for (Card card : hand.get_cards())
     {
         cout << vt << "      " << card.rank() << vt << " ";
     }
     cout << endl;
 
+    // Bottom line.
     for (int i = 0; i < 5; ++i)
     {
         cout << ll << hz << hz << hz << hz << hz << hz << hz << lr << " ";
     }
     cout << endl;
 
+    // Selection index line.
     for (int i = 1; i < 6; ++i)
     {
         cout << "     " << i << ".   ";
@@ -166,9 +185,21 @@ void PokerUI::display_current_hand_ascii(const Hand &hand) const
     cout << endl << endl;
 }
 
+/**
+* Present the a Hand to the user.
+* @param hand A reference to the hand to display.
+*/
 void PokerUI::display_current_hand(const Hand &hand) const
 {
-    display_current_hand_ascii(hand);
+    // If --text-only was provided from CLI, do not use ascii art.
+    if (args.get_bool("text-only"))
+    {
+        display_current_hand_text(hand);
+    }
+    else
+    {
+        display_current_hand_ascii(hand);
+    }
 }
 
 /**
@@ -177,6 +208,7 @@ void PokerUI::display_current_hand(const Hand &hand) const
 */
 vector<int> PokerUI::player_selections()
 {
+    // Give the user some context.
     cout << endl;
     cout << "--------------------" << endl;
     cout << " Play Game" << endl;
@@ -184,8 +216,9 @@ vector<int> PokerUI::player_selections()
 
     vector<int> replace_list;
     int to_replace = 1;
-    while (to_replace > 0 && to_replace < 6)
+    while (to_replace >= -5 && to_replace <= 5)
     {
+        // Give the user some context.
         const Hand &hand = machine.get_hand();
         cout << endl << "=== Current Hand ===" << endl;
         display_current_hand(hand);
@@ -194,24 +227,36 @@ vector<int> PokerUI::player_selections()
         cout << "Current Balance: " << machine.get_balance() << endl;
         cout << "Press Enter When Select Complete" << endl;
 
+        // Provide the current state of requested card replacements.
         cout << "Replace List: ";
         for (int r : replace_list) {
             cout << r << " ";
         }
         cout << endl;
 
-        cout << endl << "What card to replace or 'd' when done.? ";
+        // Ask the user (one card at a time) what to replace.
+        stringstream prompt;
+        cout << "Instructions:" << endl;
+        cout << "- Choose between 1 and 5 to add card to list." << endl;
+        cout << "- Choose between -1 and -5 to take card from list." << endl;
+        cout << "- Choose '0' when card selection is complete." << endl;
+        cout << endl;
+        io.get_numeric_input<int>("What card to replace?", to_replace, -5, 5);
 
-        // TODO: Grab whitespace
-        cin >> to_replace;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-        if (to_replace > 0 && to_replace < 6)
+        if (to_replace >= 1 && to_replace <= 5)
         {
+            // replace_list will only hold distinct indicies.
             if (find(replace_list.begin(), replace_list.end(), to_replace) == replace_list.end())
             {
                 replace_list.push_back(to_replace);
+            }
+        }
+        else if (to_replace <= -1 && to_replace >= -5)
+        {
+            vector<int>::iterator it = find(replace_list.begin(), replace_list.end(), -to_replace);
+            if (it != replace_list.end())
+            {
+                replace_list.erase(it);
             }
         }
         else
@@ -220,6 +265,7 @@ vector<int> PokerUI::player_selections()
         }
     }
 
+    // Return list of cards to replace.
     return replace_list;
 }
 
@@ -228,17 +274,13 @@ vector<int> PokerUI::player_selections()
 */
 void PokerUI::show_results()
 {
-    //int cnt = 0;
     const Hand &hand = machine.get_hand();
     unsigned int payout = machine.get_payout();
 
+    // Give the user some context
     cout << endl;
     cout << "=== Final Hand ===" << endl;
     display_current_hand(hand);
-    //for (Card card : hand.get_cards())
-    //{
-    //    cout << ++cnt << ". " << card.to_string() << endl;
-    //}
     cout << "Final Hand: " << hand.type_as_string() << endl;
     cout << "Final Payout: " << payout << endl;
 
@@ -249,6 +291,8 @@ void PokerUI::show_results()
         cout << "(Press Enter to return to Main Menu)";
         getchar();
     }
+    // Note: You can never bet and only have the bet value returned.
+    //       (Unless you play craps. ;) )
     else
     {
         cout << endl << "You lost " << machine.get_bet() << " coins. ";
@@ -256,8 +300,6 @@ void PokerUI::show_results()
         getchar();
     }
 }
-
-
 
 /**
 * Cashes out the BankRoll of the machine for the player.
@@ -298,10 +340,7 @@ void PokerUI::main_menu()
         cout << "2. Play Game" << endl;
         cout << "3. Cash Out & Quit" << endl;
 
-        cout << endl << "What is your choice? ";
-        cin >> choice;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        io.get_numeric_input<int>("What is your choice?", choice, 1, 3);
 
         switch (choice)
         {
@@ -322,6 +361,7 @@ void PokerUI::main_menu()
             return;
             break;
         default:
+            // This should never happen.
             cout << "ERROR: Invalid selection." << endl;
             break;
         }

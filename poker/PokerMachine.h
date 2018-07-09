@@ -31,6 +31,8 @@ public:
 
     const unsigned int get_bet() const;
 
+    unsigned int get_seed() const;
+
     const unsigned int get_winnings() const;
 
     unsigned int cash_out();

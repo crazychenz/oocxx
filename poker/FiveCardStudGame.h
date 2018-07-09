@@ -23,12 +23,16 @@ public:
 
     unsigned int replace_cards(const std::vector<int> &replace_list);
 
+    unsigned int get_seed() const;
+
 private:
     /** The deck of cards game is dealt from. */
     Deck deck;
 
     /** The player's hand being dealt from deck. */
     Hand hand;
+
+    unsigned int seed;
 
 };
 
