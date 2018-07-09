@@ -86,9 +86,14 @@ void Deck::shuffle()
         // Note: Caller responsible for seeding rand() with srand()
         int idx = rand() % baseline.size();
         std::list<Card>::iterator it = baseline.begin();
-        std::advance(it, idx);
-        baseline.erase(it);
-        deck.push_back(*it);
+        if (it != baseline.end())
+        {
+            std::advance(it, idx);
+            deck.push_back(*it);
+            // Note: Windows actually erases iterator reference here. Booooo!
+            baseline.erase(it);
+            
+        }
     }
 }
 
@@ -108,7 +113,9 @@ bool Deck::has_card() const
 Card Deck::pop_card()
 {
     vector<Card>::iterator end = deck.end() - 1;
+    Card card((Card::Rank)(*end).rank(), (Card::Suit)(*end).suit());
+    // Note: Windows blows away iterator reference here. Booooo!
     deck.pop_back();
-    return *end;
+    return card;
 }
 
