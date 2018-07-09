@@ -78,71 +78,97 @@ unsigned int PokerUI::place_bet()
     return bet;
 }
 
-/*
-void PokerUI::display_current_hand_old(const Hand &hand) const
+
+void PokerUI::display_current_hand_text(const Hand &hand) const
 {
+    int cnt = 0;
     for (Card card : hand.get_cards())
     {
         cout << ++cnt << ". " << card.to_string() << endl;
     }
 }
-*/
 
-void PokerUI::display_current_hand(const Hand &hand) const
+void PokerUI::display_current_hand_ascii(const Hand &hand) const
 {
-    string ul = "\u250C";
-    string ur = "\u2510";
-    string hz = "\u2500";
-    string vt = "\u2502";
-    string lr = "\u2518";
-    string ll = "\u2514";
+    /* Suit art found at: http://www.asciiartfarts.com/poker.html
+      _
+    ( V )
+     \ /
+      V
 
-    const string suit[4] = { "\u2660", "\u2665", "\u2663", "\u2666" };
+     / \
+    /   \
+    \   /
+     \ /
+
+      .
+     / \
+    (_,_)
+      I
+      _
+     ( )
+    (_x_)
+      Y
+
+    */
+
+    string ul = " ";
+    string ur = " ";
+    string hz = "-";
+    string vt = "|";
+    string lr = " ";
+    string ll = " ";
+
+    const string suit[4][4] = {
+        { "  .  ",  " _ _ ", "  _  ", " / \\ "},
+        { " / \\ ",  "( V )", " ( ) ", "/   \\" },
+        { "(_,_)",  " \\ / ", "(_x_)", "\\   /" },
+        { "  I  ",  "  V  ", "  Y  ", " \\ / " },
+    };
 
     for (int i = 0; i < 5; ++i)
     {
-        cout << ul << hz << hz << hz << hz << hz << ur << " ";
+        cout << ul << hz << hz << hz << hz << hz << hz << hz << ur << " ";
     }
     cout << endl;
 
     for (Card card : hand.get_cards())
     {
-        cout << vt << suit[card.suit()] << "   " << card.rank() << vt << " ";
+        cout << vt << card.rank() << "      " << vt << " ";
     }
     cout << endl;
 
-    for (int j = 0; j < 2; ++j)
+    for (int j = 0; j < 4; ++j)
     {
-        for (int i = 0; i < 5; ++i)
+        for (Card card : hand.get_cards())
         {
-            cout << vt << "     " << vt << " ";
+            cout << vt << " " << suit[j][card.suit()] << " " << vt << " ";
         }
         cout << endl;
     }
 
     for (Card card : hand.get_cards())
     {
-        cout << vt << card.rank() << "   " << suit[card.suit()] << vt << " ";
+        cout << vt << "      " << card.rank() << vt << " ";
     }
     cout << endl;
 
     for (int i = 0; i < 5; ++i)
     {
-        cout << ll << hz << hz << hz << hz << hz << lr << " ";
+        cout << ll << hz << hz << hz << hz << hz << hz << hz << lr << " ";
     }
     cout << endl;
 
     for (int i = 1; i < 6; ++i)
     {
-        cout << "   " << i << ".   ";
+        cout << "     " << i << ".   ";
     }
     cout << endl << endl;
+}
 
-    //int cnt = 0;
-    //for (Card card : hand.get_cards())
-    //{
-    //    cout << ++cnt << ". " << card.to_string() << endl;
-    //}
+void PokerUI::display_current_hand(const Hand &hand) const
+{
+    display_current_hand_ascii(hand);
 }
 
 /**
@@ -246,6 +272,8 @@ void PokerUI::cash_out()
 
     unsigned int balance = machine.cash_out();
     cout << "You now have " << balance << " coins to spend." << endl;
+    cout << "(Press Enter to Exit)";
+    getchar();
 }
 
 
