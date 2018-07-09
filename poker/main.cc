@@ -85,6 +85,9 @@ This Poker machine implementation is broken up into the poker user
 interface classes, a poker machine interface, and the five card stud game
 classes.
 
+![poker-class-diagram](poker-class-diagram-small.png "poker-class-diagram")
+[Bigger Class Diagram Image](poker-class-diagram.png)
+
  Poker User Interface
 ======================
 
