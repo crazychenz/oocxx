@@ -15,7 +15,7 @@ using namespace std;
 FiveCardStudGame::FiveCardStudGame() :
     deck(), hand()
 {
-    srand(time(NULL));
+    srand(static_cast<unsigned int>(time(NULL)));
     redeal_cards();
 }
 

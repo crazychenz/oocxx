@@ -2,6 +2,7 @@
 #include <limits>
 #include <cctype>
 #include <algorithm>
+#include <string>
 
 #include "StreamHelper.h"
 

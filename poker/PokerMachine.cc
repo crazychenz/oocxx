@@ -21,7 +21,7 @@ PokerMachine::PokerMachine(
 {
     if (args.has_key("seed"))
     {
-        game = FiveCardStudGame(args.get_int("seed"));
+        game = FiveCardStudGame(static_cast<unsigned int>(args.get_int("seed")));
     }
     else
     {
