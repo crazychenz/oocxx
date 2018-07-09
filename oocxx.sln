@@ -30,41 +30,77 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assn3", "assn3", "{F1F5BDF5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "blackjack", "blackjack", "{E7AE347C-A9B3-4751-878D-5A05F108600F}"
 	ProjectSection(SolutionItems) = preProject
+		blackjack\ArgParser.cc = blackjack\ArgParser.cc
+		blackjack\ArgParser.h = blackjack\ArgParser.h
 		blackjack\Card.cc = blackjack\Card.cc
 		blackjack\Card.h = blackjack\Card.h
+		blackjack\ConsoleEventHandler.cc = blackjack\ConsoleEventHandler.cc
+		blackjack\ConsoleEventHandler.h = blackjack\ConsoleEventHandler.h
 		blackjack\ConsoleUI.cc = blackjack\ConsoleUI.cc
 		blackjack\ConsoleUI.h = blackjack\ConsoleUI.h
 		blackjack\Dealer.cc = blackjack\Dealer.cc
 		blackjack\Dealer.h = blackjack\Dealer.h
 		blackjack\Deck.cc = blackjack\Deck.cc
 		blackjack\Deck.h = blackjack\Deck.h
-		blackjack\docsync.py = blackjack\docsync.py
 		blackjack\Doxyfile = blackjack\Doxyfile
+		blackjack\Game.cc = blackjack\Game.cc
+		blackjack\Game.h = blackjack\Game.h
 		blackjack\Hand.cc = blackjack\Hand.cc
 		blackjack\Hand.h = blackjack\Hand.h
 		blackjack\main.cc = blackjack\main.cc
 		blackjack\Makefile = blackjack\Makefile
 		blackjack\Player.cc = blackjack\Player.cc
 		blackjack\Player.h = blackjack\Player.h
-		blackjack\test.c = blackjack\test.c
-		blackjack\test.h = blackjack\test.h
-		blackjack\ui-main.cc = blackjack\ui-main.cc
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "poker", "poker", "{F10409CD-3A10-42D9-A958-F881917616AB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "poker-ori", "poker-ori", "{F10409CD-3A10-42D9-A958-F881917616AB}"
 	ProjectSection(SolutionItems) = preProject
+		poker\ArgParser.cc = poker\ArgParser.cc
+		poker\ArgParser.h = poker\ArgParser.h
+		poker\BankRoll.cc = poker\BankRoll.cc
 		poker\BankRoll.h = poker\BankRoll.h
+		poker\Card.cc = poker\Card.cc
 		poker\Card.h = poker\Card.h
+		poker\Deck.cc = poker\Deck.cc
 		poker\Deck.h = poker\Deck.h
 		poker\Doxyfile = poker\Doxyfile
+		poker\FiveCardStudGame.cc = poker\FiveCardStudGame.cc
+		poker\FiveCardStudGame.h = poker\FiveCardStudGame.h
+		poker\Hand.cc = poker\Hand.cc
 		poker\Hand.h = poker\Hand.h
 		poker\main.cc = poker\main.cc
 		poker\Makefile = poker\Makefile
+		poker\PokerArgParser.cc = poker\PokerArgParser.cc
+		poker\PokerArgParser.h = poker\PokerArgParser.h
+		poker\PokerMachine.cc = poker\PokerMachine.cc
+		poker\PokerMachine.h = poker\PokerMachine.h
+		poker\PokerUI.cc = poker\PokerUI.cc
+		poker\PokerUI.h = poker\PokerUI.h
+		poker\StreamHelper.cc = poker\StreamHelper.cc
+		poker\StreamHelper.h = poker\StreamHelper.h
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "graded", "graded", "{1E3B8363-21A7-4073-8405-7E3E628D855D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "poker", "poker\poker.vcxproj", "{6557C418-7188-49AB-A2E2-01391F79769D}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6557C418-7188-49AB-A2E2-01391F79769D}.Debug|x64.ActiveCfg = Debug|x64
+		{6557C418-7188-49AB-A2E2-01391F79769D}.Debug|x64.Build.0 = Debug|x64
+		{6557C418-7188-49AB-A2E2-01391F79769D}.Debug|x86.ActiveCfg = Debug|Win32
+		{6557C418-7188-49AB-A2E2-01391F79769D}.Debug|x86.Build.0 = Debug|Win32
+		{6557C418-7188-49AB-A2E2-01391F79769D}.Release|x64.ActiveCfg = Release|x64
+		{6557C418-7188-49AB-A2E2-01391F79769D}.Release|x64.Build.0 = Release|x64
+		{6557C418-7188-49AB-A2E2-01391F79769D}.Release|x86.ActiveCfg = Release|Win32
+		{6557C418-7188-49AB-A2E2-01391F79769D}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
