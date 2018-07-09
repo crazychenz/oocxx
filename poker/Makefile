@@ -48,7 +48,9 @@ clean:
 
 docs:
 	@echo [ BUILDING DOCS ]
-	@mkdir html ; cp poker-gui.png ./html/
+	@mkdir html 2>/dev/null; cp poker-gui.png ./html/
+	@mkdir html 2>/dev/null; cp poker-class-diagram.png ./html/
+	@mkdir html 2>/dev/null; cp poker-class-diagram-small.png ./html/
 	@( \
 	    cat Doxyfile | \
 	    echo PROJECT_NAME=\"$(PROJECTNAME)\" \
