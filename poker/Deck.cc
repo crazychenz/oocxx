@@ -92,7 +92,7 @@ void Deck::shuffle()
             deck.push_back(*it);
             // Note: Windows actually erases iterator reference here. Booooo!
             baseline.erase(it);
-            
+
         }
     }
 }

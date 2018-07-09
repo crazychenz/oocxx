@@ -62,8 +62,9 @@ void PokerArgParser::usage()
     cout << endl;
     cout << "With no SEED, current time is used." << endl;
     cout << endl;
-    cout << "  --help - show this help message" << endl;
-    cout << "  --seed - seed the PRNG for deterministic shuffles" << endl;
+    cout << "  --help  - show this help message" << endl;
+    cout << "  --seed  - seed the PRNG for deterministic shuffles" << endl;
+    cout << "  --debug - show debug output" << endl;
     cout << endl;
     cout << "Examples:" << endl;
     cout << "  " << argv[0] << " --seed 23443" << endl;

@@ -25,7 +25,7 @@ protected:
 private:
 
     void display_current_hand_text(const Hand &hand) const;
-    
+
     void display_current_hand_ascii(const Hand &hand) const;
 
     void add_coins();
