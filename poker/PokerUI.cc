@@ -37,8 +37,8 @@ void PokerUI::add_coins()
     cout << "--------------------" << endl;
     cout << " Add Coins" << endl;
     cout << "--------------------" << endl;
-    cout << "You have " << machine.get_balance() << " coins." << endl; 
-    
+    cout << "You have " << machine.get_balance() << " coins." << endl;
+
     // Only allow adding coins if they fit within primitive type.
     unsigned int max;
     max = numeric_limits<unsigned int>::max();
@@ -65,7 +65,7 @@ unsigned int PokerUI::place_bet()
     cout << "--------------------" << endl;
     cout << " Place Bet" << endl;
     cout << "--------------------" << endl;
-    
+
     unsigned int balance = machine.get_balance();
     cout << "You have " << balance << " coins." << endl;
 
@@ -113,14 +113,14 @@ void PokerUI::display_current_hand_text(const Hand &hand) const
 */
 void PokerUI::display_current_hand_ascii(const Hand &hand) const
 {
-    /* Suit ascii art found at: 
+    /* Suit ascii art found at:
        http://www.asciiartfarts.com/poker.html
 
-         .    _ _    _    / \ 
+         .    _ _    _    / \
         / \  ( V )  ( )  /   \
        (_,_)  \ /  (_x_) \   /
-         I     V     Y    \ / 
-    
+         I     V     Y    \ /
+
     */
 
     // An easy index for remapping the sides of the cards.
