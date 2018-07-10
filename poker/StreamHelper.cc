@@ -22,7 +22,10 @@ StreamHelper::StreamHelper()
 * @param out The output stream.
 * @param err The error stream.
 */
-StreamHelper::StreamHelper(std::istream *in, std::ostream *out, std::ostream *err)
+StreamHelper::StreamHelper(
+    std::istream *in,
+    std::ostream *out,
+    std::ostream *err)
 {
     if (in != nullptr)
         this->in_stream = in;
@@ -121,7 +124,8 @@ StreamHelper::prompted_getline(
 * @param c The character value to check.
 * @return Returns true if character is not a whitespace. False otherwise.
 */
-bool StreamHelper::isnotspace(const int c)
+bool
+StreamHelper::isnotspace(const int c)
 {
     return !(::isspace(c));
 }
@@ -131,7 +135,8 @@ bool StreamHelper::isnotspace(const int c)
 * @param prompt The string prompt to present to the user.
 * @param output The single word reference string returned to user.
 */
-void StreamHelper::get_single_word_input(
+void
+StreamHelper::get_single_word_input(
     const std::string &prompt,
     string &output)
 {
@@ -149,7 +154,8 @@ void StreamHelper::get_single_word_input(
 /**
 * Fetches the internally stored input stream.
 */
-istream& StreamHelper::in() const
+istream&
+StreamHelper::in() const
 {
     return *in_stream;
 }
@@ -157,7 +163,8 @@ istream& StreamHelper::in() const
 /**
 * Fetches the internally stored output stream.
 */
-ostream& StreamHelper::out() const
+ostream&
+StreamHelper::out() const
 {
     return *out_stream;
 }
@@ -165,7 +172,8 @@ ostream& StreamHelper::out() const
 /**
 * Fetches the internally stored error output stream.
 */
-ostream& StreamHelper::err() const
+ostream&
+StreamHelper::err() const
 {
     return *err_stream;
 }

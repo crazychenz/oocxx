@@ -75,9 +75,9 @@ The winning hands, listed in highest to lowest precedence, are as follows:
  Project Deliverables
 ----------------------
 
-- A class diagram
 - All source code
-- A screen capture illustrating the results of a single hand.
+- [A class diagram](poker-class-diagram.png)
+- [A screen capture illustrating the results of a single hand.](single-hand.mov)
 
  Implementation Synopsis
 =========================
@@ -85,6 +85,8 @@ This Poker machine implementation is broken up into the poker user
 interface classes, a poker machine interface, and the five card stud game
 classes.
 
+ Class Diagram
+---------------
 ![poker-class-diagram](poker-class-diagram-small.png "poker-class-diagram")
 [Bigger Class Diagram Image](poker-class-diagram.png)
 
@@ -101,20 +103,10 @@ PokerUI drives the PokerMachine object on behalf of the user.
 ---------------
 This class assists with managing input, output, and error streams. By
 default, these streams are set to the standard associated streams. This
-accomplishes two things:
+class is mainly used for safe input and parsing of data from the
+cin istream.
 
-- Provides a mechanism for automation of testing and logging by
-  controlling the input and output outside of the standard streams.
-  For example, the application could configure the ConsoleUI to
-  read all input from a file and produce the output results to
-  another file unattended.
-
-- Provides a mechanism for using non-console output. By implementing
-  the input and output through this ConsoleUI, this application has
-  the beginnings of an abstracted interface that would allow other
-  UI classes to more simply replace the ConsoleUI.
-
-As a input stream manager, the StreamHelper can prompt the user for
+As an input stream manager, the StreamHelper can prompt the user for
 'fat-fingered' information and only sanity check it after a newline
 character has been detected. If requesting a numerical value, StreamHelper
 will check the numerical limits of the parsed value and any given
@@ -128,15 +120,23 @@ that ensures there is no white space within the given text. This prevents
 premature stream injection that may not have been desired. In otherwords,
 it aims to improve the user experience.
 
- Poker Machine Object Overview
-===============================
+ Poker Machine Overview
+========================
 
  PokerMachine
 --------------
 The PokerMachine object is responsible for managing access to the bankroll,
 the bet, and the current game being played through the use of a facade pattern.
 The bankroll and bet are loosely coupled from the five card stud game itself
-by the PokerMachine object.
+by the PokerMachine object. Pokermachine also makes use of the ArgParser
+for more granular user load-time configuration.
+
+ BankRoll
+----------
+The bankroll is a simple object that wraps a balance. The object can add
+to and remove from the balance, but the object will throw an exception
+if it can't store the amount of money requested (due to primitive datatype
+constraints).
 
  Five Card Stud Game
 =====================
@@ -144,16 +144,22 @@ by the PokerMachine object.
  FiveCardStudGame
 ------------------
 The five card stud game is responsible for managing the player's hand, the
-deck of cards being dealt, and the rules of the game.
+deck of cards being dealt, and the rules of the game. The FiveCardStudGame
+object also happens to be where the PRNG is set.
 
  Card
 ------
 The Card object is a wrapper around a 2 enumerations, a suit enum and a
-rank enum.
+rank enum. For convienence, this object provides string translations of
+its state and primitive translations for its enumeration values. These
+are used by the Poker UI.
 
  Hand
 ------
-The Hand object stores a number of cards in a rank ordered vector.
+The Hand object stores a number of cards in a rank ordered vector. It is
+also capable of calculating the type of hand it is with the current vector
+of cards available. This type is used to query a worth or payout from another
+object.
 
  Deck
 ------
@@ -163,19 +169,46 @@ and the instance in the deck is removed.
 
  Argument Parser
 =================
-The application starts with an argument parser. This argument parser will
-allow the user to request a --help message or set an explicit seed value.
-The seed value allows for repeatable card deck shuffles so that the code
+
+ Base ArgParser
+----------------
+The base ArgParser class is responsible for implementing the common data
+storage, retreival, and setters for all subclasses. It also defines an
+abstract-like member function that should be commonly overloaded by all
+subclasses. (parse())
+
+ PokerArgParser
+----------------
+PokerArgParser is a subclass of ArgParser. It is responsible for parsing
+arguments that are specific to this poker application. This argument parser
+will allow the user to request a --help message to see all the argument
+options.
+
+The --seed argument allows for repeatable card deck shuffles so that the code
 can be easily tested with deterministic results. No arguments will
 implicitly set the PRNG based on the result of time(NULL).
 
 ### Example Help Output
 
     $ ./poker --help
+    Usage: ./poker [--seed SEED]
+
+    Play a game of poker (five card stud).
+
+    With no SEED, current time is used.
+
+      --help      - show this help message
+      --seed      - seed the PRNG for deterministic shuffles
+      --text-only - show text based hands
+      --verbose   - increase the verbosity of output
+
+    Examples:
+      ./poker --seed 23443
+      ./poker
 
 ### Example Given Seed
 
-    $ ./poker 5432
+    $ ./poker --seed 7
 
 
 ### Example Random Seed
@@ -183,6 +216,10 @@ implicitly set the PRNG based on the result of time(NULL).
     $ ./poker
 
 
+ Example Game
+==============
+- [Single Hand Game](single-hand.mov)
+- [Three Of A Kind With Seed](3s-with-seed.mov)
 
 */
 
@@ -203,4 +240,5 @@ int main(int argc, char **argv)
     PokerUI(machine, args).main_menu();
     return 0;
 }
+
 

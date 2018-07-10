@@ -20,7 +20,8 @@ PokerArgParser::PokerArgParser(int argc, char **argv) :
 /**
 * Interprets the argc/argv parameters into a argument key/value table.
 */
-void PokerArgParser::parse()
+void
+PokerArgParser::parse()
 {
     const int argc = get_argc();
     const char **argv = get_argv();
@@ -63,7 +64,8 @@ void PokerArgParser::parse()
 /**
 * Show the CLI usage of the application.
 */
-void PokerArgParser::usage()
+void
+PokerArgParser::usage()
 {
     const char **argv = get_argv();
     cout << "Usage: " << argv[0] << " [--seed SEED]\n" << endl;
@@ -72,7 +74,7 @@ void PokerArgParser::usage()
     cout << "With no SEED, current time is used." << endl;
     cout << endl;
     cout << "  --help      - show this help message" << endl;
-    cout << "  --seed      - seed the PRNG for deterministic shuffles" << endl;
+    cout << "  --seed      - seed PRNG for deterministic shuffles" << endl;
     cout << "  --text-only - show text based hands" << endl;
     cout << "  --verbose   - increase the verbosity of output" << endl;
     cout << endl;

@@ -5,7 +5,7 @@ REDIRECTION := >/dev/null
 FLAGS := -Wall -Werror
 HEADERS := $(wildcard *.h)
 SOURCES := $(wildcard *.cc)
-OBJECTS := $(filter-out main.o,$(SOURCES:%.cc=%.o))
+OBJECTS := $(filter-out main.o brute.o,$(SOURCES:%.cc=%.o))
 
 # Style command stuff
 STYLEFLAGS := -z2 -n -s4
@@ -46,11 +46,13 @@ clean:
 	@echo [ CLEANING WORKSPACE ]
 	@rm -rf *.o $(MAINBIN) html latex $(REDIRECTION)
 
-docs:
+html:
+	@mkdir html
+
+docs: html
 	@echo [ BUILDING DOCS ]
-	@mkdir html 2>/dev/null; cp poker-gui.png ./html/
-	@mkdir html 2>/dev/null; cp poker-class-diagram.png ./html/
-	@mkdir html 2>/dev/null; cp poker-class-diagram-small.png ./html/
+	@cp *.png ./html/
+	@cp *.mov ./html/
 	@( \
 	    cat Doxyfile | \
 	    echo PROJECT_NAME=\"$(PROJECTNAME)\" \

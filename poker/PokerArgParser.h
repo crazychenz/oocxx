@@ -13,6 +13,9 @@ public:
     void parse();
 
     void usage();
+
 private:
+
+    /** Stream helper for parsing seed input. */
     StreamHelper io = StreamHelper();
 };

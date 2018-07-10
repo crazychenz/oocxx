@@ -30,7 +30,8 @@ PokerUI::PokerUI(PokerMachine &machine, ArgParser &args) :
 /**
 * Requests from user the number of coins they have and sets amount in machine.
 */
-void PokerUI::add_coins()
+void
+PokerUI::add_coins()
 {
     // Give the user some context.
     cout << endl;
@@ -56,7 +57,8 @@ void PokerUI::add_coins()
 /**
 * Asks the Player what bet they'd like to make on the next hand.
 */
-unsigned int PokerUI::place_bet()
+unsigned int
+PokerUI::place_bet()
 {
     unsigned int bet = 0;
 
@@ -98,7 +100,8 @@ unsigned int PokerUI::place_bet()
 * Present the a Hand to the user with plain text.
 * @param hand A reference to the hand to display.
 */
-void PokerUI::display_current_hand_text(const Hand &hand) const
+void
+PokerUI::display_current_hand_text(const Hand &hand) const
 {
     int cnt = 0;
     for (Card card : hand.get_cards())
@@ -111,7 +114,8 @@ void PokerUI::display_current_hand_text(const Hand &hand) const
 * Present the a Hand to the user with ASCII art.
 * @param hand A reference to the hand to display.
 */
-void PokerUI::display_current_hand_ascii(const Hand &hand) const
+void
+PokerUI::display_current_hand_ascii(const Hand &hand) const
 {
     /* Suit ascii art found at:
        http://www.asciiartfarts.com/poker.html
@@ -189,7 +193,8 @@ void PokerUI::display_current_hand_ascii(const Hand &hand) const
 * Present the a Hand to the user.
 * @param hand A reference to the hand to display.
 */
-void PokerUI::display_current_hand(const Hand &hand) const
+void
+PokerUI::display_current_hand(const Hand &hand) const
 {
     // If --text-only was provided from CLI, do not use ascii art.
     if (args.get_bool("text-only"))
@@ -206,7 +211,8 @@ void PokerUI::display_current_hand(const Hand &hand) const
 * Allows player to play the current hand of the (Five Card Stud) Poker Game.
 * @return The payout of the final hand as an integer.
 */
-vector<int> PokerUI::player_selections()
+vector<int>
+PokerUI::player_selections()
 {
     // Give the user some context.
     cout << endl;
@@ -246,14 +252,17 @@ vector<int> PokerUI::player_selections()
         if (to_replace >= 1 && to_replace <= 5)
         {
             // replace_list will only hold distinct indicies.
-            if (find(replace_list.begin(), replace_list.end(), to_replace) == replace_list.end())
+            vector<int>::iterator it =
+                find(replace_list.begin(), replace_list.end(), to_replace);
+            if (it == replace_list.end())
             {
                 replace_list.push_back(to_replace);
             }
         }
         else if (to_replace <= -1 && to_replace >= -5)
         {
-            vector<int>::iterator it = find(replace_list.begin(), replace_list.end(), -to_replace);
+            vector<int>::iterator it =
+                find(replace_list.begin(), replace_list.end(), -to_replace);
             if (it != replace_list.end())
             {
                 replace_list.erase(it);
@@ -272,7 +281,8 @@ vector<int> PokerUI::player_selections()
 /**
 * Shows player the results of their hand after the card replacements.
 */
-void PokerUI::show_results()
+void
+PokerUI::show_results()
 {
     const Hand &hand = machine.get_hand();
     unsigned int payout = machine.get_payout();
@@ -305,7 +315,8 @@ void PokerUI::show_results()
 * Cashes out the BankRoll of the machine for the player.
 * Presents the user with the number of coins they've cashed out.
 */
-void PokerUI::cash_out()
+void
+PokerUI::cash_out()
 {
     cout << endl;
     cout << "--------------------" << endl;
@@ -323,7 +334,8 @@ void PokerUI::cash_out()
 /**
 * Main Menu for player action selection.
 */
-void PokerUI::main_menu()
+void
+PokerUI::main_menu()
 {
 
     int choice = 0;

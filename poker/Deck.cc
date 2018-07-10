@@ -18,7 +18,8 @@ Deck::Deck()
 /**
 * Shuffles the Cards in the deck vector.
 */
-void Deck::shuffle()
+void
+Deck::shuffle()
 {
     list<Card> baseline = {
         Card(Card::ACE, Card::SPADE),
@@ -92,7 +93,6 @@ void Deck::shuffle()
             deck.push_back(*it);
             // Note: Windows actually erases iterator reference here. Booooo!
             baseline.erase(it);
-
         }
     }
 }
@@ -101,7 +101,8 @@ void Deck::shuffle()
 * Check if there are Card objects left in the deck.
 * @return true if there are Card objects in the deck.
 */
-bool Deck::has_card() const
+bool
+Deck::has_card() const
 {
     return deck.size() > 0;
 }
@@ -110,7 +111,8 @@ bool Deck::has_card() const
 * Remove and return the top card of the deck.
 * @return Card object that was removed from the deck.
 */
-Card Deck::pop_card()
+Card
+Deck::pop_card()
 {
     vector<Card>::iterator end = deck.end() - 1;
     Card card((Card::Rank)(*end).rank(), (Card::Suit)(*end).suit());

@@ -35,7 +35,8 @@ FiveCardStudGame::FiveCardStudGame(unsigned int seed) :
 /**
 * Reshuffle and redeal cards for a new game.
 */
-void FiveCardStudGame::redeal_cards()
+void
+FiveCardStudGame::redeal_cards()
 {
     deck = Deck();
     hand = Hand();

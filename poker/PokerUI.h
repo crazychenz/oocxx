@@ -42,8 +42,10 @@ private:
     /** The PokerMachine PokerUI is communicating with. */
     PokerMachine &machine;
 
+    /** Execution environment arguments. */
     ArgParser &args;
 
+    /** StreamHelper object for console user input processing. */
     StreamHelper io = StreamHelper();
 
 };
