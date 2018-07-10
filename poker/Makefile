@@ -59,3 +59,6 @@ docs: html
 	) | \
 	doxygen - $(REDIRECTION)
 
+zip:
+	zip -r project1_vagriesti.zip *vcxproj* *.cc *.h html latex *.mov *.png Makefile Doxyfile
+
