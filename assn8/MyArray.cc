@@ -7,15 +7,19 @@
 
 using namespace std;
 
+/** Fetch the size of the array. 
+@return The size of the array.
+*/
 template <typename ArrayType>
-size_t 
+size_t
 MyArray<ArrayType>::size() const
 {
     return sz;
 }
 
+/** Dump the state of the object to console. */
 template <typename ArrayType>
-void 
+void
 MyArray<ArrayType>::console_dump(std::string desc) const
 {
     std::cout << desc << " Size: " << size() << std::endl;
@@ -25,6 +29,7 @@ MyArray<ArrayType>::console_dump(std::string desc) const
     }
 }
 
+/** Allow an initializer list to be used for for this array class. */
 template <typename ArrayType>
 MyArray<ArrayType>::MyArray(std::initializer_list<ArrayType> list)
     : sz(list.size()), data(list)
@@ -32,6 +37,9 @@ MyArray<ArrayType>::MyArray(std::initializer_list<ArrayType> list)
 
 }
 
+/** Construct array with explicit size. 
+@param size - The size of the array.
+*/
 template <typename ArrayType>
 MyArray<ArrayType>::MyArray(size_t size) : sz(size)
 {
@@ -41,6 +49,9 @@ MyArray<ArrayType>::MyArray(size_t size) : sz(size)
     }
 }
 
+/** Overload the index operator to allow standard array indexing. 
+@param index - The index of the array to return reference for.
+*/
 template <typename ArrayType>
 ArrayType &
 MyArray<ArrayType>::operator[](size_t index)

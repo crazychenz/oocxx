@@ -5,9 +5,15 @@
 #include <cstdlib>
 #include <cstdint>
 
+/**
+  @class MyArray
+  @brief A simple (templated) array class.
+*/
 template <typename ArrayType>
 class MyArray
 {
+    // Sanity check that the vector::size_type is compatible with the
+    // size_t that is used in this class as the index type.
     static_assert(
         std::is_same<std::size_t, std::vector<int>::size_type>::value,
         "MyArray requires that vector<int>::size_type be same as size_t.");
@@ -15,19 +21,22 @@ class MyArray
 public:
     MyArray(std::initializer_list<ArrayType> list);
 
-    MyArray(size_t size);
+    MyArray(std::size_t size);
 
     ArrayType &
-    operator[](size_t index);
+    operator[](std::size_t index);
 
-    size_t
+    std::size_t
     size() const;
 
     void
     console_dump(std::string desc) const;
 
 private:
-    size_t sz = 0;
+    /** Default size to 0. */
+    std::size_t sz = 0;
+
+    /** The main structure that backs this array class. */
     std::vector<ArrayType> data;
 };
 

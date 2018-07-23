@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{66830c7a-0567-4e2a-a50d-535d8f361b31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cc">
@@ -38,5 +41,16 @@
     <ClInclude Include="Date.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore">
+      <Filter>Misc</Filter>
+    </None>
+    <None Include="Doxyfile">
+      <Filter>Misc</Filter>
+    </None>
+    <None Include="Makefile">
+      <Filter>Misc</Filter>
+    </None>
   </ItemGroup>
 </Project>
