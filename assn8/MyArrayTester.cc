@@ -9,6 +9,7 @@
 using namespace std;
 
 /** MyArrayTester int specialization tests. */
+template<>
 void
 MyArrayTester<int>::run_tests()
 {
@@ -37,6 +38,7 @@ MyArrayTester<int>::run_tests()
 }
 
 /** MyArrayTester float specialization tests. */
+template<>
 void
 MyArrayTester<float>::run_tests()
 {
@@ -65,6 +67,7 @@ MyArrayTester<float>::run_tests()
 }
 
 /** MyArrayTester string specialization tests. */
+template<>
 void
 MyArrayTester<string>::run_tests()
 {
@@ -90,7 +93,7 @@ MyArrayTester<string>::run_tests()
     }
 
     // Creating an array initialization list
-    MyArray<string> strArray2 = { 
+    MyArray<string> strArray2 = {
         "A balanced diet means a cupcake in each hand.",
         "I'm sorry, if you were right, I'd agree with you.",
         "Sorry for the mean, awful, accurate things I said.",
@@ -100,6 +103,7 @@ MyArrayTester<string>::run_tests()
 }
 
 /** MyArrayTester Date specialization tests. */
+template<>
 void
 MyArrayTester<Date>::run_tests()
 {
@@ -127,50 +131,125 @@ MyArrayTester<Date>::run_tests()
     //       expected exception hasn't already been throwing. This
     //       will make it apparent if there is an error with the
     //       Date constructor not throwing where it should.
-    try { Date(2, 30, 2004); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(2, 30, 2004);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(2, 29, 2003); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(2, 29, 2003);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(2, 29, 1900); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(2, 29, 1900);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(2, 30, 2000); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(2, 30, 2000);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(1, 32, 2018); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(1, 32, 2018);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(3, 32, 2018); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(3, 32, 2018);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(4, 31, 2018); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(4, 31, 2018);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(5, 32, 2018); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(5, 32, 2018);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(6, 31, 2018); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(6, 31, 2018);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(7, 32, 2018); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(7, 32, 2018);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(8, 32, 2018); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(8, 32, 2018);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(9, 31, 2018); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(9, 31, 2018);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(10, 32, 2018); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(10, 32, 2018);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(11, 31, 2018); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(11, 31, 2018);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
-    try { Date(12, 32, 2018); throw exception(); }
-    catch (invalid_argument &ia) { cout << ia.what() << endl; }
+    try {
+        Date(12, 32, 2018);
+        throw exception();
+    }
+    catch (invalid_argument &ia) {
+        cout << ia.what() << endl;
+    }
 
     // Blank Array
     MyArray<Date> dateArray(3);
@@ -192,7 +271,7 @@ MyArrayTester<Date>::run_tests()
     }
 
     // Creating an array initialization list
-    MyArray<Date> dateArray2 = { 
+    MyArray<Date> dateArray2 = {
         Date(1, 1, 1601),
         Date(12, 31, 1840),
         Date(12, 31, 1899),

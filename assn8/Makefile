@@ -51,8 +51,8 @@ html:
 
 docs: html
 	@echo [ BUILDING DOCS ]
-	@cp *.png ./html/
-	@cp *.mov ./html/
+	@cp *.png ./html/ 2>/dev/null ; true
+	@cp *.mov ./html/ 2>/dev/null ; true
 	@( \
 	    cat Doxyfile | \
 	    echo PROJECT_NAME=\"$(PROJECTNAME)\" \
