@@ -2,8 +2,8 @@
 #include <iostream>
 
 /**
-  @class Date
-  @brief A class representing a Date with month, day/date, and year.
+* @class Date
+* @brief A class representing a Date with month, day/date, and year.
 */
 class Date
 {

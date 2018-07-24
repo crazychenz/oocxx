@@ -1,6 +1,6 @@
 /**
-@class MyArrayTester
-@brief A simple (templated) class for testing MyArray class.
+* @class MyArrayTester
+* @brief A simple (templated) class for testing MyArray class.
 */
 template <typename ArrayType>
 class MyArrayTester

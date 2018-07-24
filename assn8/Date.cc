@@ -12,9 +12,9 @@ Date::Date()
 }
 
 /** Explicity constructor. Mostly sanity checks inputs.
-  @param month - The month of the year. (Can be 1 thru 12 inclusive.)
-  @param date - The date of the month. (Follows Julian calendar rules.)
-  @param year - The year in anno domini. (<0 and >=0 years allowed.)
+* @param month - The month of the year. (Can be 1 thru 12 inclusive.)
+* @param date - The date of the month. (Follows Julian calendar rules.)
+* @param year - The year in anno domini. (<0 and >=0 years allowed.)
 */
 Date::Date(int month, int date, int year)
     : month(month), date(date), year(year)
@@ -81,8 +81,9 @@ Date::Date(int month, int date, int year)
     }
 }
 
-/** Get the month value.
-@return The month value returned as an int.
+/**
+* Get the month value.
+* @return The month value returned as an int.
 */
 int
 Date::get_month() const
@@ -90,8 +91,9 @@ Date::get_month() const
     return month;
 }
 
-/** Get the date of the month value.
-@return The date value returned as an int.
+/**
+* Get the date of the month value.
+* @return The date value returned as an int.
 */
 int
 Date::get_date() const
@@ -99,8 +101,9 @@ Date::get_date() const
     return date;
 }
 
-/** Get the year value.
-@return The year value returned as an int.
+/**
+* Get the year value.
+* @return The year value returned as an int.
 */
 int
 Date::get_year() const
@@ -108,8 +111,9 @@ Date::get_year() const
     return year;
 }
 
-/** Get the date as a string value.
-@return The date as a string value.
+/**
+* Get the date as a string value.
+* @return The date as a string value.
 */
 string
 Date::to_string() const
@@ -119,14 +123,15 @@ Date::to_string() const
     return ss.str();
 }
 
-/** Stream operator overloader for Date.
-
-@param stream - The stream object Date is being pushed into.
-@param d - The date object being streamed.
-@return Returns the reference to the stream passed in.
-
-@note This method doesn't need to be friended because it uses
-      the public to_string() method.
+/**
+* Stream operator overloader for Date.
+*
+* @param stream - The stream object Date is being pushed into.
+* @param d - The date object being streamed.
+* @return Returns the reference to the stream passed in.
+*
+* @note This method doesn't need to be friended because it uses
+*       the public to_string() method.
 */
 std::ostream&
 operator<<(std::ostream& stream, const Date& d)

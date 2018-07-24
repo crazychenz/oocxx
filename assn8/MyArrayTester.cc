@@ -8,7 +8,9 @@
 
 using namespace std;
 
-/** MyArrayTester int specialization tests. */
+/**
+* MyArrayTester int specialization tests.
+*/
 template<>
 void
 MyArrayTester<int>::run_tests()
@@ -37,7 +39,9 @@ MyArrayTester<int>::run_tests()
     intArray2.console_dump("Initialized Integer (int) Array");
 }
 
-/** MyArrayTester float specialization tests. */
+/**
+* MyArrayTester float specialization tests.
+*/
 template<>
 void
 MyArrayTester<float>::run_tests()
@@ -66,7 +70,9 @@ MyArrayTester<float>::run_tests()
     floatArray2.console_dump("Initialized Float Array");
 }
 
-/** MyArrayTester string specialization tests. */
+/**
+* MyArrayTester string specialization tests.
+*/
 template<>
 void
 MyArrayTester<string>::run_tests()
@@ -102,7 +108,9 @@ MyArrayTester<string>::run_tests()
     strArray2.console_dump("Initialized String Array");
 }
 
-/** MyArrayTester Date specialization tests. */
+/**
+* MyArrayTester Date specialization tests.
+*/
 template<>
 void
 MyArrayTester<Date>::run_tests()
