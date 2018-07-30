@@ -60,5 +60,6 @@ docs: html
 	doxygen - $(REDIRECTION)
 
 zip:
-	zip -r assignment8_vagriesti.zip *vcxproj* *.cc *.h html latex *.mov *.png Makefile Doxyfile
+	zip -r assignment8_vagriesti.zip *vcxproj* *.cc *.h html latex *.mov \
+	    *.wmv *.png Makefile Doxyfile
 
