@@ -1,0 +1,5 @@
+
+.. [#proj2] Author Name. :ref:`Project 2 Documentation <proj2:proj2_index>`. v3 2018 
+
+.. [#proj4fn] Text of the second footnote.
+
